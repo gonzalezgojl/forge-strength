@@ -47,7 +47,7 @@
 <main class="app">
 <header class="top">
  <div class="brand"><div class="logo">F</div><div><div class="brand-name">FORGE</div><div class="brand-sub">Programa · 4 días</div></div></div>
- <div class="top-pill">≈60 MIN</div>
+ <div class="top-pill">≈60–70 MIN</div>
 </header>
 <section class="week-card">
  <div class="week-top"><div class="week-label">Entrenamientos completados esta semana</div><div class="week-number" id="weekCount">0 / 4</div></div>
@@ -63,7 +63,7 @@
 <div class="actions"><button class="primary" id="completeBtn">Marcar día como hecho</button></div>
 <div class="section-title">Distribución semanal recomendada</div>
 <div class="schedule">
- <div><b>LUNES</b><small>Pull</small></div><div><b>MARTES</b><small>Push</small></div><div><b>JUEVES</b><small>Legs</small></div><div><b>DOMINGO</b><small>Mixed</small></div>
+ <div><b>LUNES</b><small>Pull</small></div><div><b>MARTES</b><small>Push</small></div><div><b>JUEVES</b><small>Legs</small></div><div><b>SÁBADO</b><small>Mixed</small></div>
 </div>
 <div class="section-title">Últimos entrenamientos</div>
 <div class="history" id="historyList"></div>
@@ -101,7 +101,7 @@ const sessions=[
 {id:"seated-cable-row",name:"Remo sentado en polea",sets:3,reps:"8–12 reps",rest:"2 min",aliases:["seated-cable-row","seated cable row","cable row"]},
 {id:"hip-thrust",name:"Hip thrust",sets:3,reps:"8–12 reps",rest:"2–3 min",aliases:["hip-thrust","barbell hip thrust"]},
 {id:"bulgarian-split-squat",name:"Sentadilla búlgara",sets:2,reps:"8–10 / pierna",rest:"2 min",aliases:["bulgarian-split-squat","bulgarian split squat"]},
-{id:"leg-curl",name:"Curl femoral tumbado",sets:2,reps:"10–15 reps",rest:"90–120 s",aliases:["leg-curl","lying-leg-curl","lying leg curl"]},
+{id:"leg-curl",name:"Curl femoral tumbado",sets:3,reps:"10–15 reps",rest:"90–120 s",aliases:["leg-curl","lying-leg-curl","lying leg curl"]},
 {id:"dumbbell-calf-raise",name:"Gemelos de pie con mancuernas",sets:2,reps:"12–20 reps",rest:"90 s",aliases:["dumbbell-calf-raise","dumbbell calf raise"]},
 {id:"seated-dumbbell-curl",name:"Curl de bíceps con mancuernas",sets:2,reps:"10–15 reps",rest:"90–120 s después de la pareja",superset:"A",aliases:["seated-dumbbell-curl","dumbbell-curl","dumbbell curl"]},
 {id:"dumbbell-tricep-extension",name:"Extensión de tríceps sobre la cabeza con mancuerna",sets:2,reps:"10–15 reps",rest:"90–120 s después de la pareja",superset:"A",aliases:["dumbbell-tricep-extension","overhead dumbbell tricep extension"]}
