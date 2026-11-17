@@ -4,133 +4,148 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#0b0e0d">
-<meta name="description" content="Programa de entrenamiento de cuatro días con ilustraciones y seguimiento diario.">
+<meta name="description" content="FORGE: programa equilibrado de fuerza de cuatro días, con progresión, descansos, superseries y seguimiento.">
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="icon" href="./icon.svg" type="image/svg+xml">
-<title>FORGE — Programa de 4 días</title>
+<title>FORGE — Rutina equilibrada 4 días</title>
 <style>
-:root{color-scheme:dark;--bg:#090d0b;--panel:#111815;--line:#26342b;--text:#f3f6f1;--muted:#9aa79e;--lime:#c9ff47}
+:root{color-scheme:dark;--bg:#090d0b;--panel:#111815;--panel2:#17211a;--line:#29372e;--text:#f3f6f1;--muted:#9aa79e;--dim:#78877d;--lime:#c9ff47;--lime-soft:#28391b;--blue:#9ac7ff}
 *{box-sizing:border-box}
-body{margin:0;background:radial-gradient(ellipse at 50% -20%,#1b2c20 0,transparent 42%),var(--bg);color:var(--text);font:15px/1.4 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+body{margin:0;background:radial-gradient(ellipse at 50% -20%,#1b2c20 0,transparent 42%),var(--bg);color:var(--text);font:15px/1.42 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
 button{font:inherit}
-.app{width:min(100%,780px);margin:auto;padding:calc(16px + env(safe-area-inset-top)) 15px calc(30px + env(safe-area-inset-bottom))}
+.app{width:min(100%,820px);margin:auto;padding:calc(15px + env(safe-area-inset-top)) 14px calc(32px + env(safe-area-inset-bottom))}
 .top{display:flex;align-items:center;justify-content:space-between;margin:2px 2px 17px}
-.brand{display:flex;align-items:center;gap:10px}
-.logo{width:37px;height:37px;border-radius:11px;background:var(--lime);color:#11180e;display:grid;place-items:center;font-weight:1000;font-size:19px;letter-spacing:-2px}
-.brand-name{font-weight:950;letter-spacing:.16em;font-size:19px}
-.brand-sub{font-size:10px;color:var(--muted);letter-spacing:.12em;text-transform:uppercase}
-.top-pill{border:1px solid var(--line);border-radius:100px;padding:6px 10px;color:var(--muted);font-size:10px;letter-spacing:.08em}
-.week-card{background:linear-gradient(135deg,#17231b,#101713);border:1px solid var(--line);border-radius:15px;padding:13px 15px;margin:0 0 16px}
-.week-top{display:flex;justify-content:space-between;align-items:center;gap:10px}
-.week-label{font-size:11px;color:var(--muted)}
-.week-number{font-size:20px;font-weight:850;color:var(--lime);font-variant-numeric:tabular-nums}
-.bar{height:6px;background:#29362d;border-radius:20px;overflow:hidden;margin-top:9px}
-.bar>span{display:block;height:100%;width:0;background:var(--lime);border-radius:20px;transition:width .2s}
-.day-tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin:14px 0}
-.day-tab{border:1px solid var(--line);background:#101612;color:var(--muted);padding:10px 3px;border-radius:12px;cursor:pointer;font-weight:850;font-size:11px;letter-spacing:.04em;position:relative}
-.day-tab small{display:block;font-weight:500;font-size:9px;letter-spacing:0;margin-top:3px}
-.day-tab.active{background:var(--lime);border-color:var(--lime);color:#11180e}
-.day-tab.done:not(.active):after{content:"✓";position:absolute;right:6px;top:3px;color:var(--lime);font-size:12px;font-weight:900}
-.session-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:19px 2px 13px}
-.session-head h1{font-size:25px;line-height:1.1;margin:0;letter-spacing:-.04em}
-.session-head p{margin:4px 0 0;color:var(--muted);font-size:12px}
-.session-head p.rest-note{font-size:10px;color:#819087;margin-top:4px}
-.time-tag{font-size:11px;color:var(--lime);border:1px solid #4a6330;border-radius:100px;padding:6px 9px;white-space:nowrap}
-.exercise-list{display:grid;gap:9px}
-.exercise{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:11px 12px;display:grid;grid-template-columns:minmax(0,1fr) 152px;align-items:center;gap:8px;min-height:116px}
-.ex-head{display:flex;align-items:flex-start;gap:8px}
-.num{font-size:10px;color:var(--lime);font-weight:850;min-width:19px;padding-top:2px}
-.ex-title{font-weight:800;font-size:14px;line-height:1.25}
-.ex-volume{margin:6px 0 0 27px;color:var(--muted);font-size:11px}
-.ex-rest{margin:4px 0 0 27px;color:#849188;font-size:10px}
-.superset{display:inline-flex;margin:7px 0 0 27px;border:1px solid #526a39;color:var(--lime);border-radius:100px;padding:2px 7px;font-size:9px;font-weight:850;letter-spacing:.08em}
-.sequence{height:88px;display:flex;align-items:center;justify-content:center;gap:3px;overflow:hidden}
-.pose{width:69px;height:78px;object-fit:contain;border-radius:8px;background:#1a241d}
-.pose-arrow{font-size:15px;color:var(--lime);font-weight:900;flex:0 0 auto}
-.single-pose{width:120px;height:82px;object-fit:contain;border-radius:8px;background:#1a241d}
-.img-pending{font-size:10px;color:#708076;border:1px dashed #314036;border-radius:9px;padding:12px 5px;text-align:center;width:100%}
-.notice{min-height:18px;text-align:center;color:var(--muted);font-size:11px;margin:8px 0}
-.actions{margin:14px 0 5px}
-.primary{width:100%;border-radius:12px;padding:14px 16px;font-weight:900;background:var(--lime);color:#11180e;border:0;cursor:pointer}
-.primary.completed{background:#26391d;border:1px solid #6b913c;color:#eaffc8}
-.schedule{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin:17px 0 20px}
-.schedule div{background:#101612;border:1px solid var(--line);border-radius:10px;padding:8px 4px;text-align:center}
-.schedule b{display:block;color:var(--lime);font-size:10px}
-.schedule small{color:var(--muted);font-size:9px}
-.section-title{font-size:11px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin:19px 2px 8px}
-.history{display:grid;gap:6px}
-.history-item{display:flex;justify-content:space-between;gap:10px;background:#101612;border:1px solid var(--line);border-radius:10px;padding:9px 11px;font-size:11px}
-.history-item span:last-child{color:var(--muted);text-align:right}
-.footer{color:#748077;font-size:10px;text-align:center;margin:24px 0 4px}
-.footer a{color:#a6b99e;text-decoration:underline;text-underline-offset:2px}
-@media(min-width:600px){.app{padding-left:22px;padding-right:22px}.exercise-list{grid-template-columns:repeat(2,minmax(0,1fr))}.exercise{grid-template-columns:minmax(0,1fr) 135px}.pose{width:61px}.session-head{margin-top:23px}}
-@media(max-width:370px){.app{padding-left:10px;padding-right:10px}.exercise{grid-template-columns:minmax(0,1fr) 125px;padding:9px}.pose{width:56px}.sequence{height:80px}.day-tab{font-size:10px}}
+.brand{display:flex;align-items:center;gap:10px}.logo{width:38px;height:38px;border-radius:11px;background:var(--lime);color:#11180e;display:grid;place-items:center;font-weight:1000;font-size:20px;letter-spacing:-2px}.brand-name{font-weight:950;letter-spacing:.16em;font-size:19px}.brand-sub{font-size:10px;color:var(--muted);letter-spacing:.12em;text-transform:uppercase}.top-pill{border:1px solid var(--line);border-radius:100px;padding:6px 10px;color:var(--muted);font-size:10px;letter-spacing:.08em}
+.week-card{background:linear-gradient(135deg,#17231b,#101713);border:1px solid var(--line);border-radius:15px;padding:13px 15px;margin:0 0 13px}.week-top{display:flex;justify-content:space-between;align-items:center;gap:10px}.week-label{font-size:11px;color:var(--muted)}.week-number{font-size:20px;font-weight:850;color:var(--lime);font-variant-numeric:tabular-nums}.bar{height:6px;background:#29362d;border-radius:20px;overflow:hidden;margin-top:9px}.bar>span{display:block;height:100%;width:0;background:var(--lime);border-radius:20px;transition:width .2s}
+.schedule{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:12px 0 15px}.schedule div{background:#101612;border:1px solid var(--line);border-radius:10px;padding:8px 3px;text-align:center}.schedule b{display:block;color:var(--lime);font-size:10px;letter-spacing:.05em}.schedule small{color:var(--muted);font-size:9px}
+.day-tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin:12px 0}.day-tab{border:1px solid var(--line);background:#101612;color:var(--muted);padding:10px 3px;border-radius:12px;cursor:pointer;font-weight:850;font-size:11px;letter-spacing:.035em;position:relative}.day-tab small{display:block;font-weight:500;font-size:9px;letter-spacing:0;margin-top:3px}.day-tab.active{background:var(--lime);border-color:var(--lime);color:#11180e}.day-tab.done:not(.active):after{content:"✓";position:absolute;right:6px;top:3px;color:var(--lime);font-size:12px;font-weight:900}
+.session-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin:20px 2px 12px}.session-head h1{font-size:25px;line-height:1.1;margin:0;letter-spacing:-.04em}.session-head p{margin:4px 0 0;color:var(--muted);font-size:12px}.time-tag{font-size:10px;color:var(--lime);border:1px solid #4a6330;border-radius:100px;padding:6px 9px;white-space:nowrap}
+.session-meta{display:flex;flex-wrap:wrap;gap:6px;margin:0 1px 12px}.meta-chip{font-size:10px;color:#c1cec5;border:1px solid var(--line);background:#101612;border-radius:100px;padding:5px 8px}.meta-chip strong{color:var(--lime);font-weight:800}
+.pair-guide{border:1px solid #405431;background:linear-gradient(135deg,#172318,#111a14);border-radius:12px;padding:10px 12px;margin:10px 0 12px}.pair-guide b{font-size:11px;color:var(--lime);letter-spacing:.04em}.pair-guide p{font-size:11px;color:#bfcbc1;margin:4px 0 0}.pair-guide .key{color:#fff;font-weight:800}
+.exercise-list{display:grid;gap:9px}.exercise{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:11px 12px;display:grid;grid-template-columns:minmax(0,1fr) 132px;align-items:center;gap:8px;min-height:114px}.ex-head{display:flex;align-items:flex-start;gap:8px}.num{font-size:10px;color:var(--lime);font-weight:850;min-width:20px;padding-top:2px}.ex-title{font-weight:800;font-size:13px;line-height:1.28}.ex-volume{margin:6px 0 0 28px;color:#dce5dc;font-size:11px;font-weight:700}.ex-rest{margin:4px 0 0 28px;color:var(--muted);font-size:10px}.ex-rir{margin:4px 0 0 28px;color:var(--dim);font-size:10px}.superset{display:inline-flex;align-items:center;gap:4px;margin:7px 0 0 28px;border:1px solid #526a39;color:var(--lime);border-radius:100px;padding:2px 7px;font-size:9px;font-weight:850;letter-spacing:.06em}.superset-note{margin:5px 0 0 28px;color:#9db48c;font-size:9px;line-height:1.35}
+.sequence{height:86px;display:flex;align-items:center;justify-content:center;gap:3px;overflow:hidden}.pose{width:59px;height:76px;object-fit:contain;border-radius:8px;background:#1a241d}.pose-arrow{font-size:14px;color:var(--lime);font-weight:900;flex:0 0 auto}.single-pose{width:112px;height:80px;object-fit:contain;border-radius:8px;background:#1a241d}.img-pending{font-size:10px;color:#708076;border:1px dashed #314036;border-radius:9px;padding:12px 5px;text-align:center;width:100%}
+.notice{min-height:18px;text-align:center;color:var(--muted);font-size:11px;margin:8px 0}.actions{margin:13px 0 6px}.primary{width:100%;border-radius:12px;padding:14px 16px;font-weight:900;background:var(--lime);color:#11180e;border:0;cursor:pointer}.primary.completed{background:#26391d;border:1px solid #6b913c;color:#eaffc8}
+.section-title{font-size:11px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin:21px 2px 8px}.history{display:grid;gap:6px}.history-item{display:flex;justify-content:space-between;gap:10px;background:#101612;border:1px solid var(--line);border-radius:10px;padding:9px 11px;font-size:11px}.history-item span:last-child{color:var(--muted);text-align:right}
+.volume-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}.volume-item{background:#101612;border:1px solid var(--line);border-radius:10px;padding:8px 9px}.volume-top{display:flex;justify-content:space-between;gap:5px;font-size:10px}.volume-top b{font-weight:700}.volume-top span{color:var(--lime);font-variant-numeric:tabular-nums}.volume-bar{height:4px;background:#29362d;border-radius:10px;margin-top:6px;overflow:hidden}.volume-bar i{display:block;height:100%;background:#91b84a;border-radius:10px}
+details.guide{background:#101612;border:1px solid var(--line);border-radius:12px;margin:8px 0;overflow:hidden}details.guide summary{cursor:pointer;list-style:none;padding:12px 13px;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:space-between}details.guide summary::-webkit-details-marker{display:none}details.guide summary:after{content:"+";color:var(--lime);font-size:17px}details.guide[open] summary:after{content:"−"}.guide-body{padding:0 13px 13px;color:#bac6bd;font-size:11px}.guide-body p{margin:6px 0}.guide-body ul{padding-left:17px;margin:6px 0}.guide-body li{margin:5px 0}.guide-body strong{color:#eff5ed}.rest-table{width:100%;border-collapse:collapse;font-size:10px;margin-top:7px}.rest-table td{border-bottom:1px solid var(--line);padding:7px 4px}.rest-table td:last-child{text-align:right;color:var(--lime);white-space:nowrap}.history-title{display:flex;align-items:center;justify-content:space-between}.footer{color:#748077;font-size:10px;text-align:center;margin:24px 0 4px}.footer a{color:#a6b99e;text-decoration:underline;text-underline-offset:2px}
+@media(min-width:600px){.app{padding-left:22px;padding-right:22px}.exercise-list{grid-template-columns:repeat(2,minmax(0,1fr))}.exercise{grid-template-columns:minmax(0,1fr) 118px}.pose{width:52px}.session-head{margin-top:23px}.volume-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:370px){.app{padding-left:9px;padding-right:9px}.exercise{grid-template-columns:minmax(0,1fr) 108px;padding:9px}.pose{width:47px}.sequence{height:78px}.day-tab{font-size:10px}.ex-title{font-size:12px}}
 </style>
 </head>
 <body>
 <main class="app">
 <header class="top">
- <div class="brand"><div class="logo">F</div><div><div class="brand-name">FORGE</div><div class="brand-sub">Programa · 4 días</div></div></div>
- <div class="top-pill">≈60–70 MIN</div>
+ <div class="brand"><div class="logo">F</div><div><div class="brand-name">FORGE</div><div class="brand-sub">Fuerza · equilibrio · progreso</div></div></div>
+ <div class="top-pill">4 DÍAS / SEMANA</div>
 </header>
 <section class="week-card">
- <div class="week-top"><div class="week-label">Entrenamientos completados esta semana</div><div class="week-number" id="weekCount">0 / 4</div></div>
+ <div class="week-top"><div class="week-label">Sesiones completadas esta semana</div><div class="week-number" id="weekCount">0 / 4</div></div>
  <div class="bar"><span id="weekBar"></span></div>
 </section>
+<div class="schedule">
+ <div><b>LUNES</b><small>Superior A</small></div><div><b>MARTES</b><small>Inferior A</small></div><div><b>JUEVES</b><small>Superior B</small></div><div><b>SÁBADO</b><small>Inferior B</small></div>
+</div>
 <nav class="day-tabs" id="dayTabs" aria-label="Días de entrenamiento"></nav>
 <section class="session-head">
- <div><h1 id="sessionTitle"></h1><p id="sessionFocus"></p><p class="rest-note">Descansos entre series · Compuestos: 2–3 min · Aislamientos: 90–120 s · RIR 1–3</p></div>
- <div class="time-tag">≈60–70 MIN</div>
+ <div><h1 id="sessionTitle"></h1><p id="sessionFocus"></p></div>
+ <div class="time-tag" id="timeTag">65–80 MIN</div>
 </section>
+<div class="session-meta" id="sessionMeta"></div>
+<div class="pair-guide" id="pairGuide"></div>
 <div class="exercise-list" id="exerciseList"></div>
 <div class="notice" id="notice" aria-live="polite"></div>
 <div class="actions"><button class="primary" id="completeBtn">Marcar día como hecho</button></div>
-<div class="section-title">Distribución semanal recomendada</div>
-<div class="schedule">
- <div><b>LUNES</b><small>Pull</small></div><div><b>MARTES</b><small>Push</small></div><div><b>JUEVES</b><small>Legs</small></div><div><b>SÁBADO</b><small>Mixed</small></div>
-</div>
-<div class="section-title">Últimos entrenamientos</div>
+<div class="section-title">Volumen semanal por grupo muscular</div>
+<div class="volume-grid" id="volumeGrid"></div>
+<div class="section-title">Guía de entrenamiento</div>
+<details class="guide">
+ <summary>Descansos y superseries</summary>
+ <div class="guide-body">
+  <p><strong>Ejercicios principales:</strong> descansa 2,5–3 minutos en sentadilla, press banca y peso muerto rumano. En remos, jalones, prensa e hip thrust, unos 2 minutos.</p>
+  <p><strong>Aislamientos:</strong> 90–120 segundos en bíceps y tríceps; 60–90 segundos en elevaciones laterales, pájaros, gemelos y abdominales.</p>
+  <p><strong>Cómo hacer las superseries:</strong> completa A1, espera el tiempo de transición indicado, haz A2 y descansa después de la pareja. No es un circuito rápido. El descanso debe permitir repetir el ejercicio con buena técnica y rendimiento.</p>
+  <p>Si necesitas más tiempo para recuperar respiración o fuerza, descansa más. La calidad de las repeticiones importa más que cumplir un cronómetro.</p>
+ </div>
+</details>
+<details class="guide">
+ <summary>RIR, esfuerzo y técnica</summary>
+ <div class="guide-body">
+  <p><strong>RIR</strong> significa repeticiones en recámara: RIR 2 quiere decir que al terminar calculas que podrías hacer dos repeticiones más con buena técnica.</p>
+  <ul>
+   <li>Sentadilla, press banca y peso muerto rumano: normalmente RIR 2–3.</li>
+   <li>Remos, jalones, presses y ejercicios accesorios: RIR 1–2.</li>
+   <li>Aislamientos: RIR 1–2; en la última serie puedes acercarte ocasionalmente a RIR 0–1 si la técnica sigue limpia.</li>
+  </ul>
+  <p>Controla la bajada (aproximadamente 2–3 segundos), evita rebotes y utiliza el mayor recorrido que puedas realizar sin dolor. No hace falta llegar al fallo en cada serie.</p>
+ </div>
+</details>
+<details class="guide">
+ <summary>Calentamiento y progresión</summary>
+ <div class="guide-body">
+  <p><strong>Calentamiento:</strong> 5–8 minutos de actividad general y movilidad dinámica. Antes del primer ejercicio principal realiza 2–4 series progresivas de aproximación, sin fatigar. No cuentan como series efectivas.</p>
+  <p><strong>Progresión doble:</strong> trabaja dentro del rango indicado. Cuando completes el máximo de repeticiones en todas las series con el RIR previsto y buena técnica, sube ligeramente la carga y vuelve a la parte baja del rango.</p>
+  <ul>
+   <li>Tren superior: incrementos pequeños, normalmente 1–2,5 kg según el ejercicio.</li>
+   <li>Tren inferior: normalmente 2,5–5 kg cuando puedas mantener la técnica.</li>
+   <li>En aislamientos, utiliza el incremento más pequeño disponible.</li>
+  </ul>
+  <p>Evalúa el progreso después de 8–10 semanas. Reduce temporalmente el volumen si aparece fatiga persistente, caída del rendimiento en varias sesiones o molestias que no remiten.</p>
+ </div>
+</details>
+<details class="guide">
+ <summary>Volumen: cómo interpretar las series</summary>
+ <div class="guide-body">
+  <p>El volumen de la tabla cuenta <strong>series directas</strong>. Además, bíceps trabaja en jalones y remos; tríceps y deltoide anterior trabajan en los presses; deltoide posterior participa en los remos. Por eso no debes sumar series adicionales automáticamente.</p>
+  <p>El objetivo es desarrollar todo el cuerpo de manera proporcionada, no maximizar el volumen de un solo músculo. Ajusta solo después de observar rendimiento y recuperación durante varias semanas.</p>
+ </div>
+</details>
+<div class="section-title history-title"><span>Últimos entrenamientos</span><span style="font-size:9px;letter-spacing:0;color:var(--dim)">REGISTRO LOCAL</span></div>
 <div class="history" id="historyList"></div>
-<div class="footer">Ilustraciones: <a href="https://repdb.co" target="_blank" rel="noopener noreferrer">Exercise data by RepDB</a></div>
+<div class="footer">Ilustraciones: <a href="https://repdb.co" target="_blank" rel="noopener noreferrer">Exercise data by RepDB</a> · Historial guardado en este dispositivo</div>
 </main>
 <script>
 const sessions=[
-{id:"pull",tab:"PULL",day:"DÍA 01",title:"PULL",focus:"Espalda · Deltoides posteriores · Bíceps",exercises:[
-{id:"lat-pulldown",name:"Jalón al pecho",sets:3,reps:"8–12 reps",rest:"2–3 min",aliases:["lat-pulldown","lat pulldown","wide grip lat pulldown"]},
-{id:"barbell-row",name:"Remo con barra inclinado",sets:3,reps:"6–10 reps",rest:"2–3 min",aliases:["barbell-row","bent-over barbell row"]},
-{id:"db-pullover",name:"Pullover con mancuerna",sets:2,reps:"10–15 reps",rest:"2 min",aliases:["db-pullover","dumbbell pullover"]},
-{id:"dumbbell-reverse-fly",name:"Pájaros con mancuernas inclinado",sets:3,reps:"12–20 reps",rest:"90–120 s",aliases:["dumbbell-reverse-fly","rear-delt-fly","bent-over-reverse-fly"]},
-{id:"ez-bar-curl",name:"Curl de bíceps con barra EZ",sets:3,reps:"8–12 reps",rest:"90–120 s",aliases:["ez-bar-curl","ez bar curl"]},
-{id:"hammer-curl",name:"Curl martillo con mancuernas",sets:2,reps:"10–15 reps",rest:"90–120 s",aliases:["hammer-curl","dumbbell hammer curl","hammer curl"]}
+{id:"upper-a",tab:"SUPERIOR A",day:"LUNES",title:"SUPERIOR A",focus:"Pecho · Espalda · Hombros · Bíceps · Tríceps",duration:"70–85 MIN",sets:19,pairGuide:"<b>SUPERSERIES DE HOY</b><p><span class='key'>A · Press banca + jalón:</span> 60–75 s entre ejercicios y 90–120 s al terminar la pareja. <span class='key'>B · Bíceps + tríceps:</span> 30–45 s entre ejercicios y 90–120 s al terminar la pareja.</p>",exercises:[
+{id:"bench-press",name:"Press banca con barra",sets:3,reps:"5–8 reps",rest:"2,5–3 min entre series si lo haces solo",rir:"RIR 2–3",superset:{id:"A",role:"A1",text:"Superserie A · 3 rondas con jalón al pecho",note:"Tras A1, espera 60–75 s y realiza A2. Después descansa 90–120 s."},aliases:["bench-press","barbell-bench-press","barbell bench press","bench press"]},
+{id:"lat-pulldown",name:"Jalón al pecho",sets:3,reps:"8–12 reps",rest:"Tras la pareja: 90–120 s",rir:"RIR 1–2",superset:{id:"A",role:"A2",text:"Superserie A · 3 rondas con press banca",note:"Hazlo después del press banca; el descanso conjunto deja tiempo suficiente antes de repetir cada ejercicio."},aliases:["lat-pulldown","lat pulldown","wide grip lat pulldown"]},
+{id:"seated-cable-row",name:"Remo sentado en polea",sets:2,reps:"8–12 reps",rest:"2 min",rir:"RIR 1–2",aliases:["seated-cable-row","seated cable row","cable row"]},
+{id:"seated-db-press",name:"Press de hombros sentado con mancuernas",sets:2,reps:"8–12 reps",rest:"2 min",rir:"RIR 1–2",aliases:["seated-db-press","dumbbell-shoulder-press","seated dumbbell shoulder press"]},
+{id:"lateral-raise",name:"Elevaciones laterales con mancuernas",sets:3,reps:"12–20 reps",rest:"60–90 s",rir:"RIR 1–2",aliases:["lateral-raise","dumbbell-lateral-raise","seated-dumbbell-lateral-raise"]},
+{id:"dumbbell-reverse-fly",name:"Pájaros con mancuernas",sets:2,reps:"12–20 reps",rest:"60–90 s",rir:"RIR 1–2",aliases:["dumbbell-reverse-fly","rear-delt-fly","bent-over-reverse-fly"]},
+{id:"ez-bar-curl",name:"Curl de bíceps con barra EZ",sets:2,reps:"8–12 reps",rest:"Tras la pareja: 90–120 s",rir:"RIR 1–2",superset:{id:"B",role:"B1",text:"Superserie B · 2 rondas con tríceps en cuerda",note:"Alterna bíceps y tríceps; deja 30–45 s entre ejercicios y 90–120 s tras la pareja."},aliases:["ez-bar-curl","ez bar curl"]},
+{id:"tricep-pushdown",name:"Extensión de tríceps en polea con cuerda",sets:2,reps:"10–15 reps",rest:"Tras la pareja: 90–120 s",rir:"RIR 1–2",superset:{id:"B",role:"B2",text:"Superserie B · 2 rondas con curl EZ",note:"Mantén los codos estables y evita balancear el tronco."},aliases:["tricep-pushdown","cable tricep pushdown","triceps pushdown"]}
 ]},
-{id:"push",tab:"PUSH",day:"DÍA 02",title:"PUSH",focus:"Pecho · Hombros · Tríceps",exercises:[
-{id:"bench-press",name:"Press banca con barra",sets:3,reps:"5–8 reps",rest:"2,5–3 min",aliases:["bench-press","barbell-bench-press","barbell bench press","bench press"]},
-{id:"incline-db-press",name:"Press inclinado con mancuernas",sets:3,reps:"8–12 reps",rest:"2 min",aliases:["incline-db-press","incline-dumbbell-press","incline dumbbell press"]},
-{id:"seated-db-press",name:"Press hombros sentado con mancuernas",sets:2,reps:"8–12 reps",rest:"2 min",aliases:["seated-db-press","dumbbell-shoulder-press","seated dumbbell shoulder press"]},
-{id:"cable-fly",name:"Aperturas con cable",sets:2,reps:"10–15 reps",rest:"90–120 s",aliases:["cable-fly","cable fly"]},
-{id:"lateral-raise",name:"Elevaciones laterales con mancuernas",sets:3,reps:"12–20 reps",rest:"90–120 s",aliases:["lateral-raise","dumbbell-lateral-raise","seated-dumbbell-lateral-raise"]},
-{id:"tricep-pushdown",name:"Extensión de tríceps en polea",sets:3,reps:"10–15 reps",rest:"90–120 s",aliases:["tricep-pushdown","cable tricep pushdown","triceps pushdown"]}
+{id:"lower-a",tab:"INFERIOR A",day:"MARTES",title:"INFERIOR A",focus:"Cuádriceps · Isquiosurales · Glúteos · Gemelos · Abdomen",duration:"60–75 MIN",sets:17,pairGuide:"<b>SUPERSERIE DE HOY</b><p><span class='key'>A · Gemelos de pie + crunch en polea:</span> alterna los ejercicios y descansa 60–90 s después de cada pareja. Las sentadillas, el rumano y la prensa se hacen con descansos completos, sin superseries.</p>",exercises:[
+{id:"squat",name:"Sentadilla con barra",sets:3,reps:"5–8 reps",rest:"2,5–3 min",rir:"RIR 2–3",aliases:["squat","barbell squat","back squat"]},
+{id:"romanian-deadlift",name:"Peso muerto rumano",sets:3,reps:"8–10 reps",rest:"2,5–3 min",rir:"RIR 2–3",aliases:["romanian-deadlift","barbell romanian deadlift","romanian deadlift"]},
+{id:"leg-press",name:"Prensa de piernas",sets:2,reps:"10–15 reps",rest:"2 min",rir:"RIR 1–2",aliases:["leg-press","leg press"]},
+{id:"leg-curl",name:"Curl femoral tumbado",sets:3,reps:"10–15 reps",rest:"90–120 s",rir:"RIR 1–2",aliases:["leg-curl","lying-leg-curl","lying leg curl"]},
+{id:"dumbbell-calf-raise",name:"Gemelos de pie",sets:3,reps:"12–20 reps",rest:"Tras la pareja: 60–90 s",rir:"RIR 1–2",superset:{id:"A",role:"A1",text:"Superserie A · 3 rondas con crunch en polea",note:"Haz 3 rondas de gemelos + crunch. Descansa 60–90 s al terminar cada pareja."},aliases:["dumbbell-calf-raise","dumbbell calf raise","standing calf raise"]},
+{id:"cable-crunch",name:"Crunch abdominal en polea",sets:3,reps:"10–15 reps",rest:"Tras la pareja: 60–90 s",rir:"RIR 1–2",superset:{id:"A",role:"A2",text:"Superserie A · 3 rondas con gemelos",note:"Flexiona el tronco controladamente; no conviertas el movimiento en un tirón de brazos."},aliases:["cable-crunch","cable crunch"]}
 ]},
-{id:"legs",tab:"LEGS",day:"DÍA 03",title:"LEGS",focus:"Cuádriceps · Isquiosurales · Glúteos · Gemelos · Core",exercises:[
-{id:"squat",name:"Sentadilla con barra",sets:3,reps:"5–8 reps",rest:"2,5–3 min",aliases:["squat","barbell squat","back squat"]},
-{id:"romanian-deadlift",name:"Peso muerto rumano",sets:3,reps:"8–10 reps",rest:"2,5–3 min",aliases:["romanian-deadlift","barbell romanian deadlift","romanian deadlift"]},
-{id:"leg-press",name:"Prensa de piernas",sets:3,reps:"10–15 reps",rest:"2 min",aliases:["leg-press","leg press"]},
-{id:"leg-extension",name:"Extensión de cuádriceps",sets:2,reps:"12–15 reps",rest:"90–120 s",aliases:["leg-extension","leg extension"]},
-{id:"leg-curl",name:"Curl femoral tumbado",sets:3,reps:"10–15 reps",rest:"90–120 s",aliases:["leg-curl","lying-leg-curl","lying leg curl"]},
-{id:"dumbbell-calf-raise",name:"Gemelos de pie con mancuernas",sets:3,reps:"12–20 reps",rest:"90 s",aliases:["dumbbell-calf-raise","dumbbell calf raise"]},
-{id:"plank",name:"Plancha abdominal",sets:3,reps:"30–45 segundos",rest:"60–90 s",aliases:["plank"]}
+{id:"upper-b",tab:"SUPERIOR B",day:"JUEVES",title:"SUPERIOR B",focus:"Pecho · Espalda · Hombros · Bíceps · Tríceps",duration:"70–85 MIN",sets:20,pairGuide:"<b>SUPERSERIES DE HOY</b><p><span class='key'>A · Press inclinado + remo apoyado:</span> 60–75 s de transición y 90–120 s tras la pareja. <span class='key'>B · Aperturas + pájaros:</span> 2 rondas; añade después 1 serie extra de aperturas por separado. <span class='key'>C · Bíceps + tríceps:</span> 30–45 s de transición y 90–120 s tras la pareja.</p>",exercises:[
+{id:"incline-db-press",name:"Press inclinado con mancuernas",sets:3,reps:"8–12 reps",rest:"Tras la pareja: 90–120 s",rir:"RIR 1–2",superset:{id:"A",role:"A1",text:"Superserie A · 3 rondas con remo con pecho apoyado",note:"Haz el remo después del press; descansa 90–120 s al completar la pareja."},aliases:["incline-db-press","incline-dumbbell-press","incline dumbbell press"]},
+{id:"chest-supported-row",name:"Remo con pecho apoyado",sets:3,reps:"8–12 reps",rest:"Tras la pareja: 90–120 s",rir:"RIR 1–2",superset:{id:"A",role:"A2",text:"Superserie A · 3 rondas con press inclinado",note:"El apoyo del pecho reduce la demanda de estabilización lumbar y facilita mantener la técnica."},aliases:["chest-supported-row","chest supported row","incline bench dumbbell row","chest supported dumbbell row"]},
+{id:"lat-pulldown",name:"Jalón al pecho",sets:2,reps:"8–12 reps",rest:"2 min",rir:"RIR 1–2",aliases:["lat-pulldown","lat pulldown","wide grip lat pulldown"]},
+{id:"cable-fly",name:"Aperturas en polea",sets:3,reps:"10–15 reps",rest:"60–90 s",rir:"RIR 1–2",superset:{id:"B",role:"B1",text:"Superserie B · 2 rondas con pájaros; 1 serie adicional individual",note:"Primero haz 2 series alternadas con pájaros. Después completa la tercera serie de aperturas sin pareja."},aliases:["cable-fly","cable fly","standing cable fly"]},
+{id:"dumbbell-reverse-fly",name:"Pájaros con mancuernas",sets:2,reps:"12–20 reps",rest:"Tras la pareja: 60–90 s",rir:"RIR 1–2",superset:{id:"B",role:"B2",text:"Superserie B · 2 rondas con aperturas en polea",note:"Mantén el tronco estable y evita impulsarte."},aliases:["dumbbell-reverse-fly","rear-delt-fly","bent-over-reverse-fly"]},
+{id:"lateral-raise",name:"Elevaciones laterales con mancuernas",sets:3,reps:"12–20 reps",rest:"60–90 s",rir:"RIR 1–2",aliases:["lateral-raise","dumbbell-lateral-raise","seated-dumbbell-lateral-raise"]},
+{id:"incline-db-curl",name:"Curl inclinado con mancuernas",sets:2,reps:"10–15 reps",rest:"Tras la pareja: 90–120 s",rir:"RIR 1–2",superset:{id:"C",role:"C1",text:"Superserie C · 2 rondas con extensión de tríceps sobre la cabeza",note:"Deja 30–45 s de transición y 90–120 s al terminar la pareja."},aliases:["incline-db-curl","incline dumbbell curl","dumbbell incline curl"]},
+{id:"overhead-tricep-extension",name:"Extensión de tríceps sobre la cabeza",sets:2,reps:"10–15 reps",rest:"Tras la pareja: 90–120 s",rir:"RIR 1–2",superset:{id:"C",role:"C2",text:"Superserie C · 2 rondas con curl inclinado",note:"Mantén los codos orientados hacia delante y evita arquear la zona lumbar."},aliases:["overhead-tricep-extension","overhead cable triceps extension","dumbbell overhead triceps extension","overhead dumbbell tricep extension"]}
 ]},
-{id:"mixed",tab:"MIXED",day:"DÍA 04",title:"MIXED",focus:"Segundo estímulo · Tren superior e inferior",exercises:[
-{id:"db-bench-press",name:"Press banca con mancuernas",sets:3,reps:"8–12 reps",rest:"2 min",aliases:["db-bench-press","dumbbell-bench-press","dumbbell bench press"]},
-{id:"seated-cable-row",name:"Remo sentado en polea",sets:3,reps:"8–12 reps",rest:"2 min",aliases:["seated-cable-row","seated cable row","cable row"]},
-{id:"hip-thrust",name:"Hip thrust",sets:2,reps:"8–12 reps",rest:"2–3 min",aliases:["hip-thrust","barbell hip thrust"]},
-{id:"bulgarian-split-squat",name:"Sentadilla búlgara",sets:2,reps:"8–10 / pierna",rest:"2 min",aliases:["bulgarian-split-squat","bulgarian split squat"]},
-{id:"leg-curl",name:"Curl femoral tumbado",sets:2,reps:"10–15 reps",rest:"90–120 s",aliases:["leg-curl","lying-leg-curl","lying leg curl"]},
-{id:"dumbbell-calf-raise",name:"Gemelos de pie con mancuernas",sets:2,reps:"12–20 reps",rest:"90 s",aliases:["dumbbell-calf-raise","dumbbell calf raise"]},
-{id:"cable-crunch",name:"Crunch abdominal en polea",sets:2,reps:"10–15 reps",rest:"60–90 s",aliases:["cable-crunch","cable crunch"]},
-{id:"seated-dumbbell-curl",name:"Curl de bíceps con mancuernas",sets:2,reps:"10–15 reps",rest:"90–120 s después de la pareja",superset:"A",aliases:["seated-dumbbell-curl","dumbbell-curl","dumbbell curl"]},
-{id:"dumbbell-tricep-extension",name:"Extensión de tríceps sobre la cabeza con mancuerna",sets:2,reps:"10–15 reps",rest:"90–120 s después de la pareja",superset:"A",aliases:["dumbbell-tricep-extension","overhead dumbbell tricep extension"]}
+{id:"lower-b",tab:"INFERIOR B",day:"SÁBADO",title:"INFERIOR B",focus:"Piernas · Glúteos · Gemelos · Abdomen · Complementos de brazos",duration:"65–80 MIN",sets:18,pairGuide:"<b>SUPERSERIES DE HOY</b><p><span class='key'>A · Extensión de cuádriceps + curl femoral:</span> 2 rondas, 45–60 s entre ejercicios y 90–120 s tras la pareja. <span class='key'>B · Gemelos sentado + plancha:</span> 2 rondas y 1 serie adicional de gemelos individual. <span class='key'>C · Curl martillo + tríceps en polea:</span> 2 rondas, 30–45 s de transición y 90–120 s tras la pareja.</p>",exercises:[
+{id:"bulgarian-split-squat",name:"Sentadilla búlgara",sets:3,reps:"8–10 por pierna",rest:"2–3 min",rir:"RIR 2",aliases:["bulgarian-split-squat","bulgarian split squat"]},
+{id:"hip-thrust",name:"Hip thrust",sets:2,reps:"8–12 reps",rest:"2–3 min",rir:"RIR 1–2",aliases:["hip-thrust","barbell hip thrust"]},
+{id:"leg-extension",name:"Extensión de cuádriceps",sets:2,reps:"12–15 reps",rest:"Tras la pareja: 90–120 s",rir:"RIR 1–2",superset:{id:"A",role:"A1",text:"Superserie A · 2 rondas con curl femoral",note:"Alterna extensión de rodilla y flexión de rodilla; evita acortar el recorrido por fatiga."},aliases:["leg-extension","leg extension"]},
+{id:"leg-curl",name:"Curl femoral tumbado",sets:2,reps:"10–15 reps",rest:"Tras la pareja: 90–120 s",rir:"RIR 1–2",superset:{id:"A",role:"A2",text:"Superserie A · 2 rondas con extensión de cuádriceps",note:"Dos rondas en pareja. No rebotes ni levantes la pelvis del banco."},aliases:["leg-curl","lying-leg-curl","lying leg curl"]},
+{id:"seated-calf-raise",name:"Gemelos sentado",sets:3,reps:"12–20 reps",rest:"Tras la pareja: 60–90 s",rir:"RIR 1–2",superset:{id:"B",role:"B1",text:"Superserie B · 2 rondas con plancha + 1 serie extra de gemelos",note:"Haz 2 rondas gemelos + plancha y termina con la tercera serie de gemelos por separado."},aliases:["seated-calf-raise","seated calf raise","seated dumbbell calf raise"]},
+{id:"plank",name:"Plancha abdominal",sets:2,reps:"30–45 segundos",rest:"Tras la pareja: 60–90 s",rir:"Deja margen; postura estable",superset:{id:"B",role:"B2",text:"Superserie B · 2 rondas con gemelos sentado",note:"Mantén costillas y pelvis controladas; termina la serie antes de perder la postura."},aliases:["plank","front plank"]},
+{id:"hammer-curl",name:"Curl martillo con mancuernas",sets:2,reps:"10–15 reps",rest:"Tras la pareja: 90–120 s",rir:"RIR 1–2",superset:{id:"C",role:"C1",text:"Superserie C · 2 rondas con tríceps en polea",note:"Complemento de brazos: 30–45 s entre ejercicios y 90–120 s al terminar la pareja."},aliases:["hammer-curl","dumbbell hammer curl","hammer curl"]},
+{id:"tricep-pushdown",name:"Extensión de tríceps en polea",sets:2,reps:"10–15 reps",rest:"Tras la pareja: 90–120 s",rir:"RIR 1–2",superset:{id:"C",role:"C2",text:"Superserie C · 2 rondas con curl martillo",note:"Mantén los codos estables y completa el recorrido sin balancear el cuerpo."},aliases:["tricep-pushdown","cable tricep pushdown","triceps pushdown"]}
 ]}
+];
+const volumes=[
+{name:"Pecho",sets:9},{name:"Espalda",sets:10},{name:"Cuádriceps",sets:10},{name:"Isquiotibiales",sets:8},{name:"Bíceps",sets:6},{name:"Tríceps",sets:6},{name:"Deltoide lateral",sets:6},{name:"Deltoide posterior",sets:4},{name:"Gemelos",sets:6},{name:"Abdominales",sets:5}
 ];
 const progressKey="forge_fourday_daily_v4";
 const historyKey="forge_fourday_history_v4";
@@ -138,93 +153,72 @@ let active=0,library=[],libraryState="loading";
 let completions=readStore(progressKey,{});
 let history=readStore(historyKey,[]);
 function readStore(k,f){try{const v=localStorage.getItem(k);return v?JSON.parse(v):f}catch(e){return f}}
-function save(){localStorage.setItem(progressKey,JSON.stringify(completions));localStorage.setItem(historyKey,JSON.stringify(history))}
-function localDate(d=new Date()){return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
+function save(){try{localStorage.setItem(progressKey,JSON.stringify(completions));localStorage.setItem(historyKey,JSON.stringify(history))}catch(e){}}
+function localDate(d){d=d||new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
 function mondayOfWeek(){const d=new Date();d.setHours(0,0,0,0);d.setDate(d.getDate()-((d.getDay()+6)%7));return localDate(d)}
-function isDone(id,date=localDate()){return !!completions[date+"|"+id]}
+function isDone(id,date){return !!completions[(date||localDate())+"|"+id]}
 function norm(s){return String(s||"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9]+/g," ").trim()}
 function getArtwork(ex){
  if(!library.length)return null;
- const aliases=(ex.aliases||[]).map(norm);
- let best=null,bestScore=0;
- for(const item of library){
-  const id=norm(item.id),en=norm(item.name_en),es=norm(item.name_es);
-  let score=0;
-  for(const a of aliases){
-   if(id===a)score=Math.max(score,120);
-   if(id.replace(/ /g,"-")===a.replace(/ /g,"-"))score=Math.max(score,118);
-   if(en===a||es===a)score=Math.max(score,110);
-   if((en+" "+es).includes(a)||a.includes(en)&&en.length>5)score=Math.max(score,85+a.length/100);
-   if(id.includes(a)||a.includes(id)&&id.length>6)score=Math.max(score,75+a.length/100);
-  }
+ const aliases=(ex.aliases||[]).map(norm);let best=null,bestScore=0;
+ for(const item of library){const id=norm(item.id),en=norm(item.name_en),es=norm(item.name_es);let score=0;
+  for(const a of aliases){if(id===a)score=Math.max(score,120);if(id.replace(/ /g,"-")===a.replace(/ /g,"-"))score=Math.max(score,118);if(en===a||es===a)score=Math.max(score,110);if((en+" "+es).includes(a)||a.includes(en)&&en.length>5)score=Math.max(score,85+a.length/100);if(id.includes(a)||a.includes(id)&&id.length>6)score=Math.max(score,75+a.length/100)}
   if(score>bestScore){best=item;bestScore=score}
  }
- if(!best||bestScore<75)return null;
- return best.images&&best.images.flat?best.images.flat:null;
+ if(!best||bestScore<75)return null;return best.images&&best.images.flat?best.images.flat:null
 }
-function imgURL(path){if(!path)return "";return /^https?:/i.test(path)?path:"https://exercise-dataset.com/"+String(path).replace(/^\/+/, "")}
+function imgURL(path){if(!path)return "";return /^https?:/i.test(path)?path:"https://exercise-dataset.com/"+String(path).replace(/^\/+/,"")}
 function imageHTML(ex){
- const art=getArtwork(ex);
- if(!art)return '<div class="img-pending">'+(libraryState==="loading"?"…":"")+'</div>';
- const start=art.start||art.main,peak=art.peak||art.main;
- if(!start&&!peak)return '<div class="img-pending"></div>';
+ const art=getArtwork(ex);if(!art)return '<div class="img-pending">'+(libraryState==="loading"?"Cargando…":"Ilustración no disponible")+'</div>';
+ const start=art.start||art.main,peak=art.peak||art.main;if(!start&&!peak)return '<div class="img-pending">Ilustración no disponible</div>';
  if(start&&peak&&start!==peak)return '<div class="sequence"><img class="pose" loading="lazy" alt="" src="'+imgURL(start)+'"><span class="pose-arrow">→</span><img class="pose" loading="lazy" alt="" src="'+imgURL(peak)+'"></div>';
- return '<div class="sequence"><img class="single-pose" loading="lazy" alt="" src="'+imgURL(start||peak)+'"></div>';
+ return '<div class="sequence"><img class="single-pose" loading="lazy" alt="" src="'+imgURL(start||peak)+'"></div>'
 }
 function renderTabs(){
- document.getElementById("dayTabs").innerHTML=sessions.map((s,i)=>'<button class="day-tab '+(i===active?'active ':'')+(isDone(s.id)?'done':'')+'" data-day="'+i+'">'+s.tab+'<small>'+s.day+'</small></button>').join("");
- document.querySelectorAll(".day-tab").forEach(b=>b.addEventListener("click",()=>{active=Number(b.dataset.day);render()}));
+ document.getElementById("dayTabs").innerHTML=sessions.map((s,i)=>'<button class="day-tab '+(i===active?"active ":"")+(isDone(s.id)?"done":"")+'" data-day="'+i+'">'+s.tab+'<small>'+s.day+'</small></button>').join("");
+ document.querySelectorAll(".day-tab").forEach(b=>b.addEventListener("click",()=>{active=Number(b.dataset.day);render()}))
 }
 function renderSession(){
  const s=sessions[active],done=isDone(s.id);
  document.getElementById("sessionTitle").textContent=s.title;
  document.getElementById("sessionFocus").textContent=s.focus;
- document.getElementById("exerciseList").innerHTML=s.exercises.map((e,i)=>
-  '<article class="exercise"><div><div class="ex-head"><span class="num">'+String(i+1).padStart(2,"0")+'</span><div class="ex-title">'+e.name+'</div></div><div class="ex-volume">'+e.sets+' × '+e.reps+'</div><div class="ex-rest">'+(e.superset?"Tras la pareja: ":"Entre series: ")+e.rest+'</div>'+(e.superset?'<div class="superset">SUPERSERIE '+e.superset+'</div>':'')+'</div>'+imageHTML(e)+'</article>'
- ).join("");
- const btn=document.getElementById("completeBtn");
- btn.textContent=done?"Día completado ✓":"Marcar día como hecho";
- btn.classList.toggle("completed",done);
- document.getElementById("notice").textContent=libraryState==="loading"?"Cargando ilustraciones de ejercicios…":libraryState==="error"?"No se han podido cargar algunas ilustraciones. Comprueba la conexión.":"";
+ document.getElementById("timeTag").textContent="≈"+s.duration;
+ document.getElementById("sessionMeta").innerHTML='<span class="meta-chip"><strong>'+s.sets+'</strong> series de trabajo</span><span class="meta-chip">Descansos completos</span><span class="meta-chip">RIR según ejercicio</span>';
+ document.getElementById("pairGuide").innerHTML=s.pairGuide;
+ document.getElementById("exerciseList").innerHTML=s.exercises.map((e,i)=>{
+  const pair=e.superset?'<div class="superset">SUPERSERIE '+e.superset.id+' · '+e.superset.role+'</div><div class="superset-note">'+e.superset.text+(e.superset.note?" · "+e.superset.note:"")+'</div>':"";
+  return '<article class="exercise"><div><div class="ex-head"><span class="num">'+String(i+1).padStart(2,"0")+'</span><div class="ex-title">'+e.name+'</div></div><div class="ex-volume">'+e.sets+' × '+e.reps+'</div><div class="ex-rest">Descanso: '+e.rest+'</div><div class="ex-rir">'+e.rir+'</div>'+pair+'</div>'+imageHTML(e)+'</article>'
+ }).join("");
+ const btn=document.getElementById("completeBtn");btn.textContent=done?"Entrenamiento completado ✓":"Marcar día como hecho";btn.classList.toggle("completed",done);
+ document.getElementById("notice").textContent=libraryState==="loading"?"Cargando ilustraciones de ejercicios…":libraryState==="error"?"Algunas ilustraciones no están disponibles; puedes seguir usando la rutina.":"";
+}
+function renderVolumes(){
+ document.getElementById("volumeGrid").innerHTML=volumes.map(v=>'<div class="volume-item"><div class="volume-top"><b>'+v.name+'</b><span>'+v.sets+' series</span></div><div class="volume-bar"><i style="width:'+Math.min(100,v.sets/12*100)+'%"></i></div></div>').join("")
 }
 function renderWeek(){
- const monday=mondayOfWeek(),today=localDate();
- const count=history.filter(h=>h.date>=monday&&h.date<=today).length;
+ const monday=mondayOfWeek(),today=localDate(),ids=sessions.map(s=>s.id);
+ const count=history.filter(h=>h.date>=monday&&h.date<=today&&ids.includes(h.session)).length;
  document.getElementById("weekCount").textContent=Math.min(count,4)+" / 4";
  document.getElementById("weekBar").style.width=Math.min(count,4)/4*100+"%";
- document.getElementById("historyList").innerHTML=history.slice().sort((a,b)=>(b.date+b.session).localeCompare(a.date+a.session)).slice(0,8).map(h=>{
+ document.getElementById("historyList").innerHTML=history.slice().sort((a,b)=>(b.date+b.session).localeCompare(a.date+a.session)).slice(0,10).map(h=>{
   const s=sessions.find(x=>x.id===h.session);
-  return '<div class="history-item"><span><b>'+(s?s.title:h.session)+'</b></span><span>'+h.date+'</span></div>';
- }).join("")||'<div class="history-item"><span>Todavía no hay entrenamientos registrados.</span></div>';
+  const old={pull:"PULL (rutina anterior)",push:"PUSH (rutina anterior)",legs:"LEGS (rutina anterior)",mixed:"MIXED (rutina anterior)"};
+  return '<div class="history-item"><span><b>'+(s?s.title:(old[h.session]||h.session))+'</b></span><span>'+h.date+'</span></div>'
+ }).join("")||'<div class="history-item"><span>Todavía no hay entrenamientos registrados.</span></div>'
 }
-function render(){renderTabs();renderSession();renderWeek()}
+function render(){renderTabs();renderSession();renderWeek();renderVolumes()}
 document.getElementById("completeBtn").addEventListener("click",()=>{
  const s=sessions[active],today=localDate(),k=today+"|"+s.id;
- if(completions[k]){
-  delete completions[k];
-  history=history.filter(h=>!(h.date===today&&h.session===s.id));
-  document.getElementById("notice").textContent="Entrenamiento desmarcado.";
- }else{
-  completions[k]=true;
-  history=history.filter(h=>!(h.date===today&&h.session===s.id));
-  history.push({date:today,session:s.id});
-  document.getElementById("notice").textContent="Entrenamiento registrado.";
- }
- save();render();
+ if(completions[k]){delete completions[k];history=history.filter(h=>!(h.date===today&&h.session===s.id));document.getElementById("notice").textContent="Entrenamiento desmarcado."}
+ else{completions[k]=true;history=history.filter(h=>!(h.date===today&&h.session===s.id));history.push({date:today,session:s.id});document.getElementById("notice").textContent="Entrenamiento registrado."}
+ save();render()
 });
 async function loadExerciseArt(){
- try{
-  const response=await fetch("https://exercise-dataset.com/exercises.json",{cache:"force-cache"});
-  if(!response.ok)throw new Error("HTTP "+response.status);
-  const data=await response.json();
-  library=Array.isArray(data.exercises)?data.exercises:[];
-  if(!library.length)throw new Error("Empty exercise library");
-  libraryState="ready";
- }catch(e){libraryState="error"}
- renderSession();
+ try{const response=await fetch("https://exercise-dataset.com/exercises.json",{cache:"force-cache"});if(!response.ok)throw new Error("HTTP "+response.status);const data=await response.json();library=Array.isArray(data.exercises)?data.exercises:[];if(!library.length)throw new Error("Empty exercise library");libraryState="ready"}
+ catch(e){libraryState="error"}
+ renderSession()
 }
-render();
-loadExerciseArt();
+render();renderVolumes();loadExerciseArt();
 if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}))}
 </script>
 </body>
