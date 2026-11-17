@@ -15,7 +15,7 @@ button{font:inherit}.app{width:min(100%,780px);margin:auto;padding:calc(16px + e
 .top{display:flex;align-items:center;justify-content:space-between;margin:2px 2px 17px}.brand{display:flex;align-items:center;gap:10px}.logo{width:37px;height:37px;border-radius:11px;background:var(--lime);color:#11180e;display:grid;place-items:center;font-weight:1000;font-size:19px;letter-spacing:-2px}.brand-name{font-weight:950;letter-spacing:.16em;font-size:19px}.brand-sub{font-size:10px;color:var(--muted);letter-spacing:.12em;text-transform:uppercase}.top-pill{border:1px solid var(--line);border-radius:100px;padding:6px 10px;color:var(--muted);font-size:10px;letter-spacing:.08em}
 .week-card{background:linear-gradient(135deg,#17231b,#101713);border:1px solid var(--line);border-radius:15px;padding:13px 15px;margin:0 0 16px}.week-top{display:flex;justify-content:space-between;align-items:center;gap:10px}.week-label{font-size:11px;color:var(--muted)}.week-number{font-size:20px;font-weight:850;color:var(--lime);font-variant-numeric:tabular-nums}.bar{height:6px;background:#29362d;border-radius:20px;overflow:hidden;margin-top:9px}.bar>span{display:block;height:100%;width:0;background:var(--lime);border-radius:20px;transition:width .2s}
 .day-tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin:14px 0}.day-tab{border:1px solid var(--line);background:#101612;color:var(--muted);padding:10px 3px;border-radius:12px;cursor:pointer;font-weight:850;font-size:11px;letter-spacing:.04em;position:relative}.day-tab small{display:block;font-weight:500;font-size:9px;letter-spacing:0;margin-top:3px}.day-tab.active{background:var(--lime);border-color:var(--lime);color:#11180e}.day-tab.done:not(.active):after{content:"✓";position:absolute;right:6px;top:3px;color:var(--lime);font-size:12px;font-weight:900}
-.session-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:19px 2px 13px}.session-head h1{font-size:25px;line-height:1.1;margin:0;letter-spacing:-.04em}.session-head p{margin:4px 0 0;color:var(--muted);font-size:12px}.time-tag{font-size:11px;color:var(--lime);border:1px solid #4a6330;border-radius:100px;padding:6px 9px;white-space:nowrap}
+.session-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:19px 2px 13px}.session-head h1{font-size:25px;line-height:1.1;margin:0;letter-spacing:-.04em}.session-head p{margin:4px 0 0;color:var(--muted);font-size:12px}.session-head p.rest-note{font-size:10px;color:#819087;margin-top:4px}.time-tag{font-size:11px;color:var(--lime);border:1px solid #4a6330;border-radius:100px;padding:6px 9px;white-space:nowrap}
 .exercise-list{display:grid;gap:9px}.exercise{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:11px 12px;display:grid;grid-template-columns:minmax(0,1fr) 152px;align-items:center;gap:8px;min-height:116px}.ex-head{display:flex;align-items:flex-start;gap:8px}.num{font-size:10px;color:var(--lime);font-weight:850;min-width:19px;padding-top:2px}.ex-title{font-weight:800;font-size:14px;line-height:1.25}.ex-volume{margin:6px 0 0 27px;color:var(--muted);font-size:11px}.superset{display:inline-flex;margin:7px 0 0 27px;border:1px solid #526a39;color:var(--lime);border-radius:100px;padding:2px 7px;font-size:9px;font-weight:850;letter-spacing:.08em}
 .sequence{height:88px;display:flex;align-items:center;justify-content:center;gap:3px;overflow:hidden}.pose{width:69px;height:78px;object-fit:contain;border-radius:8px;background:#1a241d}.pose-arrow{font-size:15px;color:var(--lime);font-weight:900;flex:0 0 auto}.single-pose{width:120px;height:82px;object-fit:contain;border-radius:8px;background:#1a241d}.img-pending{font-size:10px;color:#708076;border:1px dashed #314036;border-radius:9px;padding:12px 5px;text-align:center;width:100%}
 .notice{min-height:18px;text-align:center;color:var(--muted);font-size:11px;margin:8px 0}
@@ -38,7 +38,7 @@ button{font:inherit}.app{width:min(100%,780px);margin:auto;padding:calc(16px + e
 </section>
 <nav class="day-tabs" id="dayTabs" aria-label="Días de entrenamiento"></nav>
 <section class="session-head">
- <div><h1 id="sessionTitle"></h1><p id="sessionFocus"></p></div>
+ <div><h1 id="sessionTitle"></h1><p id="sessionFocus"></p><p class="rest-note">Compuestos: 2–3 min · Accesorios: 60–90 s · RIR 1–3</p></div>
  <div class="time-tag">≈ 60 MIN</div>
 </section>
 <div class="exercise-list" id="exerciseList"></div>
@@ -46,7 +46,7 @@ button{font:inherit}.app{width:min(100%,780px);margin:auto;padding:calc(16px + e
 <div class="actions"><button class="primary" id="completeBtn">Marcar día como hecho</button></div>
 <div class="section-title">Distribución semanal recomendada</div>
 <div class="schedule">
- <div><b>LUNES</b><small>Pull</small></div><div><b>MARTES</b><small>Push</small></div><div><b>JUEVES</b><small>Legs</small></div><div><b>SÁBADO</b><small>Mixed</small></div>
+ <div><b>LUNES</b><small>Pull</small></div><div><b>MARTES</b><small>Push</small></div><div><b>JUEVES</b><small>Legs</small></div><div><b>DOMINGO</b><small>Mixed</small></div>
 </div>
 <div class="section-title">Últimos entrenamientos</div>
 <div class="history" id="historyList"></div>
@@ -55,41 +55,35 @@ button{font:inherit}.app{width:min(100%,780px);margin:auto;padding:calc(16px + e
 <script>
 const sessions=[
 {id:"pull",tab:"PULL",day:"DÍA 01",title:"PULL",focus:"Espalda · Deltoides posteriores · Bíceps",exercises:[
-{id:"lat-pulldown",name:"Jalón vertical agarre neutro",sets:3,reps:"8–12 reps",aliases:["lat-pulldown","lat pulldown","wide grip lat pulldown","close grip lat pulldown"]},
-{id:"chest-supported-row",name:"Remo con pecho apoyado",sets:3,reps:"8–12 reps",aliases:["chest-supported-db-row","chest-supported-row","chest supported row","chest-supported dumbbell row","chest supported dumbbell row"]},
-{id:"reverse-pec-deck",name:"Pájaros en máquina",sets:2,reps:"12–20 reps",aliases:["machine-reverse-fly","reverse-pec-deck","machine reverse fly","reverse pec deck","reverse fly machine","rear delt machine fly"],superset:"A"},
-{id:"preacher-curl",name:"Curl predicador barra EZ",sets:2,reps:"8–12 reps",aliases:["preacher-curl","ez-bar preacher curl","preacher curl"],superset:"A"},
-{id:"straight-arm-pulldown",name:"Pullover en polea",sets:2,reps:"12–15 reps",aliases:["straight-arm-pulldown","straight arm pulldown","cable pullover"] ,superset:"B"},
-{id:"hammer-curl",name:"Curl martillo",sets:2,reps:"10–15 reps",aliases:["hammer-curl","dumbbell hammer curl","hammer curl"],superset:"B"},
-
-
+{id:"lat-pulldown",name:"Jalón al pecho",sets:3,reps:"8–12 reps",aliases:["lat-pulldown","lat pulldown","wide grip lat pulldown"]},
+{id:"bent-over-db-row",name:"Remo con mancuerna a una mano",sets:3,reps:"8–12 reps",aliases:["bent-over-db-row","one-arm-dumbbell-row","one arm dumbbell row","chest-supported-db-row"]},
+{id:"dumbbell-reverse-fly",name:"Pájaros con mancuernas inclinado",sets:2,reps:"12–20 reps",aliases:["dumbbell-reverse-fly","rear-delt-fly","bent-over-reverse-fly"]},
+{id:"ez-bar-curl",name:"Curl de bíceps con barra EZ",sets:3,reps:"8–12 reps",aliases:["ez-bar-curl","ez bar curl"]},
+{id:"hammer-curl",name:"Curl martillo con mancuernas",sets:2,reps:"10–15 reps",aliases:["hammer-curl","dumbbell hammer curl","hammer curl"]}
 ]},
 {id:"push",tab:"PUSH",day:"DÍA 02",title:"PUSH",focus:"Pecho · Hombros · Tríceps",exercises:[
-{id:"bench-press",name:"Press banca con barra",sets:3,reps:"5–8 reps",aliases:["barbell-bench-press","barbell bench press","bench press"]},
-{id:"incline-dumbbell-press",name:"Press inclinado con mancuernas",sets:3,reps:"8–12 reps",aliases:["incline-db-press","incline-dumbbell-press","incline dumbbell bench press","incline dumbbell press"]},
-{id:"machine-shoulder-press",name:"Press hombros en máquina",sets:2,reps:"8–12 reps",aliases:["machine-shoulder-press","machine shoulder press","seated machine shoulder press"]},
-{id:"cable-lateral-raise",name:"Elevación lateral en polea",sets:2,reps:"12–20 reps",aliases:["cable-lateral-raise","single-arm cable lateral raise","cable lateral raise"],superset:"A"},
-{id:"triceps-pushdown",name:"Extensión de tríceps con cuerda",sets:2,reps:"10–15 reps",aliases:["tricep-pushdown","triceps-pushdown","cable tricep pushdown","cable triceps pushdown","tricep rope pushdown","triceps rope pushdown"],superset:"A"},
-{id:"overhead-triceps-extension",name:"Extensión de tríceps sobre la cabeza",sets:2,reps:"10–15 reps",aliases:["cable-overhead-tricep-extension","overhead-tricep-extension","overhead-triceps-extension","cable overhead tricep extension","overhead tricep extension","overhead cable tricep extension"]}
+{id:"bench-press",name:"Press banca con barra",sets:3,reps:"5–8 reps",aliases:["bench-press","barbell-bench-press","barbell bench press","bench press"]},
+{id:"incline-db-press",name:"Press inclinado con mancuernas",sets:3,reps:"8–12 reps",aliases:["incline-db-press","incline-dumbbell-press","incline dumbbell press"]},
+{id:"seated-db-press",name:"Press hombros sentado con mancuernas",sets:2,reps:"8–12 reps",aliases:["seated-db-press","dumbbell-shoulder-press","seated dumbbell shoulder press","dumbbell shoulder press"]},
+{id:"lateral-raise",name:"Elevaciones laterales con mancuernas",sets:3,reps:"12–20 reps",aliases:["lateral-raise","dumbbell-lateral-raise","seated-dumbbell-lateral-raise"]},
+{id:"tricep-pushdown",name:"Extensión de tríceps en polea",sets:3,reps:"10–15 reps",aliases:["tricep-pushdown","cable tricep pushdown","triceps pushdown"]}
 ]},
 {id:"legs",tab:"LEGS",day:"DÍA 03",title:"LEGS",focus:"Cuádriceps · Isquiosurales · Glúteos · Gemelos",exercises:[
-{id:"hack-squat",name:"Hack squat",sets:3,reps:"8–12 reps",aliases:["hack-squat","hack squat"]},
+{id:"squat",name:"Sentadilla con barra",sets:3,reps:"5–8 reps",aliases:["squat","barbell squat","back squat"]},
 {id:"romanian-deadlift",name:"Peso muerto rumano",sets:3,reps:"8–10 reps",aliases:["romanian-deadlift","barbell romanian deadlift","romanian deadlift"]},
 {id:"leg-press",name:"Prensa de piernas",sets:2,reps:"10–15 reps",aliases:["leg-press","leg press"]},
-{id:"seated-leg-curl",name:"Curl femoral sentado",sets:2,reps:"10–15 reps",aliases:["seated-leg-curl","seated leg curl"]},
-{id:"standing-calf-raise",name:"Gemelos de pie",sets:3,reps:"10–15 reps",aliases:["standing-calf-raise","standing calf raise","standing calf raises"],superset:"A"},
-{id:"cable-crunch",name:"Crunch abdominal en polea",sets:3,reps:"10–15 reps",aliases:["cable-crunch","cable crunch"],superset:"A"}
+{id:"leg-curl",name:"Curl femoral tumbado",sets:2,reps:"10–15 reps",aliases:["leg-curl","lying-leg-curl","lying leg curl"]},
+{id:"barbell-calf-raise",name:"Gemelos de pie con mancuernas",sets:3,reps:"12–20 reps",aliases:["barbell-calf-raise","standing-calf-raise","standing calf raise","calf raise"] ,superset:"A"},
+{id:"plank",name:"Plancha abdominal",sets:3,reps:"30–45 segundos",aliases:["plank"],superset:"A"}
 ]},
-{id:"mixed",tab:"MIXED",day:"DÍA 04",title:"MIXED",focus:"Cuerpo completo · Segundo estímulo semanal",exercises:[
-{id:"hip-thrust",name:"Hip thrust",sets:2,reps:"8–12 reps",aliases:["hip-thrust","barbell hip thrust"]},
+{id:"mixed",tab:"MIXED",day:"DÍA 04",title:"MIXED",focus:"Segundo estímulo · Tren superior e inferior",exercises:[
+{id:"db-bench-press",name:"Press banca con mancuernas",sets:3,reps:"8–12 reps",aliases:["db-bench-press","dumbbell-bench-press","dumbbell bench press"]},
+{id:"seated-cable-row",name:"Remo sentado en polea",sets:3,reps:"8–12 reps",aliases:["seated-cable-row","seated cable row","cable row"]},
 {id:"bulgarian-split-squat",name:"Sentadilla búlgara",sets:2,reps:"8–10 / pierna",aliases:["bulgarian-split-squat","bulgarian split squat"]},
-{id:"machine-chest-press",name:"Press de pecho en máquina",sets:2,reps:"8–12 reps",aliases:["chest-press-machine","machine-chest-press","machine chest press","chest press machine"],superset:"A"},
-{id:"seated-cable-row",name:"Remo sentado en polea",sets:2,reps:"8–12 reps",aliases:["seated-cable-row","seated cable row","cable row"],superset:"A"},
-{id:"cable-biceps-curl",name:"Curl de bíceps en polea",sets:2,reps:"10–15 reps",aliases:["cable-biceps-curl","cable-curl","cable biceps curl","cable curl","standing cable curl"],superset:"B"},
-{id:"rope-triceps-pushdown",name:"Extensión tríceps cuerda",sets:2,reps:"10–15 reps",aliases:["tricep-pushdown","triceps-pushdown","cable tricep pushdown","cable triceps pushdown","tricep rope pushdown","triceps rope pushdown"],superset:"B"},
-{id:"dumbbell-lateral-raise",name:"Elevación lateral mancuernas",sets:2,reps:"12–20 reps",aliases:["lateral-raise","dumbbell-lateral-raise","lateral raise","dumbbell lateral raise"],superset:"C"},
-{id:"seated-leg-curl",name:"Curl femoral sentado",sets:2,reps:"10–15 reps",aliases:["seated-leg-curl","seated leg curl"],superset:"C"}
-
+{id:"hip-thrust",name:"Hip thrust",sets:2,reps:"8–12 reps",aliases:["hip-thrust","barbell hip thrust"]},
+{id:"leg-curl",name:"Curl femoral tumbado",sets:2,reps:"10–15 reps",aliases:["leg-curl","lying-leg-curl","lying leg curl"]},
+{id:"seated-dumbbell-curl",name:"Curl de bíceps con mancuernas",sets:2,reps:"10–15 reps",aliases:["seated-dumbbell-curl","dumbbell-curl","dumbbell curl"],superset:"A"},
+{id:"dumbbell-tricep-extension",name:"Extensión de tríceps sobre la cabeza con mancuerna",sets:2,reps:"10–15 reps",aliases:["dumbbell-tricep-extension","single-arm-dumbbell-overhead-tricep-extension","overhead dumbbell tricep extension"],superset:"A"}
 ]}
 ];
 const progressKey="forge_fourday_daily_v3";
