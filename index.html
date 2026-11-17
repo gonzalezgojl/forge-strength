@@ -79,7 +79,7 @@ button{font:inherit}
 </section>
 <nav class="day-tabs" id="dayTabs" aria-label="Días de entrenamiento"></nav>
 <section class="session-head">
- <div><h1 id="sessionTitle"></h1><p id="sessionFocus"></p><p class="rest-note">Compuestos: 2–3 min · Aislamientos: 90–120 s · RIR 1–3</p></div>
+ <div><h1 id="sessionTitle"></h1><p id="sessionFocus"></p><p class="rest-note">Descansos entre series · Compuestos: 2–3 min · Aislamientos: 90–120 s · RIR 1–3</p></div>
  <div class="time-tag">≈60–70 MIN</div>
 </section>
 <div class="exercise-list" id="exerciseList"></div>
@@ -180,7 +180,7 @@ function renderSession(){
  document.getElementById("sessionTitle").textContent=s.title;
  document.getElementById("sessionFocus").textContent=s.focus;
  document.getElementById("exerciseList").innerHTML=s.exercises.map((e,i)=>
-  '<article class="exercise"><div><div class="ex-head"><span class="num">'+String(i+1).padStart(2,"0")+'</span><div class="ex-title">'+e.name+'</div></div><div class="ex-volume">'+e.sets+' × '+e.reps+'</div><div class="ex-rest">Descanso: '+e.rest+'</div>'+(e.superset?'<div class="superset">SUPERSERIE '+e.superset+'</div>':'')+'</div>'+imageHTML(e)+'</article>'
+  '<article class="exercise"><div><div class="ex-head"><span class="num">'+String(i+1).padStart(2,"0")+'</span><div class="ex-title">'+e.name+'</div></div><div class="ex-volume">'+e.sets+' × '+e.reps+'</div><div class="ex-rest">'+(e.superset?"Tras la pareja: ":"Entre series: ")+e.rest+'</div>'+(e.superset?'<div class="superset">SUPERSERIE '+e.superset+'</div>':'')+'</div>'+imageHTML(e)+'</article>'
  ).join("");
  const btn=document.getElementById("completeBtn");
  btn.textContent=done?"Día completado ✓":"Marcar día como hecho";
