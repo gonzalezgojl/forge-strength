@@ -4,165 +4,187 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#0b0e0d">
-<meta name="description" content="Programa de fuerza e hipertrofia de cuatro días.">
+<meta name="description" content="Programa de entrenamiento de cuatro días con seguimiento diario e ilustraciones de ejercicios.">
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="icon" href="./icon.svg" type="image/svg+xml">
 <title>FORGE — Entrenamiento</title>
 <style>
-:root{color-scheme:dark;--bg:#090d0b;--panel:#111815;--panel2:#17211b;--line:#26342b;--text:#f3f6f1;--muted:#9aa79e;--lime:#c9ff47;--lime2:#a8df2c;--orange:#ffb86b}
-*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 50% -20%,#1b2c20 0,transparent 42%),var(--bg);color:var(--text);font:15px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-button{font:inherit}.app{width:min(100%,850px);margin:auto;padding:calc(22px + env(safe-area-inset-top)) 18px calc(42px + env(safe-area-inset-bottom))}
-.top{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:26px}.brand{display:flex;align-items:center;gap:11px}.logo{width:39px;height:39px;border-radius:12px;background:var(--lime);color:#11180e;display:grid;place-items:center;font-weight:1000;font-size:19px;letter-spacing:-2px}.brand-name{font-weight:950;letter-spacing:.16em;font-size:19px}.brand-sub{font-size:10px;color:var(--muted);letter-spacing:.17em;text-transform:uppercase}.top-pill{border:1px solid var(--line);border-radius:100px;padding:7px 11px;color:var(--muted);font-size:11px;letter-spacing:.08em}
-.hero{margin:10px 0 22px}.eyebrow{color:var(--lime);font-size:11px;font-weight:800;letter-spacing:.18em;text-transform:uppercase}.hero h1{font-size:clamp(29px,7vw,44px);line-height:1.05;letter-spacing:-.045em;margin:8px 0 9px}.hero p{color:var(--muted);margin:0;max-width:550px}
-.week-card{background:linear-gradient(135deg,#17231b,#101713);border:1px solid var(--line);border-radius:18px;padding:17px 18px;margin:22px 0 20px}.week-top{display:flex;justify-content:space-between;align-items:center;gap:12px}.week-label{font-size:12px;color:var(--muted)}.week-number{font-size:23px;font-weight:850;color:var(--lime);font-variant-numeric:tabular-nums}.bar{height:7px;background:#29362d;border-radius:20px;overflow:hidden;margin-top:12px}.bar>span{display:block;height:100%;width:0;background:var(--lime);border-radius:20px;transition:width .2s}.week-note{font-size:11px;color:var(--muted);margin-top:9px}
-.day-tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:18px 0 16px}.day-tab{border:1px solid var(--line);background:#101612;color:var(--muted);padding:11px 4px;border-radius:13px;cursor:pointer;font-weight:800;font-size:11px;letter-spacing:.05em}.day-tab small{display:block;font-weight:500;font-size:10px;letter-spacing:0;margin-top:3px}.day-tab.active{background:var(--lime);border-color:var(--lime);color:#11180e}
-.session-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin:22px 2px 15px}.session-head h2{font-size:25px;line-height:1.1;margin:0 0 6px;letter-spacing:-.03em}.session-head p{margin:0;color:var(--muted);font-size:13px}.session-index{font-size:12px;color:var(--lime);font-weight:850;white-space:nowrap;border:1px solid #4a6330;border-radius:100px;padding:6px 10px}
-.progress-row{display:flex;justify-content:space-between;color:var(--muted);font-size:11px;margin:0 2px 8px}.progress-row strong{color:var(--text);font-variant-numeric:tabular-nums}.exercise-list{display:grid;gap:10px}
-.exercise{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:14px 14px 12px}.exercise-top{display:flex;align-items:flex-start;gap:11px}.number{width:29px;height:29px;flex:0 0 29px;display:grid;place-items:center;background:#202c23;border-radius:9px;color:var(--lime);font-weight:850;font-size:12px}.ex-main{flex:1;min-width:0}.ex-title{font-weight:800;font-size:15px;line-height:1.25}.ex-muscle{font-size:10px;color:var(--muted);margin-top:4px;letter-spacing:.07em;text-transform:uppercase}.ex-prescription{text-align:right;white-space:nowrap}.sets{font-weight:850;color:var(--lime);font-size:14px}.reps{font-size:11px;color:var(--muted)}.cue{color:#aeb8b0;font-size:12px;margin:10px 0 11px 40px}
-.super-label{display:inline-block;margin:0 0 7px 40px;border:1px solid #485c36;color:var(--lime);border-radius:100px;padding:3px 8px;font-size:9px;font-weight:850;letter-spacing:.09em;text-transform:uppercase}
-.sets-track{display:flex;flex-wrap:wrap;gap:7px;margin-left:40px}.set-check{display:flex;align-items:center;gap:6px;border:1px solid #334138;background:#17211b;color:var(--muted);border-radius:9px;padding:7px 9px;cursor:pointer;font-size:11px;min-width:67px;justify-content:center}.set-check:before{content:"";width:13px;height:13px;border:1.5px solid #718078;border-radius:4px;display:inline-block}.set-check.done{background:#27371d;border-color:#718f3c;color:#eaffc8}.set-check.done:before{content:"✓";display:grid;place-items:center;background:var(--lime);border-color:var(--lime);color:#14200c;font-size:10px;font-weight:900}
-.actions{display:flex;gap:9px;margin:15px 0 8px}.primary,.secondary{border-radius:12px;padding:12px 14px;font-weight:850;cursor:pointer}.primary{background:var(--lime);color:#11180e;border:0;flex:1}.secondary{background:#131b16;color:var(--muted);border:1px solid var(--line)}
-.notice{min-height:20px;text-align:center;color:var(--lime);font-size:12px;margin:5px 0 16px}
-.info-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:22px 0}.info{border:1px solid var(--line);border-radius:15px;background:#101612;padding:14px}.info b{display:block;font-size:12px;margin-bottom:5px}.info p{margin:0;color:var(--muted);font-size:11px}
-.section-title{font-size:13px;letter-spacing:.11em;text-transform:uppercase;margin:27px 0 10px}.schedule{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.schedule div{background:#101612;border:1px solid var(--line);border-radius:12px;padding:10px 8px;text-align:center}.schedule b{display:block;color:var(--lime);font-size:11px}.schedule small{color:var(--muted);font-size:10px}
-.history{display:grid;gap:7px}.history-item{display:flex;justify-content:space-between;gap:10px;background:#101612;border:1px solid var(--line);border-radius:11px;padding:10px 12px;font-size:12px}.history-item span:last-child{color:var(--muted);text-align:right}
-.footer{color:#6f7b72;font-size:10px;text-align:center;margin-top:30px;letter-spacing:.04em}
-@media(min-width:650px){.exercise-list{grid-template-columns:repeat(2,minmax(0,1fr))}.exercise{min-height:165px}.session-head{margin-top:30px}.day-tab{padding:13px 6px}.app{padding-left:26px;padding-right:26px}}
-@media(max-width:390px){.app{padding-left:13px;padding-right:13px}.day-tab{font-size:10px}.ex-title{font-size:14px}.sets-track{margin-left:0}.cue{margin-left:0}.super-label{margin-left:0}}
+:root{color-scheme:dark;--bg:#090d0b;--panel:#111815;--panel2:#17211b;--line:#26342b;--text:#f3f6f1;--muted:#9aa79e;--lime:#c9ff47;--lime2:#a8df2c}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 50% -20%,#1b2c20 0,transparent 42%),var(--bg);color:var(--text);font:15px/1.4 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+button{font:inherit}.app{width:min(100%,780px);margin:auto;padding:calc(16px + env(safe-area-inset-top)) 15px calc(30px + env(safe-area-inset-bottom))}
+.top{display:flex;align-items:center;justify-content:space-between;margin:2px 2px 17px}.brand{display:flex;align-items:center;gap:10px}.logo{width:37px;height:37px;border-radius:11px;background:var(--lime);color:#11180e;display:grid;place-items:center;font-weight:1000;font-size:19px;letter-spacing:-2px}.brand-name{font-weight:950;letter-spacing:.16em;font-size:19px}.brand-sub{font-size:10px;color:var(--muted);letter-spacing:.12em;text-transform:uppercase}.top-pill{border:1px solid var(--line);border-radius:100px;padding:6px 10px;color:var(--muted);font-size:10px;letter-spacing:.08em}
+.week-card{background:linear-gradient(135deg,#17231b,#101713);border:1px solid var(--line);border-radius:15px;padding:13px 15px;margin:0 0 16px}.week-top{display:flex;justify-content:space-between;align-items:center;gap:10px}.week-label{font-size:11px;color:var(--muted)}.week-number{font-size:20px;font-weight:850;color:var(--lime);font-variant-numeric:tabular-nums}.bar{height:6px;background:#29362d;border-radius:20px;overflow:hidden;margin-top:9px}.bar>span{display:block;height:100%;width:0;background:var(--lime);border-radius:20px;transition:width .2s}
+.day-tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin:14px 0}.day-tab{border:1px solid var(--line);background:#101612;color:var(--muted);padding:10px 3px;border-radius:12px;cursor:pointer;font-weight:850;font-size:11px;letter-spacing:.04em;position:relative}.day-tab small{display:block;font-weight:500;font-size:9px;letter-spacing:0;margin-top:3px}.day-tab.active{background:var(--lime);border-color:var(--lime);color:#11180e}.day-tab.done:not(.active):after{content:"✓";position:absolute;right:6px;top:3px;color:var(--lime);font-size:12px;font-weight:900}
+.session-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:19px 2px 13px}.session-head h1{font-size:25px;line-height:1.1;margin:0;letter-spacing:-.04em}.session-head p{margin:4px 0 0;color:var(--muted);font-size:12px}.time-tag{font-size:11px;color:var(--lime);border:1px solid #4a6330;border-radius:100px;padding:6px 9px;white-space:nowrap}
+.exercise-list{display:grid;gap:9px}.exercise{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:11px 12px;display:grid;grid-template-columns:minmax(0,1fr) 152px;align-items:center;gap:8px;min-height:116px}.ex-head{display:flex;align-items:flex-start;gap:8px}.num{font-size:10px;color:var(--lime);font-weight:850;min-width:19px;padding-top:2px}.ex-title{font-weight:800;font-size:14px;line-height:1.25}.ex-volume{margin:6px 0 0 27px;color:var(--muted);font-size:11px}.superset{display:inline-flex;margin:7px 0 0 27px;border:1px solid #526a39;color:var(--lime);border-radius:100px;padding:2px 7px;font-size:9px;font-weight:850;letter-spacing:.08em}
+.sequence{height:88px;display:flex;align-items:center;justify-content:center;gap:3px;overflow:hidden}.pose{width:69px;height:78px;object-fit:contain;border-radius:8px;background:#1a241d}.pose-arrow{font-size:15px;color:var(--lime);font-weight:900;flex:0 0 auto}.single-pose{width:120px;height:82px;object-fit:contain;border-radius:8px;background:#1a241d}.img-pending{font-size:10px;color:#708076;border:1px dashed #314036;border-radius:9px;padding:12px 5px;text-align:center;width:100%}
+.notice{min-height:18px;text-align:center;color:var(--muted);font-size:11px;margin:8px 0}
+.actions{margin:14px 0 5px}.primary{width:100%;border-radius:12px;padding:14px 16px;font-weight:900;background:var(--lime);color:#11180e;border:0;cursor:pointer}.primary.completed{background:#26391d;border:1px solid #6b913c;color:#eaffc8}
+.schedule{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin:17px 0 20px}.schedule div{background:#101612;border:1px solid var(--line);border-radius:10px;padding:8px 4px;text-align:center}.schedule b{display:block;color:var(--lime);font-size:10px}.schedule small{color:var(--muted);font-size:9px}
+.section-title{font-size:11px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin:19px 2px 8px}.history{display:grid;gap:6px}.history-item{display:flex;justify-content:space-between;gap:10px;background:#101612;border:1px solid var(--line);border-radius:10px;padding:9px 11px;font-size:11px}.history-item span:last-child{color:var(--muted);text-align:right}.footer{color:#748077;font-size:10px;text-align:center;margin:24px 0 4px}.footer a{color:#a6b99e;text-decoration:underline;text-underline-offset:2px}
+@media(min-width:600px){.app{padding-left:22px;padding-right:22px}.exercise-list{grid-template-columns:repeat(2,minmax(0,1fr))}.exercise{grid-template-columns:minmax(0,1fr) 135px}.pose{width:61px}.session-head{margin-top:23px}}
+@media(max-width:370px){.app{padding-left:10px;padding-right:10px}.exercise{grid-template-columns:minmax(0,1fr) 125px;padding:9px}.pose{width:56px}.sequence{height:80px}.day-tab{font-size:10px}}
 </style>
 </head>
 <body>
 <main class="app">
 <header class="top">
- <div class="brand"><div class="logo">F</div><div><div class="brand-name">FORGE</div><div class="brand-sub">Strength training system</div></div></div>
- <div class="top-pill">4-DAY PROGRAM</div>
+ <div class="brand"><div class="logo">F</div><div><div class="brand-name">FORGE</div><div class="brand-sub">Programa · 4 días</div></div></div>
+ <div class="top-pill">50–60 MIN</div>
 </header>
-<section class="hero">
- <div class="eyebrow">Programa optimizado</div>
- <h1>Entrena fuerte.<br>Recupérate mejor.</h1>
- <p>Cuatro sesiones semanales para progresar en fuerza e hipertrofia, con volumen equilibrado y seguimiento de cada serie.</p>
-</section>
 <section class="week-card">
- <div class="week-top"><div><div class="week-label">Sesiones completadas esta semana</div><div class="week-number" id="weekCount">0 / 4</div></div><div class="week-label" id="weekRange">Esta semana</div></div>
+ <div class="week-top"><div class="week-label">Entrenamientos completados esta semana</div><div class="week-number" id="weekCount">0 / 4</div></div>
  <div class="bar"><span id="weekBar"></span></div>
- <div class="week-note">Objetivo: completar las cuatro sesiones, respetando los días de recuperación.</div>
 </section>
-<nav class="day-tabs" id="dayTabs" aria-label="Sesiones"></nav>
+<nav class="day-tabs" id="dayTabs" aria-label="Días de entrenamiento"></nav>
 <section class="session-head">
- <div><h2 id="sessionTitle"></h2><p id="sessionFocus"></p></div>
- <div class="session-index" id="sessionTag"></div>
+ <div><h1 id="sessionTitle"></h1><p id="sessionFocus"></p></div>
+ <div class="time-tag">≈ 60 MIN</div>
 </section>
-<div class="progress-row"><span>Progreso de la sesión</span><strong id="sessionProgress">0 / 0 series</strong></div>
-<div class="bar"><span id="sessionBar"></span></div>
 <div class="exercise-list" id="exerciseList"></div>
-<div class="actions"><button class="primary" id="finishBtn">Finalizar sesión</button><button class="secondary" id="resetBtn">Reiniciar</button></div>
 <div class="notice" id="notice" aria-live="polite"></div>
-<section class="info-grid">
- <div class="info"><b>Intensidad · RIR 1–3</b><p>Termina la mayoría de series pudiendo hacer todavía 1 a 3 repeticiones con buena técnica.</p></div>
- <div class="info"><b>Progresión doble</b><p>Al completar el máximo del rango en todas las series, aumenta ligeramente el peso y vuelve al rango inferior.</p></div>
- <div class="info"><b>Descansos principales</b><p>2–3 minutos en sentadillas, presses, remos y pesos muertos.</p></div>
- <div class="info"><b>Descansos accesorios</b><p>60–120 segundos. En superseries, descansa después de completar la pareja.</p></div>
-</section>
-<h3 class="section-title">Distribución recomendada</h3>
+<div class="actions"><button class="primary" id="completeBtn">Marcar día como hecho</button></div>
+<div class="section-title">Distribución semanal recomendada</div>
 <div class="schedule">
- <div><b>LUNES</b><small>Upper A</small></div><div><b>MARTES</b><small>Lower A</small></div><div><b>JUEVES</b><small>Upper B</small></div><div><b>SÁBADO</b><small>Lower B</small></div>
+ <div><b>LUNES</b><small>Pull</small></div><div><b>MARTES</b><small>Push</small></div><div><b>JUEVES</b><small>Legs</small></div><div><b>SÁBADO</b><small>Mixed</small></div>
 </div>
-<h3 class="section-title">Últimas sesiones</h3>
+<div class="section-title">Últimos entrenamientos</div>
 <div class="history" id="historyList"></div>
-<div class="footer">FORGE · El progreso se guarda en este dispositivo · Técnica antes que carga</div>
+<div class="footer">Ilustraciones: <a href="https://repdb.co" target="_blank" rel="noopener noreferrer">Exercise data by RepDB</a></div>
 </main>
 <script>
 const sessions=[
-{id:"upper-a",tab:"UPPER A",day:"DÍA 01",title:"Tren superior A",focus:"Base de fuerza · pectoral y espalda",exercises:[
-{id:"bench",name:"Press banca con barra",muscle:"Pectoral · tríceps · deltoides anterior",sets:3,reps:"5–8 reps",rest:"2–3 min",cue:"Prioriza una trayectoria controlada y deja los hombros estables."},
-{id:"tbar",name:"Remo T-Bar",muscle:"Espalda media · dorsal",sets:3,reps:"8–10 reps",rest:"2 min",cue:"Lleva los codos hacia atrás sin balancear el tronco."},
-{id:"incline-db",name:"Press inclinado con mancuernas",muscle:"Pectoral superior",sets:2,reps:"8–12 reps",rest:"2 min",cue:"Mantén una inclinación moderada y controla la bajada."},
-{id:"pulldown-neutral",name:"Jalón en polea, agarre neutro",muscle:"Dorsal · bíceps",sets:3,reps:"8–12 reps",rest:"90–120 s",cue:"Lleva los codos hacia las caderas; evita tirar con impulso."},
-{id:"lateral-cable",name:"Elevación lateral en polea",muscle:"Deltoides lateral",sets:3,reps:"12–20 reps",rest:"60–90 s",cue:"Sube hasta la altura del hombro sin encoger el trapecio."},
-{id:"pushdown",name:"Extensión de tríceps con cuerda",muscle:"Tríceps",sets:2,reps:"10–15 reps",rest:"60–90 s",superset:"SUPERSERIE A",cue:"Mantén los codos junto al cuerpo."},
-{id:"preacher",name:"Curl predicador con barra EZ",muscle:"Bíceps",sets:2,reps:"10–15 reps",rest:"60–90 s",superset:"SUPERSERIE A",cue:"Evita despegar los brazos del apoyo."}
+{id:"pull",tab:"PULL",day:"DÍA 01",title:"PULL",focus:"Espalda · Deltoides posteriores · Bíceps",exercises:[
+{id:"lat-pulldown",name:"Jalón vertical agarre neutro",sets:3,reps:"8–12 reps",aliases:["lat-pulldown","lat pulldown","wide grip lat pulldown","close grip lat pulldown"]},
+{id:"chest-supported-row",name:"Remo con pecho apoyado",sets:3,reps:"8–12 reps",aliases:["chest-supported-row","chest supported row","chest-supported dumbbell row","chest supported dumbbell row"]},
+{id:"straight-arm-pulldown",name:"Pullover en polea",sets:2,reps:"12–15 reps",aliases:["straight-arm-pulldown","straight arm pulldown","cable pullover"] ,superset:"B"},
+{id:"reverse-pec-deck",name:"Pájaros en máquina",sets:2,reps:"12–20 reps",aliases:["reverse-pec-deck","reverse pec deck","reverse fly machine","rear delt machine fly"],superset:"A"},
+{id:"preacher-curl",name:"Curl predicador barra EZ",sets:2,reps:"8–12 reps",aliases:["preacher-curl","ez-bar preacher curl","preacher curl"],superset:"A"},
+{id:"hammer-curl",name:"Curl martillo",sets:2,reps:"10–15 reps",aliases:["hammer-curl","dumbbell hammer curl","hammer curl"],superset:"B"}
 ]},
-{id:"lower-a",tab:"LOWER A",day:"DÍA 02",title:"Tren inferior A",focus:"Énfasis en cuádriceps · fuerza y control",exercises:[
-{id:"squat",name:"Sentadilla",muscle:"Cuádriceps · glúteos · core",sets:3,reps:"5–8 reps",rest:"2–3 min",cue:"Mantén el tronco firme y utiliza un rango de movimiento que controles."},
-{id:"rdl",name:"Peso muerto rumano con barra",muscle:"Isquiosurales · glúteos",sets:3,reps:"8–10 reps",rest:"2–3 min",cue:"Lleva la cadera atrás y conserva la barra cerca de las piernas."},
-{id:"hack",name:"Hack squat",muscle:"Cuádriceps · glúteos",sets:3,reps:"8–12 reps",rest:"2 min",cue:"Baja de forma controlada sin perder la posición de la pelvis."},
-{id:"legcurl-a",name:"Curl femoral sentado",muscle:"Isquiosurales",sets:2,reps:"10–15 reps",rest:"60–90 s",cue:"Controla tanto la flexión como la vuelta a la posición inicial."},
-{id:"calf-standing",name:"Elevación de gemelos de pie",muscle:"Gemelo · gastrocnemio",sets:3,reps:"10–15 reps",rest:"60–90 s",superset:"SUPERSERIE A",cue:"Haz una pausa breve arriba y busca recorrido completo."},
-{id:"cable-crunch",name:"Crunch abdominal en polea",muscle:"Abdominales",sets:3,reps:"10–15 reps",rest:"60–90 s",superset:"SUPERSERIE A",cue:"Flexiona el tronco sin convertir el movimiento en un tirón de brazos."}
+{id:"push",tab:"PUSH",day:"DÍA 02",title:"PUSH",focus:"Pecho · Hombros · Tríceps",exercises:[
+{id:"bench-press",name:"Press banca con barra",sets:3,reps:"5–8 reps",aliases:["barbell-bench-press","barbell bench press","bench press"]},
+{id:"incline-dumbbell-press",name:"Press inclinado con mancuernas",sets:3,reps:"8–12 reps",aliases:["incline-dumbbell-press","incline dumbbell bench press","incline dumbbell press"]},
+{id:"machine-shoulder-press",name:"Press hombros en máquina",sets:2,reps:"8–12 reps",aliases:["machine-shoulder-press","machine shoulder press","seated machine shoulder press"]},
+{id:"cable-lateral-raise",name:"Elevación lateral en polea",sets:2,reps:"12–20 reps",aliases:["cable-lateral-raise","single-arm cable lateral raise","cable lateral raise"],superset:"A"},
+{id:"triceps-pushdown",name:"Extensión de tríceps con cuerda",sets:2,reps:"10–15 reps",aliases:["triceps-pushdown","cable triceps pushdown","triceps rope pushdown"],superset:"A"},
+{id:"overhead-triceps-extension",name:"Extensión de tríceps sobre la cabeza",sets:2,reps:"10–15 reps",aliases:["overhead-triceps-extension","overhead cable triceps extension","cable overhead triceps extension"]}
 ]},
-{id:"upper-b",tab:"UPPER B",day:"DÍA 03",title:"Tren superior B",focus:"Hipertrofia · ángulos complementarios y hombros",exercises:[
-{id:"incline-machine",name:"Press inclinado en máquina",muscle:"Pectoral superior · tríceps",sets:3,reps:"8–12 reps",rest:"2 min",cue:"Ajusta el asiento para que las asas queden a la altura del pecho."},
-{id:"pulldown-medium",name:"Jalón vertical, agarre medio",muscle:"Dorsal · bíceps",sets:3,reps:"8–12 reps",rest:"90–120 s",cue:"Evita arquear excesivamente la zona lumbar."},
-{id:"chest-row",name:"Remo con pecho apoyado",muscle:"Espalda media · romboides",sets:3,reps:"8–12 reps",rest:"90–120 s",cue:"Apoya el pecho y evita utilizar impulso."},
-{id:"pecdeck",name:"Aperturas en pec deck",muscle:"Pectoral",sets:2,reps:"12–15 reps",rest:"60–90 s",cue:"Mantén una ligera flexión de codos y no fuerces el estiramiento."},
-{id:"shoulder-press",name:"Press de hombros en máquina",muscle:"Deltoides · tríceps",sets:2,reps:"8–12 reps",rest:"90–120 s",cue:"No bloquees con violencia los codos al extender."},
-{id:"lateral-db",name:"Elevación lateral con mancuernas",muscle:"Deltoides lateral",sets:2,reps:"12–20 reps",rest:"60–90 s",cue:"Utiliza una carga que permita controlar todas las repeticiones."},
-{id:"reverse-pec",name:"Reverse pec deck",muscle:"Deltoides posterior",sets:2,reps:"12–20 reps",rest:"60–90 s",cue:"Abre los brazos sin elevar los hombros."},
-{id:"hammer",name:"Curl martillo con mancuernas",muscle:"Bíceps · braquial",sets:2,reps:"10–15 reps",rest:"60–90 s",superset:"SUPERSERIE B",cue:"Mantén las muñecas neutras y evita balancearte."},
-{id:"overhead-triceps",name:"Extensión de tríceps sobre la cabeza",muscle:"Tríceps · cabeza larga",sets:2,reps:"10–15 reps",rest:"60–90 s",superset:"SUPERSERIE B",cue:"Mantén los codos estables y controla el estiramiento."}
+{id:"legs",tab:"LEGS",day:"DÍA 03",title:"LEGS",focus:"Cuádriceps · Isquiosurales · Glúteos · Gemelos",exercises:[
+{id:"hack-squat",name:"Hack squat",sets:3,reps:"8–12 reps",aliases:["hack-squat","hack squat"]},
+{id:"romanian-deadlift",name:"Peso muerto rumano",sets:3,reps:"8–10 reps",aliases:["romanian-deadlift","barbell romanian deadlift","romanian deadlift"]},
+{id:"leg-press",name:"Prensa de piernas",sets:2,reps:"10–15 reps",aliases:["leg-press","leg press"]},
+{id:"seated-leg-curl",name:"Curl femoral sentado",sets:2,reps:"10–15 reps",aliases:["seated-leg-curl","seated leg curl"]},
+{id:"standing-calf-raise",name:"Gemelos de pie",sets:3,reps:"10–15 reps",aliases:["standing-calf-raise","standing calf raise","standing calf raises"],superset:"A"},
+{id:"cable-crunch",name:"Crunch abdominal en polea",sets:2,reps:"10–15 reps",aliases:["cable-crunch","cable crunch"],superset:"A"}
 ]},
-{id:"lower-b",tab:"LOWER B",day:"DÍA 04",title:"Tren inferior B",focus:"Cadena posterior · glúteos y trabajo unilateral",exercises:[
-{id:"trapbar",name:"Peso muerto con trap bar",muscle:"Glúteos · cuádriceps · espalda",sets:3,reps:"5–8 reps",rest:"2–3 min",cue:"Empuja el suelo y mantén la columna estable durante todo el recorrido."},
-{id:"legpress",name:"Prensa de piernas",muscle:"Cuádriceps · glúteos",sets:3,reps:"10–15 reps",rest:"2 min",cue:"No despegues la pelvis del respaldo en la parte baja."},
-{id:"hipthrust",name:"Hip thrust",muscle:"Glúteos",sets:3,reps:"8–12 reps",rest:"90–120 s",cue:"Termina extendiendo la cadera, sin hiperextender la zona lumbar."},
-{id:"bulgarian",name:"Sentadilla búlgara",muscle:"Cuádriceps · glúteos",sets:2,reps:"8–10 / pierna",rest:"90–120 s",cue:"Mantén el equilibrio y adapta la zancada a tu movilidad."},
-{id:"legcurl-b",name:"Curl femoral tumbado",muscle:"Isquiosurales",sets:2,reps:"10–15 reps",rest:"60–90 s",cue:"Evita levantar la pelvis y controla la fase de bajada."},
-{id:"calf-seated",name:"Elevación de gemelos sentado",muscle:"Sóleo",sets:3,reps:"12–20 reps",rest:"60–90 s",superset:"SUPERSERIE A",cue:"Utiliza recorrido completo y pausa en la posición estirada."},
-{id:"pallof",name:"Pallof press",muscle:"Core · estabilidad antirotacional",sets:3,reps:"10–12 / lado",rest:"60–90 s",superset:"SUPERSERIE A",cue:"Evita que el tronco rote; mueve solo los brazos."}
+{id:"mixed",tab:"MIXED",day:"DÍA 04",title:"MIXED",focus:"Cuerpo completo · Segundo estímulo semanal",exercises:[
+{id:"hip-thrust",name:"Hip thrust",sets:2,reps:"8–12 reps",aliases:["hip-thrust","barbell hip thrust"]},
+{id:"bulgarian-split-squat",name:"Sentadilla búlgara",sets:2,reps:"8–10 / pierna",aliases:["bulgarian-split-squat","bulgarian split squat"]},
+{id:"machine-chest-press",name:"Press de pecho en máquina",sets:2,reps:"8–12 reps",aliases:["machine-chest-press","machine chest press","chest press machine"],superset:"A"},
+{id:"seated-cable-row",name:"Remo sentado en polea",sets:2,reps:"8–12 reps",aliases:["seated-cable-row","seated cable row","cable row"],superset:"A"},
+{id:"dumbbell-lateral-raise",name:"Elevación lateral mancuernas",sets:2,reps:"12–20 reps",aliases:["dumbbell-lateral-raise","dumbbell lateral raise"],superset:"C"},
+{id:"cable-biceps-curl",name:"Curl de bíceps en polea",sets:2,reps:"10–15 reps",aliases:["cable-biceps-curl","cable biceps curl","standing cable curl"],superset:"B"},
+{id:"rope-triceps-pushdown",name:"Extensión tríceps cuerda",sets:2,reps:"10–15 reps",aliases:["triceps-pushdown","cable triceps pushdown","triceps rope pushdown"],superset:"B"},
+{id:"pallof-press",name:"Pallof press",sets:2,reps:"10–12 / lado",aliases:["pallof-press","pallof press"],superset:"C"}
 ]}
 ];
-const STORE="forge_strength_4day_progress_v1";
-const HISTORY="forge_strength_4day_history_v1";
-let active=0;
-let progress=readStore(STORE,{});
-let history=readStore(HISTORY,[]);
-function readStore(key,fallback){try{const v=localStorage.getItem(key);return v?JSON.parse(v):fallback}catch(e){return fallback}}
-function save(){localStorage.setItem(STORE,JSON.stringify(progress));localStorage.setItem(HISTORY,JSON.stringify(history))}
-function dateKey(){const d=new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
-function keyFor(ex,set){return dateKey()+"|"+sessions[active].id+"|"+ex.id+"|"+set}
-function countSets(s){return s.exercises.reduce((n,e)=>n+e.sets,0)}
-function getDone(s){let n=0;s.exercises.forEach(e=>{for(let i=1;i<=e.sets;i++){const k=dateKey()+"|"+s.id+"|"+e.id+"|"+i;if(progress[k])n++}});return n}
-function renderTabs(){document.getElementById("dayTabs").innerHTML=sessions.map((s,i)=>'<button class="day-tab '+(i===active?'active':'')+'" data-day="'+i+'">'+s.tab+'<small>'+s.day+'</small></button>').join("");document.querySelectorAll(".day-tab").forEach(b=>b.addEventListener("click",()=>{active=Number(b.dataset.day);render()}))}
+const progressKey="forge_fourday_daily_v3";
+const historyKey="forge_fourday_history_v3";
+let active=0,library=[],libraryState="loading";
+let completions=readStore(progressKey,{});
+let history=readStore(historyKey,[]);
+function readStore(k,f){try{const v=localStorage.getItem(k);return v?JSON.parse(v):f}catch(e){return f}}
+function save(){localStorage.setItem(progressKey,JSON.stringify(completions));localStorage.setItem(historyKey,JSON.stringify(history))}
+function localDate(d=new Date()){return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
+function mondayOfWeek(){const d=new Date();d.setHours(0,0,0,0);d.setDate(d.getDate()-((d.getDay()+6)%7));return localDate(d)}
+function isDone(id,date=localDate()){return !!completions[date+"|"+id]}
+function norm(s){return String(s||"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9]+/g," ").trim()}
+function getArtwork(ex){
+ if(!library.length)return null;
+ const aliases=(ex.aliases||[]).map(norm);
+ let best=null,bestScore=0;
+ for(const item of library){
+  const id=norm(item.id),en=norm(item.name_en),es=norm(item.name_es);
+  let score=0;
+  for(const a of aliases){
+   if(id===a)score=Math.max(score,120);
+   if(id.replace(/ /g,"-")===a.replace(/ /g,"-"))score=Math.max(score,118);
+   if(en===a||es===a)score=Math.max(score,110);
+   if((en+" "+es).includes(a)||a.includes(en)&&en.length>5)score=Math.max(score,85+a.length/100);
+   if(id.includes(a)||a.includes(id)&&id.length>6)score=Math.max(score,75+a.length/100);
+  }
+  if(score>bestScore){best=item;bestScore=score}
+ }
+ if(!best||bestScore<75)return null;
+ return best.images&&best.images.flat?best.images.flat:null;
+}
+function imgURL(path){if(!path)return "";return /^https?:/i.test(path)?path:"https://exercise-dataset.com/"+String(path).replace(/^\/+/,"")}
+function imageHTML(ex){
+ const art=getArtwork(ex);
+ if(!art)return '<div class="img-pending">'+(libraryState==="loading"?"…":"")+'</div>';
+ const start=art.start||art.main,peak=art.peak||art.main;
+ if(!start&&!peak)return '<div class="img-pending"></div>';
+ if(start&&peak&&start!==peak)return '<div class="sequence"><img class="pose" loading="lazy" alt="" src="'+imgURL(start)+'"><span class="pose-arrow">→</span><img class="pose" loading="lazy" alt="" src="'+imgURL(peak)+'"></div>';
+ return '<div class="sequence"><img class="single-pose" loading="lazy" alt="" src="'+imgURL(start||peak)+'"></div>';
+}
+function sessionCount(s){return s.exercises.reduce((n,e)=>n+e.sets,0)}
+function renderTabs(){
+ document.getElementById("dayTabs").innerHTML=sessions.map((s,i)=>'<button class="day-tab '+(i===active?'active ':'')+(isDone(s.id)?'done':'')+'" data-day="'+i+'">'+s.tab+'<small>'+s.day+'</small></button>').join("");
+ document.querySelectorAll(".day-tab").forEach(b=>b.addEventListener("click",()=>{active=Number(b.dataset.day);render()}));
+}
 function renderSession(){
- const s=sessions[active],total=countSets(s),done=getDone(s);
+ const s=sessions[active],done=isDone(s.id);
  document.getElementById("sessionTitle").textContent=s.title;
  document.getElementById("sessionFocus").textContent=s.focus;
- document.getElementById("sessionTag").textContent=s.day+" · 4";
- document.getElementById("sessionProgress").textContent=done+" / "+total+" series";
- document.getElementById("sessionBar").style.width=(total?done/total*100:0)+"%";
- document.getElementById("exerciseList").innerHTML=s.exercises.map((e,idx)=>{
- const sets=Array.from({length:e.sets},(_,i)=>{const checked=progress[keyFor(e,i+1)]?" done":"";return '<button class="set-check'+checked+'" data-ex="'+e.id+'" data-set="'+(i+1)+'" aria-pressed="'+(checked?"true":"false")+'">Serie '+(i+1)+'</button>'}).join("");
- return '<article class="exercise"><div class="exercise-top"><div class="number">'+String(idx+1).padStart(2,"0")+'</div><div class="ex-main"><div class="ex-title">'+e.name+'</div><div class="ex-muscle">'+e.muscle+'</div></div><div class="ex-prescription"><div class="sets">'+e.sets+' ×</div><div class="reps">'+e.reps+'</div></div></div>'+(e.superset?'<div class="super-label">'+e.superset+'</div>':'')+'<p class="cue">'+e.cue+'</p><div class="sets-track">'+sets+'</div></article>'
- }).join("");
- document.querySelectorAll(".set-check").forEach(b=>b.addEventListener("click",()=>{const k=dateKey()+"|"+s.id+"|"+b.dataset.ex+"|"+b.dataset.set;progress[k]=!progress[k];save();renderSession();renderWeek()}));
- const already=history.some(h=>h.date===dateKey()&&h.session===s.id);
- document.getElementById("notice").textContent=already?"Sesión registrada hoy. Puedes seguir actualizando tus series.":"";
+ document.getElementById("exerciseList").innerHTML=s.exercises.map((e,i)=>
+  '<article class="exercise"><div><div class="ex-head"><span class="num">'+String(i+1).padStart(2,"0")+'</span><div class="ex-title">'+e.name+'</div></div><div class="ex-volume">'+e.sets+' × '+e.reps+'</div>'+(e.superset?'<div class="superset">SUPERSERIE '+e.superset+'</div>':'')+'</div>'+imageHTML(e)+'</article>'
+ ).join("");
+ const btn=document.getElementById("completeBtn");
+ btn.textContent=done?"Día completado ✓":"Marcar día como hecho";
+ btn.classList.toggle("completed",done);
+ document.getElementById("notice").textContent=libraryState==="loading"?"Cargando ilustraciones de ejercicios…":libraryState==="error"?"No se han podido cargar algunas ilustraciones. Comprueba la conexión.":"";
 }
-function mondayOfWeek(){const d=new Date();d.setHours(0,0,0,0);const day=(d.getDay()+6)%7;d.setDate(d.getDate()-day);return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
 function renderWeek(){
- const monday=mondayOfWeek(),count=history.filter(h=>h.date>=monday&&h.date<=dateKey()).length;
+ const monday=mondayOfWeek(),today=localDate();
+ const n=sessions.filter(s=>isDone(s.id)&&completions[monday+"|"+s.id]).length;
+ const count=history.filter(h=>h.date>=monday&&h.date<=today).length;
+ // Prefer the unique completed sessions recorded in the current Monday-Sunday window.
  document.getElementById("weekCount").textContent=Math.min(count,4)+" / 4";
  document.getElementById("weekBar").style.width=Math.min(count,4)/4*100+"%";
- const end=new Date();end.setDate(end.getDate()+6-((end.getDay()+6)%7));
- const fmt=d=>d.toLocaleDateString("es-ES",{day:"numeric",month:"short"});
- document.getElementById("weekRange").textContent=fmt(new Date(monday+"T12:00:00"))+" – "+fmt(end);
- document.getElementById("historyList").innerHTML=history.slice().sort((a,b)=>(b.date+b.session).localeCompare(a.date+a.session)).slice(0,6).map(h=>{const s=sessions.find(x=>x.id===h.session);return '<div class="history-item"><span><b>'+(s?s.title:h.session)+'</b></span><span>'+h.date+' · '+h.done+'/'+h.total+' series</span></div>'}).join("")||'<div class="history-item"><span>Aún no hay sesiones registradas.</span><span>¡A por la primera!</span></div>';
+ document.getElementById("historyList").innerHTML=history.slice().sort((a,b)=>(b.date+b.session).localeCompare(a.date+a.session)).slice(0,8).map(h=>{
+  const s=sessions.find(x=>x.id===h.session);
+  return '<div class="history-item"><span><b>'+(s?s.title:h.session)+'</b></span><span>'+h.date+'</span></div>';
+ }).join("")||'<div class="history-item"><span>Todavía no hay entrenamientos registrados.</span></div>';
 }
 function render(){renderTabs();renderSession();renderWeek()}
-document.getElementById("finishBtn").addEventListener("click",()=>{
- const s=sessions[active],done=getDone(s),total=countSets(s),today=dateKey();
- const old=history.findIndex(h=>h.date===today&&h.session===s.id);
- const entry={date:today,session:s.id,done:done,total:total};
- if(old>=0)history[old]=entry;else history.push(entry);
- save();renderWeek();document.getElementById("notice").textContent="Sesión guardada · "+done+" de "+total+" series completadas.";
+document.getElementById("completeBtn").addEventListener("click",()=>{
+ const s=sessions[active],today=localDate(),k=today+"|"+s.id;
+ if(completions[k]){
+  delete completions[k];
+  history=history.filter(h=>!(h.date===today&&h.session===s.id));
+  document.getElementById("notice").textContent="Entrenamiento desmarcado.";
+ }else{
+  completions[k]=true;
+  history=history.filter(h=>!(h.date===today&&h.session===s.id));
+  history.push({date:today,session:s.id});
+  document.getElementById("notice").textContent="Entrenamiento registrado.";
+ }
+ save();render();
 });
-document.getElementById("resetBtn").addEventListener("click",()=>{
- if(!confirm("¿Reiniciar las marcas de esta sesión para hoy?"))return;
- const s=sessions[active];
- s.exercises.forEach(e=>{for(let i=1;i<=e.sets;i++)delete progress[dateKey()+"|"+s.id+"|"+e.id+"|"+i]});
- save();renderSession();renderWeek();document.getElementById("notice").textContent="Marcas reiniciadas.";
-});
+async function loadExerciseArt(){
+ try{
+  const response=await fetch("https://exercise-dataset.com/exercises.json",{cache:"force-cache"});
+  if(!response.ok)throw new Error("HTTP "+response.status);
+  const data=await response.json();
+  library=Array.isArray(data.exercises)?data.exercises:[];
+  if(!library.length)throw new Error("Empty exercise library");
+  libraryState="ready";
+ }catch(e){libraryState="error"}
+ renderSession();
+}
 render();
+loadExerciseArt();
 if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}))}
 </script>
 </body>
