@@ -1,18 +1,20 @@
 # FORGE — Strength Training
 
-Mobile-first strength-training PWA with an optimized four-day Upper/Lower program.
+Mobile-first four-day strength-training PWA.
 
 ## Weekly split
-- Upper A — strength emphasis for chest and back.
-- Lower A — quadriceps emphasis, posterior-chain work, calves and abs.
-- Upper B — hypertrophy emphasis, complementary angles, shoulders and arms.
-- Lower B — posterior chain, glutes, unilateral work, calves and core.
+- Monday — Pull: back, rear delts and biceps.
+- Tuesday — Push: chest, shoulders and triceps.
+- Thursday — Legs: quads, hamstrings, glutes, calves and abs.
+- Saturday — Mixed: full-body second stimulus.
 
-## Included
-- Four sessions per week, with sets, rep ranges, rest guidance and technique cues.
-- Supersets for arm accessories and calves/core accessories.
-- Per-set check-offs, session completion history and local progress tracking.
-- Double-progression, RIR and rest guidance.
+Sessions are designed for approximately 50–60 minutes, including a short specific warm-up. Supersets are limited to accessories and non-competing movements; heavy compound lifts are performed separately.
+
+## App features
+- Exercise names, set/rep targets and visual start/peak exercise illustrations.
+- Mark an entire training day as completed; no per-set check-offs.
+- Weekly completion count and a simple session history.
 - PWA manifest and service worker for Add to Home Screen.
+- Completion history stored locally in the browser/device.
 
-Progress is stored locally in the browser and does not sync across devices. Previously saved local data is not deleted by this update.
+Exercise illustrations are loaded from the RepDB free exercise dataset. In-app use is permitted with visible attribution; see https://github.com/RepDB/exercise-dataset for current dataset terms. Visible attribution is included in the app footer.
