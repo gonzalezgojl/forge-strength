@@ -123,9 +123,9 @@ const sessions=[
 {id:"mixed",tab:"MIXED",day:"DÍA 04",title:"MIXED",focus:"Segundo estímulo · Tren superior e inferior",exercises:[
 {id:"db-bench-press",name:"Press banca con mancuernas",sets:3,reps:"8–12 reps",rest:"2 min",aliases:["db-bench-press","dumbbell-bench-press","dumbbell bench press"]},
 {id:"seated-cable-row",name:"Remo sentado en polea",sets:3,reps:"8–12 reps",rest:"2 min",aliases:["seated-cable-row","seated cable row","cable row"]},
-{id:"hip-thrust",name:"Hip thrust",sets:3,reps:"8–12 reps",rest:"2–3 min",aliases:["hip-thrust","barbell hip thrust"]},
+{id:"hip-thrust",name:"Hip thrust",sets:2,reps:"8–12 reps",rest:"2–3 min",aliases:["hip-thrust","barbell hip thrust"]},
 {id:"bulgarian-split-squat",name:"Sentadilla búlgara",sets:2,reps:"8–10 / pierna",rest:"2 min",aliases:["bulgarian-split-squat","bulgarian split squat"]},
-{id:"leg-curl",name:"Curl femoral tumbado",sets:3,reps:"10–15 reps",rest:"90–120 s",aliases:["leg-curl","lying-leg-curl","lying leg curl"]},
+{id:"leg-curl",name:"Curl femoral tumbado",sets:2,reps:"10–15 reps",rest:"90–120 s",aliases:["leg-curl","lying-leg-curl","lying leg curl"]},
 {id:"dumbbell-calf-raise",name:"Gemelos de pie con mancuernas",sets:2,reps:"12–20 reps",rest:"90 s",aliases:["dumbbell-calf-raise","dumbbell calf raise"]},
 {id:"seated-dumbbell-curl",name:"Curl de bíceps con mancuernas",sets:2,reps:"10–15 reps",rest:"90–120 s después de la pareja",superset:"A",aliases:["seated-dumbbell-curl","dumbbell-curl","dumbbell curl"]},
 {id:"dumbbell-tricep-extension",name:"Extensión de tríceps sobre la cabeza con mancuerna",sets:2,reps:"10–15 reps",rest:"90–120 s después de la pareja",superset:"A",aliases:["dumbbell-tricep-extension","overhead dumbbell tricep extension"]}
@@ -161,7 +161,7 @@ function getArtwork(ex){
  if(!best||bestScore<75)return null;
  return best.images&&best.images.flat?best.images.flat:null;
 }
-function imgURL(path){if(!path)return "";return /^https?:/i.test(path)?path:"https://exercise-dataset.com/"+String(path).replace(/^\/+ /,"")}
+function imgURL(path){if(!path)return "";return /^https?:/i.test(path)?path:"https://exercise-dataset.com/"+String(path).replace(/^\/+/, "")}
 function imageHTML(ex){
  const art=getArtwork(ex);
  if(!art)return '<div class="img-pending">'+(libraryState==="loading"?"…":"")+'</div>';
