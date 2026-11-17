@@ -1,7 +1,7 @@
 {
-  "name": "FORGE — Programa 4 días",
+  "name": "FORGE — Rutina equilibrada 4 días",
   "short_name": "FORGE",
-  "description": "Programa Pull, Push, Legs y Mixed con seguimiento diario e ilustraciones.",
+  "description": "Programa equilibrado de fuerza de cuatro días con series, repeticiones, descansos, superseries, progresión y seguimiento.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
