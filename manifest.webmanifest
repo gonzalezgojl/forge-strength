@@ -1,7 +1,7 @@
 {
-  "name": "FORGE — Strength Training",
+  "name": "FORGE — 4-Day Strength Training",
   "short_name": "FORGE",
-  "description": "A focused strength training log with exercise demonstrations and session tracking.",
+  "description": "Programa de fuerza e hipertrofia de cuatro días con seguimiento de series.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
