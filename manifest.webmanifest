@@ -1,7 +1,7 @@
 {
-  "name": "FORGE — 4-Day Strength Training",
+  "name": "FORGE — Programa 4 días",
   "short_name": "FORGE",
-  "description": "Programa de fuerza e hipertrofia de cuatro días con seguimiento de series.",
+  "description": "Programa Pull, Push, Legs y Mixed con seguimiento diario e ilustraciones.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
