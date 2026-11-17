@@ -6,7 +6,7 @@ Four-day Pull / Push / Legs / Mixed strength and hypertrophy PWA. Designed aroun
 - Monday — Pull: lat pulldown, barbell row, dumbbell pullover, dumbbell rear-delt fly, EZ-bar curls and hammer curls.
 - Tuesday — Push: barbell bench press, incline dumbbell press, seated dumbbell shoulder press, cable fly, lateral raises and cable triceps pushdown.
 - Thursday — Legs: barbell squat, Romanian deadlift, leg press, leg extension, lying leg curl, dumbbell calf raise and plank.
-- Saturday — Mixed: dumbbell bench press, seated cable row, hip thrust, Bulgarian split squat, lying leg curl, dumbbell calf raise and one biceps/triceps antagonist superset.
+- Saturday — Mixed: dumbbell bench press, seated cable row, hip thrust, Bulgarian split squat, lying leg curl, dumbbell calf raise, cable crunch and one biceps/triceps antagonist superset.
 
 ## Training approach
 - Heavy compound lifts are performed as straight sets, never supersetted.
