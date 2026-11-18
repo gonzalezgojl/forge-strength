@@ -1,0 +1,19 @@
+{
+  "name": "MENTAL 360 — Desarrollo personal",
+  "short_name": "MENTAL 360",
+  "description": "Tu sistema personal de prioridades, concentración y constancia.",
+  "lang": "es",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#090c10",
+  "theme_color": "#0b0d10",
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
