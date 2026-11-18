@@ -1,25 +1,32 @@
 # FORGE — Strength Training
 
-Four-day Pull / Push / Legs / Mixed strength and hypertrophy PWA. Designed around common gym equipment and approximately 60–70 minutes per session.
+FORGE is a mobile-first, installable four-session strength and hypertrophy programme. The current plan uses three complementary upper-body days and one lower-body day to leave room for the user's cycling.
 
 ## Weekly split
-- Monday — Pull: lat pulldown, barbell row, dumbbell pullover, dumbbell rear-delt fly, EZ-bar curls and hammer curls.
-- Tuesday — Push: barbell bench press, incline dumbbell press, seated dumbbell shoulder press, cable fly, lateral raises and cable triceps pushdown.
-- Thursday — Legs: barbell squat, Romanian deadlift, leg press, leg extension, lying leg curl, dumbbell calf raise and plank.
-- Saturday — Mixed: dumbbell bench press, seated cable row, hip thrust, Bulgarian split squat, lying leg curl, dumbbell calf raise, cable crunch and one biceps/triceps antagonist superset.
 
-## Training approach
-- Heavy compound lifts are performed as straight sets, never supersetted.
-- The only superset pairs dumbbell biceps curls with overhead dumbbell triceps extensions.
-- Rest guidance is shown on each exercise card: typically 2–3 minutes for compound movements and 90–120 seconds for isolation work.
-- Most working sets should finish with 1–3 repetitions in reserve (RIR); avoid forced reps on heavy compounds.
-- The first exercise of each session should include progressive warm-up sets before the listed working sets.
+- **Upper A — Chest emphasis:** horizontal and incline pressing, chest-supported horizontal pulling, neutral-grip vertical pulling, lateral delts and an antagonist arm superset.
+- **Upper B — Back emphasis:** wide cable row, pronated pulldown, upper-chest cable fly, reverse pec deck and an antagonist arm superset.
+- **Upper C — Shoulders and arms:** vertical press, machine chest press, unilateral row, lateral and rear delts, biceps and triceps.
+- **Lower — One leg day:** hack squat, Romanian deadlift, Bulgarian split squat, seated leg curl, hip thrust, leg extension and calf raise.
 
-## App features
-- Exercise names, sets, rep ranges, rest periods and visual start/peak illustrations.
-- Mark an entire training day as completed; no per-set check-offs.
-- Weekly completion count and a simple session history.
+## Programming
+
+- **Volume:** approximately 11 direct chest sets, 13 back sets, 6 each for biceps and triceps, 8 quadriceps sets and 6 hamstring sets per week. These are main-target counts; compound lifts also provide indirect work.
+- **Effort:** compounds generally finish around 2 reps in reserve (RIR); isolation work around 1–2 RIR.
+- **Rest:** 2.5–3 minutes for priority compound lifts, about 2 minutes for secondary compounds and 60–90 seconds for most isolation work.
+- **Progression:** double progression. Build reps within the prescribed range; once all sets reach the top of the range at the target RIR with stable technique, add the smallest practical load increment.
+- **Supersets:** accessory pairings only, mainly opposing arm muscles; heavy compound lifts are not paired.
+- **Schedule:** suggested spacing is Monday Upper A, Wednesday Upper B, Friday Upper C and Sunday Lower. Keep the hardest bike session away from the day before Lower.
+
+See [TRAINING-RESEARCH.md](TRAINING-RESEARCH.md) for the literature summary, limitations and programming rationale.
+
+## App functions
+
+- 27 exercise slots across four sessions.
+- Exercise-specific sets, reps, rest, RIR, equipment and English technique guidance.
+- Two-position exercise illustrations from RepDB where matching records are available; fallbacks retain local written instructions.
+- Exercise check-offs, session completion history and local progress storage.
+- No timers, countdowns or weight-entry fields.
 - PWA manifest and service worker for Add to Home Screen.
-- Completion history stored locally in the browser/device.
 
-Exercise illustrations are loaded from the RepDB free exercise dataset. Free in-app use requires visible attribution, included in the app footer. See the source repository and licence for the full terms.
+Progress is stored in the current browser/device and does not automatically sync across devices. FORGE is a practical starting programme, not a universally optimal prescription. Adjust loads, ranges and volume to technique, recovery and symptoms.
