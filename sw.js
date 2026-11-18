@@ -1,5 +1,6 @@
-const CACHE_NAME = 'forge-shell-v14';
-const SHELL = ['./', './index.html', './manifest.webmanifest', './icon.svg', './icon-192.png', './icon-512.png'];
+const CACHE_NAME = 'forge-shell-v15';
+const BUNDLE = Array.from({length:8},(_,i)=>'./app.v3.part'+(i+1)+'.txt');
+const SHELL = ['./', './index.html', './manifest.webmanifest', './icon.svg', './icon-192.png', './icon-512.png', ...BUNDLE];
 self.addEventListener('install', event => {
   event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(SHELL)).then(() => self.skipWaiting()));
 });
