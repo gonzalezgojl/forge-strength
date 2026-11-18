@@ -17,7 +17,7 @@ body{margin:0;min-height:100vh;display:grid;place-items:center;background:#090d0
 <script>
 (async()=>{
  try{
-  const names=['app.v3.part1.txt','app.v3.part2.txt','app.v3.part3.txt','app.v3.part4.txt','app.v3.part5.txt','app.v3.part6.txt','app.v3.part7.txt','app.v3.part8.txt'];
+  const names=['app.v4.part1.txt','app.v4.part2.txt','app.v4.part3.txt','app.v4.part4.txt','app.v4.part5.txt','app.v4.part6.txt','app.v4.part7.txt','app.v4.part8.txt'];
   const chunks=await Promise.all(names.map(async name=>{
    const response=await fetch(name,{cache:'no-cache'});
    if(!response.ok)throw new Error('Unable to load '+name);
