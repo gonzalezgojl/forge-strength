@@ -1,0 +1,13 @@
+{
+  "name": "Career 360 — Aviation Opportunities",
+  "short_name": "Career 360",
+  "description": "Buscador de oportunidades para técnicos de mantenimiento aeronáutico EASA B1.1.",
+  "lang": "es-ES",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0b1422",
+  "theme_color": "#0b1422",
+  "icons": [{"src":"./icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]
+}
