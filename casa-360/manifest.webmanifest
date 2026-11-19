@@ -1,0 +1,14 @@
+{
+  "id": "./",
+  "name": "CASA 360 · Mantenimiento del hogar",
+  "short_name": "CASA 360",
+  "description": "Tareas recurrentes, compras, reparaciones, gastos e historial del hogar.",
+  "lang": "es-ES",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#101512",
+  "theme_color": "#101512",
+  "orientation": "portrait",
+  "icons": [{"src":"icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]
+}
