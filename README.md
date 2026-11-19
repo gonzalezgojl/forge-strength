@@ -51,13 +51,15 @@ FORGE is a mobile-first, installable four-session strength-training plan.
 | Hip Thrust | 2 × 9 | 2 min |
 | Leg Extension + Leg Curl | 3 × 12 each | Superset; 90 sec after pair |
 
-## App behavior
+## Companion apps
 
-- Four session tabs with exercise prescriptions and rest intervals.
-- Exercise check-offs and completed-session history saved locally on the device.
-- Supersets are grouped; move directly from A to B, then rest for the stated interval.
-- No motivational copy, rest timer, countdown or weight-entry fields.
-- PWA manifest and service worker for Add to Home Screen.
+- [Career 360](./career-360/) — on-demand aviation job search for EASA B1.1, A350/A330/A320 and European maintenance roles. Includes matching scores, saved jobs and application tracking.
+- [French 360](./french-360/) — daily French learning, vocabulary cards, listening and aviation-maintenance language.
+- [Mental 360](./mental-360/) — personal development and mental performance.
+
+## PWA installation
+
+Enable GitHub Pages from **Settings → Pages → Deploy from a branch**, branch `main`, folder `/ (root)`.
 
 ## Exercise illustrations
 
@@ -66,8 +68,3 @@ Exercise movement illustrations show the start and peak positions and are source
 ## Weekly tracking
 
 Exercise checks and completed-session indicators are stored locally on the device for the current Monday–Sunday week. Completed session tabs remain green until that session or the whole week is reset. A new week starts with a clean weekly checklist; historical completion records remain stored locally.
-
-## Companion apps
-
-- [French 360](./french-360/) — daily French learning, vocabulary cards, listening and aviation-maintenance language.
-- [Mental 360](./mental-360/) — personal development and mental performance.
