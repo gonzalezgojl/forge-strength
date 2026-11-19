@@ -103,7 +103,7 @@ button{font:inherit}
     <div class="footer">
       <div class="footer-note" id="completion-note">0 / 6 exercises completed</div>
       <div class="actions">
-        <button class="action" id="reset-button" type="button">Reset</button>
+        <button class="action" id="reset-button" type="button">Reset session</button>
         <button class="action primary" id="finish-button" type="button" disabled>Complete session</button>
       </div>
     </div>
@@ -160,7 +160,7 @@ return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.g
 }
 var state={weekKey:weekKeyNow(),checked:{},completed:{},history:[]};
 try{
-var saved=JSON.parse(localStorage.getItem(KEY)||'null');
+var saved=JSON.parse(localStorage.getItem(KEY)||localStorage.getItem('forge-training-state-v5')||'null');
 if(saved&&typeof saved==='object'){
 state.weekKey=saved.weekKey||state.weekKey;
 state.history=Array.isArray(saved.history)?saved.history:[];
@@ -294,6 +294,8 @@ save();render();showToast(s.title+' completed');
 });
 if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('./sw.js').catch(function(){});});}
 render();
+window.addEventListener('focus',render);
+document.addEventListener('visibilitychange',function(){if(!document.hidden)render();});
 })();
 </script>
 </body>
