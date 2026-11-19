@@ -1,0 +1,15 @@
+{
+  "name": "French 360 — Français au quotidien",
+  "short_name": "French 360",
+  "description": "Ton programme personnel de français en 60 minutes par jour.",
+  "lang": "fr-FR",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0d1421",
+  "theme_color": "#101827",
+  "icons": [
+    { "src": "./icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}
