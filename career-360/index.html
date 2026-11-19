@@ -239,6 +239,7 @@ function checkNow(){
    var all={},totalSources=0;lists.forEach(function(list){totalSources+=list.length;list.forEach(function(raw){var j=normalizeJob(raw);if(!j.title||j.title==="Opportunity")return;var prev=all[j.id];if(!prev||j.description.length>prev.description.length)all[j.id]=j;});});
    var normalized=Object.keys(all).map(function(k){return all[k];});
    var relevant=normalized.filter(function(j){
+     var loc=norm(j.location);var europePreferred=norm(state.regions).indexOf("europe")>=0;var knownEurope=isEurope(j);var unknownRegion=(loc==="location not specified"||loc.indexOf("remote")>=0);if(europePreferred&&!knownEurope&&!unknownRegion)return false;
      var blob=norm([j.title,j.company,j.description].join(" "));
      var aircraft=/\b(aircraft|aviation|aerospace|airline|airframe|helicopter)\b/.test(blob);
      var tech=/\b(maintenance|mechanic|technician|engineer|certifying|b1\.?1|licensed aircraft engineer|lae|avionic|airworthiness)\b/.test(blob);
