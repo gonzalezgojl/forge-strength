@@ -29,7 +29,7 @@ button,input,select,textarea{font:inherit}button{cursor:pointer}button:focus-vis
 <nav class="nav"><button class="active" data-view="home"><b>⌂</b>Inicio</button><button data-view="tasks"><b>☷</b>Tareas</button><button data-view="shopping"><b>🛒</b>Compras</button><button data-view="repairs"><b>🔧</b>Reparaciones</button><button data-view="expenses"><b>€</b>Gastos</button><button data-view="history"><b>↶</b>Historial</button></nav>
 <main>
 <section id="view-home" class="view active">
-<div class="hero"><div class="eyebrow">Tu casa, bajo control</div><h2>El mantenimiento,<br>sin olvidos.</h2><p>Organiza tareas recurrentes, prepara materiales y conserva el historial de lo que haces en casa.</p><button class="btn" data-action="new-task">＋ Añadir tarea</button></div>
+<div class="row between" style="margin:0 0 16px"><h2>Resumen</h2><button class="btn" data-action="new-task">＋ Añadir tarea</button></div>
 <div id="alertSummary"></div><div class="grid" id="stats"></div>
 <div class="section"><h3>Lo próximo</h3><button class="btn sm ghost" data-view-link="tasks">Ver todas</button></div><div id="upcoming"></div>
 <div class="section"><h3>Lista de compras</h3><button class="btn sm ghost" data-view-link="shopping">Ver lista</button></div><div id="homeShopping"></div>
