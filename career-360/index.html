@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0b1422">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Career 360">
+<meta name="description" content="Buscador de oportunidades para profesionales EASA B1.1 y mantenimiento aeronáutico.">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" href="./icon.svg" type="image/svg+xml">
+<title>Career 360</title>
+<style>
+:root{color-scheme:dark;--bg:#0b1422;--panel:#121e2e;--panel2:#19283b;--line:#2a3b52;--text:#f2f6fc;--muted:#9aabc1;--blue:#8dbbff;--cyan:#73d4e1;--green:#62d6a1;--gold:#f0c56d;--red:#ff7181;--radius:20px}
+*{box-sizing:border-box}html{background:var(--bg)}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 90% -5%,#203c5e 0,transparent 36%),var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;padding-bottom:calc(88px + env(safe-area-inset-bottom))}
+button,input,select{font:inherit}button{cursor:pointer;color:inherit}.app{max-width:820px;margin:auto;padding:env(safe-area-inset-top) 17px 30px}
+.top{display:flex;justify-content:space-between;align-items:center;padding:17px 2px 20px}.brand{display:flex;align-items:center;gap:11px}.logo{height:43px;width:43px;border-radius:14px;background:linear-gradient(140deg,#315985,#182940);border:1px solid #52769e;display:grid;place-items:center;color:white;font-size:19px;font-weight:950}.brandname{font-size:15px;font-weight:900;letter-spacing:1.8px}.brandtag{font-size:9px;color:var(--muted);letter-spacing:2px;margin-top:3px}.profiletag{border:1px solid #3d5877;background:#17263a;border-radius:99px;padding:8px 11px;font-size:10px;font-weight:800;color:#cde1ff}
+.view{display:none;animation:fade .18s ease}.view.active{display:block}@keyframes fade{from{opacity:.4;transform:translateY(4px)}to{opacity:1;transform:none}}
+.eyebrow{font-size:9px;color:var(--cyan);font-weight:900;letter-spacing:1.8px;text-transform:uppercase}.title{font-size:27px;letter-spacing:-.8px;line-height:1.12;margin:7px 0}.intro{color:var(--muted);font-size:12px;line-height:1.5;margin:0}
+.hero{border:1px solid #3b587a;background:linear-gradient(135deg,#1a3553,#19283d 70%,#152337);border-radius:24px;padding:18px;margin:17px 0;position:relative;overflow:hidden}.hero:after{content:"";position:absolute;width:190px;height:190px;border:1px solid #ffffff15;border-radius:50%;right:-66px;top:-105px;box-shadow:0 0 0 24px #ffffff07,0 0 0 50px #ffffff04}.hero-row{display:flex;justify-content:space-between;gap:12px;position:relative;z-index:1}.hero h2{font-size:18px;margin:6px 0}.hero p{font-size:11px;color:#b9cbe0;margin:0;line-height:1.5}.hero-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px;position:relative;z-index:1}
+.primary{border:0;border-radius:13px;background:linear-gradient(135deg,#94c1ff,#65a1ee);padding:12px 16px;color:#10233b;font-size:12px;font-weight:900;box-shadow:0 5px 15px #5796e633}.primary:disabled{opacity:.55;cursor:wait}.secondary{border:1px solid #46617f;background:#203650;color:#d9e8fb;border-radius:12px;padding:11px 13px;font-size:11px;font-weight:800}.quiet{border:1px solid var(--line);background:#172438;border-radius:12px;padding:10px 13px;color:#b9c8db;font-size:11px;font-weight:750}
+.spin{display:inline-block;animation:spin 1s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}
+.statusline{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:13px 2px 0;font-size:10px;color:var(--muted)}.live-dot{display:inline-block;width:7px;height:7px;background:var(--green);border-radius:50%;margin-right:6px;box-shadow:0 0 9px #62d6a188}.status-label{white-space:nowrap}.source-note{font-size:9px;color:#8192a9;line-height:1.5;margin:9px 2px}
+.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:14px 0}.metric{border:1px solid var(--line);border-radius:15px;background:#121e2e;padding:12px}.metric strong{font-size:23px;display:block}.metric span{font-size:9px;color:var(--muted);display:block;margin-top:4px}
+.filters{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:13px 0}.field-wrap{min-width:0}.field-wrap.full{grid-column:1/-1}.label{display:block;font-size:9px;color:var(--muted);font-weight:800;letter-spacing:.7px;margin:0 0 6px;text-transform:uppercase}.field{width:100%;min-width:0;border:1px solid var(--line);background:#121e2e;color:var(--text);border-radius:11px;padding:11px;font-size:12px;outline:none}.field:focus{border-color:#83b3f1}.range-row{display:flex;gap:8px;align-items:center}.range-row .field{width:80px}
+.checkline{display:flex;align-items:center;gap:8px;font-size:11px;color:#c3d1e3;margin:7px 0}.checkline input{accent-color:#77aeef;width:15px;height:15px}
+.section-head{display:flex;justify-content:space-between;align-items:end;margin:20px 2px 10px}.section-head h3{font-size:15px;margin:0}.section-head p{font-size:10px;color:var(--muted);margin:4px 0 0}.link{border:0;background:none;color:var(--blue);font-size:10px;font-weight:800;padding:4px}
+.results{display:grid;gap:10px}.job{border:1px solid var(--line);background:linear-gradient(150deg,#17263a,#121d2c);border-radius:17px;padding:14px;position:relative}.job-head{display:flex;justify-content:space-between;gap:10px}.job-title{font-size:14px;font-weight:850;line-height:1.35;margin:0 0 5px}.company{font-size:11px;color:#c2d3e8}.score{background:#1c3c36;border:1px solid #3b775f;color:#8de3b8;border-radius:10px;padding:6px 8px;white-space:nowrap;height:max-content;font-size:10px;font-weight:900}.score.mid{background:#3a3320;border-color:#76643b;color:#f1d18a}.score.low{background:#392732;border-color:#744455;color:#ffb1bc}
+.job-meta{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}.chip{font-size:9px;padding:5px 7px;border-radius:7px;background:#22334a;color:#c3d4e8}.chip.green{background:#19382f;color:#8de3b8}.chip.gold{background:#3b3320;color:#f1d18a}.chip.gray{background:#293241;color:#b7c3d2}
+.job-summary{font-size:11px;line-height:1.5;color:#aab9cd;margin:0}.job-actions{display:flex;gap:7px;margin-top:12px;flex-wrap:wrap}.job-actions a,.job-actions button{font-size:10px;font-weight:850;text-decoration:none;border-radius:10px;padding:9px 11px}.apply{background:#8cbaff;color:#10233b}.save{border:1px solid #425b79;color:#c9dcf3;background:#1d3047}.save.saved{border-color:#43886b;color:#82e2b2;background:#17382d}.no-results{border:1px dashed #42536b;border-radius:17px;padding:25px 17px;text-align:center;color:var(--muted);font-size:12px;line-height:1.6}.no-results strong{display:block;color:var(--text);font-size:14px;margin-bottom:7px}
+.filtersbar{display:flex;gap:7px;flex-wrap:wrap;margin:11px 0}.filter-pill{border:1px solid var(--line);background:#152337;color:#aebed2;border-radius:99px;padding:7px 10px;font-size:10px}.filter-pill.active{background:#27466a;border-color:#658dbb;color:#e2efff}
+.card{border:1px solid var(--line);background:#131f30;border-radius:17px;padding:15px;margin:10px 0}.card h3{font-size:14px;margin:0 0 6px}.card p{font-size:11px;color:var(--muted);line-height:1.5;margin:0}
+.portal-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}.portal{border:1px solid var(--line);background:#172438;border-radius:13px;padding:12px;text-decoration:none;color:var(--text);display:block}.portal strong{font-size:11px;display:block}.portal span{font-size:9px;color:var(--muted);display:block;margin-top:4px}
+.detail-label{font-size:9px;text-transform:uppercase;letter-spacing:1.1px;color:var(--cyan);font-weight:900}.profile-card{padding:15px;border:1px solid var(--line);border-radius:17px;background:#131f30;margin:10px 0}.profile-card h3{font-size:13px;margin:0 0 12px}.hint{font-size:9px;line-height:1.5;color:#8496ae;margin-top:7px}.divider{height:1px;background:var(--line);margin:13px 0}
+.saved-empty{text-align:center;border:1px dashed #3a4b62;border-radius:16px;padding:26px;color:var(--muted);font-size:12px}.saved-empty strong{display:block;color:#eaf1f9;margin-bottom:5px}
+.bottom{position:fixed;z-index:30;bottom:0;left:0;right:0;max-width:820px;margin:auto;background:#0d1828ed;backdrop-filter:blur(16px);border-top:1px solid #26374c;padding:7px 9px calc(7px + env(safe-area-inset-bottom));display:grid;grid-template-columns:repeat(4,1fr)}.nav{background:none;border:0;color:#8394ab;display:flex;flex-direction:column;align-items:center;gap:4px;font-size:9px;font-weight:750;padding:5px}.nav .ico{font-size:18px}.nav.active{color:#a8ccff}
+.toast{position:fixed;z-index:50;left:50%;bottom:calc(88px + env(safe-area-inset-bottom));transform:translate(-50%,10px);opacity:0;background:#e7f2ff;color:#12233a;font-size:11px;font-weight:850;padding:10px 15px;border-radius:99px;transition:.2s;pointer-events:none;white-space:nowrap;box-shadow:0 10px 24px #0007}.toast.show{opacity:1;transform:translate(-50%,0)}
+.small{font-size:9px;color:#8092a9;line-height:1.5}.time{font-variant-numeric:tabular-nums}
+@media(min-width:620px){.app{padding-left:25px;padding-right:25px}.bottom{border-left:1px solid #26374c;border-right:1px solid #26374c;border-radius:15px 15px 0 0}.filters{grid-template-columns:repeat(4,1fr)}.field-wrap.full{grid-column:auto}.field-wrap.wide{grid-column:span 2}.results{grid-template-columns:1fr 1fr}.job{min-height:205px;display:flex;flex-direction:column}.job-actions{margin-top:auto;padding-top:12px}}
+</style>
+</head>
+<body>
+<main class="app">
+<header class="top"><div class="brand"><div class="logo">C</div><div><div class="brandname">CAREER 360</div><div class="brandtag">AVIATION OPPORTUNITIES</div></div></div><div class="profiletag">EASA B1.1 · WIDEBODY</div></header>
+
+<section class="view active" id="view-home">
+  <div class="eyebrow">TU PRÓXIMO DESTINO PROFESIONAL</div><h1 class="title">Oportunidades que encajan.</h1><p class="intro">Buscador internacional para mantenimiento aeronáutico. Consulta nuevas ofertas, compara condiciones y guarda las interesantes.</p>
+  <div class="hero">
+    <div class="hero-row"><div><div class="eyebrow">BÚSQUEDA DE EMPLEO</div><h2>Revisar el mercado ahora</h2><p>Consulta anuncios publicados en las fuentes conectadas y filtra los resultados según tu perfil.</p></div><div style="font-size:34px;position:relative;z-index:1">✈</div></div>
+    <div class="hero-actions"><button class="primary" id="checkButton">↻ Comprobar ofertas ahora</button><button class="secondary" id="openResults">Ver resultados</button></div>
+    <div class="statusline"><span><i class="live-dot"></i><span id="liveStatus">Listo para consultar</span></span><span class="time" id="lastCheck">Sin consulta todavía</span></div>
+  </div>
+  <div class="metrics"><div class="metric"><strong id="metricTotal">—</strong><span>Ofertas encontradas</span></div><div class="metric"><strong id="metricMatch">—</strong><span>Coincidencia alta</span></div><div class="metric"><strong id="metricSaved">0</strong><span>Guardadas</span></div></div>
+  <div class="section-head"><div><h3>Tu perfil de búsqueda</h3><p>Filtros aplicados a cada consulta</p></div><button class="link" data-tab="profile">Editar perfil →</button></div>
+  <div class="card"><div class="job-meta" id="profileChips"></div><p id="profileSummary">EASA B1.1 · A350/A330/A320 · Line Maintenance · Europa · sin noches.</p></div>
+  <div class="section-head"><div><h3>Accesos rápidos</h3><p>Busca también en portales especializados</p></div></div>
+  <div class="portal-grid">
+    <a class="portal" target="_blank" rel="noopener" href="https://www.google.com/search?q=EASA+B1.1+A350+A330+line+maintenance+jobs+Europe"><strong>Google Jobs / Web</strong><span>Buscar ofertas en la web</span></a>
+    <a class="portal" target="_blank" rel="noopener" href="https://www.linkedin.com/jobs/search/?keywords=EASA%20B1.1%20A350"><strong>LinkedIn Jobs</strong><span>Búsqueda B1.1 y A350</span></a>
+    <a class="portal" target="_blank" rel="noopener" href="https://www.aviationjobsearch.com/"><strong>Aviation Job Search</strong><span>Portal aeronáutico</span></a>
+    <a class="portal" target="_blank" rel="noopener" href="https://www.jsfirm.com/"><strong>JSfirm</strong><span>Empleo de aviación</span></a>
+  </div>
+  <p class="source-note">Los resultados del agregador proceden de YubHub y enlazan a la candidatura original cuando el proveedor facilita ese enlace. Los portales externos se abren por separado.</p>
+</section>
+
+<section class="view" id="view-jobs">
+  <div class="eyebrow">BUSCADOR CONECTADO</div><h1 class="title">Ofertas disponibles</h1><p class="intro">Pulsa comprobar para lanzar una consulta nueva. Las ofertas se puntúan por afinidad con tu perfil, no por una garantía de contratación.</p>
+  <div class="filtersbar"><button class="filter-pill active" data-filter="all">Todas</button><button class="filter-pill" data-filter="high">Alta coincidencia</button><button class="filter-pill" data-filter="wide">A350 / A330</button><button class="filter-pill" data-filter="line">Line Maintenance</button></div>
+  <div class="statusline"><span id="resultStatus">Aún no se han consultado ofertas</span><button class="link" id="checkInline">↻ Comprobar ahora</button></div>
+  <div class="section-head"><div><h3 id="resultsHeading">Resultados</h3><p id="resultsSub">Las ofertas verificadas aparecerán aquí</p></div><select id="sortSelect" class="field" style="width:auto;padding:8px;font-size:10px"><option value="score">Mejor coincidencia</option><option value="recent">Más recientes</option></select></div>
+  <div id="results" class="results"><div class="no-results"><strong>Listo para buscar</strong>Pulsa «Comprobar ofertas ahora» para consultar el feed de empleo conectado.</div></div>
+  <p class="source-note">Fuente de datos: <a href="https://yubhub.co" target="_blank" rel="noopener" style="color:#9ec4f5">YubHub</a>. Su catálogo se refresca al menos cada hora; el botón consulta el catálogo disponible en el momento de pulsarlo. No equivale a monitorización instantánea de cada empresa.</p>
+</section>
+
+<section class="view" id="view-saved">
+  <div class="eyebrow">TU LISTA DE SEGUIMIENTO</div><h1 class="title">Ofertas guardadas</h1><p class="intro">Conserva las oportunidades, añade notas y marca el estado de cada candidatura.</p>
+  <div class="section-head"><div><h3 id="savedHeading">0 oportunidades</h3><p>Guardadas en este dispositivo</p></div></div>
+  <div id="savedList"></div>
+</section>
+
+<section class="view" id="view-profile">
+  <div class="eyebrow">CONFIGURACIÓN PERSONAL</div><h1 class="title">Tu perfil profesional</h1><p class="intro">Ajusta tus habilitaciones y tus condiciones mínimas. El motor de afinidad utilizará estos datos al revisar ofertas.</p>
+  <div class="profile-card">
+    <h3>Licencias y aeronaves</h3>
+    <label class="label" for="licence">Licencia / perfil</label><input class="field" id="licence" value="EASA B1.1">
+    <label class="label" for="types" style="margin-top:12px">Habilitaciones y tipos</label><input class="field" id="types" value="A350, A330, A320">
+    <label class="label" for="experience" style="margin-top:12px">Especialidad</label><select class="field" id="experience"><option>Line Maintenance</option><option>Line & Base Maintenance</option><option>Base Maintenance</option><option>MCC / Technical Services</option><option>Any aircraft maintenance</option></select>
+    <label class="label" for="regions" style="margin-top:12px">Zona geográfica</label><input class="field" id="regions" value="Europe">
+  </div>
+  <div class="profile-card">
+    <h3>Condiciones de trabajo</h3>
+    <label class="label" for="rate">Tarifa mínima objetivo (€/hora)</label><input class="field" id="rate" type="number" inputmode="decimal" min="0" step="0.5" value="50">
+    <p class="hint">Tu referencia de comparación es aproximadamente 616 €/día por 10 horas. Ajusta aquí el mínimo que quieres exigir.</p>
+    <label class="label" style="margin-top:12px">Rotaciones preferidas</label><div class="checkline"><input type="checkbox" id="rot55" checked><label for="rot55">5 on / 5 off</label></div><div class="checkline"><input type="checkbox" id="rot77" checked><label for="rot77">7 on / 7 off</label></div><div class="checkline"><input type="checkbox" id="rot44"><label for="rot44">4 on / 4 off</label></div><div class="checkline"><input type="checkbox" id="rotOther"><label for="rotOther">Otras rotaciones</label></div>
+    <div class="divider"></div>
+    <div class="checkline"><input type="checkbox" id="noNights" checked><label for="noNights">Priorizar puestos sin turnos nocturnos</label></div><div class="checkline"><input type="checkbox" id="accommodation" checked><label for="accommodation">Priorizar alojamiento o allowance</label></div><div class="checkline"><input type="checkbox" id="contract" checked><label for="contract">Priorizar contratos de Line Maintenance</label></div>
+  </div>
+  <div class="profile-card">
+    <h3>Cómo funciona el cálculo</h3>
+    <p>La puntuación utiliza el título, la descripción, la ubicación y las condiciones publicadas. Los anuncios que no muestran tarifa, alojamiento, rotación o turno se marcan como «No especificado», no como incumplimientos.</p>
+    <p class="hint">El feed gratuito puede tener cobertura limitada en puestos de mantenimiento aeronáutico y contratos de agencias. Por eso se incluyen accesos a portales especializados.</p>
+  </div>
+  <button class="primary" id="saveProfile" style="width:100%">Guardar mis preferencias</button>
+  <p class="small" style="margin:12px 2px">La configuración, las ofertas guardadas y las notas se almacenan localmente en este iPhone. No se envían a terceros.</p>
+</section>
+</main>
+<nav class="bottom" aria-label="Navegación"><button class="nav active" data-tab="home"><span class="ico">⌂</span>Inicio</button><button class="nav" data-tab="jobs"><span class="ico">⌕</span>Ofertas</button><button class="nav" data-tab="saved"><span class="ico">☆</span>Guardadas</button><button class="nav" data-tab="profile"><span class="ico">◉</span>Mi perfil</button></nav>
+<div id="toast" class="toast" role="status"></div>
+<script>
+(function(){
+"use strict";
+var API="https://api.yubhub.co/search",KEY="career360-v1";
+var defaults={licence:"EASA B1.1",types:"A350, A330, A320",experience:"Line Maintenance",regions:"Europe",rate:50,rotations:["5 on / 5 off","7 on / 7 off"],noNights:true,accommodation:true,contract:true,saved:[],jobs:[],lastCheck:null};
+var state=load();
+function load(){try{var x=JSON.parse(localStorage.getItem(KEY)||"{}");return Object.assign({},defaults,x);}catch(e){return Object.assign({},defaults);}}
+function persist(){try{localStorage.setItem(KEY,JSON.stringify(state));}catch(e){notify("No se pudo guardar en este navegador.");}}
+function $(id){return document.getElementById(id);}
+function notify(msg){var t=$("toast");t.textContent=msg;t.classList.add("show");clearTimeout(notify.timer);notify.timer=setTimeout(function(){t.classList.remove("show");},2200);}
+function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];});}
+function clean(s){return String(s||"").replace(/<script[\s\S]*?<\/script>/gi," ").replace(/<style[\s\S]*?<\/style>/gi," ").replace(/<[^>]+>/g," ").replace(/&nbsp;/g," ").replace(/&amp;/g,"&").replace(/\s+/g," ").trim();}
+function norm(x){return String(x||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase();}
+function field(obj,keys){for(var i=0;i<keys.length;i++){var v=obj&&obj[keys[i]];if(v!==undefined&&v!==null&&v!=="")return v;}return "";}
+function extractList(data){
+ if(Array.isArray(data))return data;
+ var candidates=[data&&data.jobs,data&&data.results,data&&data.items,data&&data.data,data&&data.listings,data&&data.results&&data.results.jobs,data&&data.data&&data.data.jobs];
+ for(var i=0;i<candidates.length;i++)if(Array.isArray(candidates[i]))return candidates[i];
+ return [];
+}
+function jobId(j){return String(field(j,["id","job_id","jobId","slug","url","apply_url","applyUrl"])||[field(j,["title"]),field(j,["company","company_name","employer"]),field(j,["location"])].join("|"));}
+function normalizeJob(j){
+ var company=field(j,["company","company_name","companyName","employer","organization"]);
+ if(typeof company==="object")company=field(company,["name","title"]);
+ var salary=field(j,["salary","salary_text","salaryText","compensation"]);
+ if(typeof salary==="object")salary=field(salary,["text","label","min","value"])||"";
+ var desc=clean(field(j,["description","summary","excerpt","details"]));
+ return {id:jobId(j),title:String(field(j,["title","name","job_title"])||"Opportunity"),company:String(company||"Employer not specified"),location:String(field(j,["location","city","country","job_location"])||"Location not specified"),url:String(field(j,["apply_url","applyUrl","application_url","applicationLink","url","link"])||""),description:desc,salary:String(salary||""),date:field(j,["first_seen","posted_at","published_at","date_posted","created_at","pubDate","date"])||"",arrangement:String(field(j,["arrangement","work_arrangement","workArrangement"])||""),type:String(field(j,["employment_type","employmentType","type"])||""),source:String(field(j,["source","board","provider"])||"YubHub"),raw:j};
+}
+var europe=["united kingdom","uk","england","scotland","wales","ireland","france","germany","spain","italy","portugal","netherlands","belgium","luxembourg","switzerland","austria","sweden","norway","denmark","finland","poland","czech","slovakia","slovenia","croatia","hungary","romania","bulgaria","greece","cyprus","malta","lithuania","latvia","estonia","iceland","serbia","montenegro","bosnia","north macedonia","albania","ukraine","turkey","europe"];
+function isEurope(j){var loc=norm(j.location);if(loc==="location not specified"||!loc)return false;return europe.some(function(c){return loc.indexOf(c)>=0;})||/\b(eu|eea|europe|remote europe)\b/.test(loc);}
+function typeList(){return String(state.types||"").split(/[,;/]+/).map(function(x){return norm(x.trim());}).filter(Boolean);}
+function score(j){
+ var title=norm(j.title),blob=norm([j.title,j.company,j.location,j.description].join(" "));
+ var pts=0,marks=[];
+ if(/\b(aircraft|aviation|aerospace|airline|airworthiness)\b/.test(title)){pts+=22;marks.push("Aviación");}
+ if(/\b(maintenance|mechanic|mechanical|technician|engineer|certifying|licensed aircraft|lae)\b/.test(blob)){pts+=19;marks.push("Mantenimiento");}
+ if(/\b(b1\.?1|b1 engineer|licensed aircraft engineer|lae|easa part 66)\b/.test(blob)){pts+=25;marks.push("B1 / EASA");}
+ var types=typeList(),matched=types.filter(function(t){return t&&blob.indexOf(t)>=0;});
+ if(matched.length){pts+=Math.min(22,matched.length*11);marks.push(matched.join(" / ").toUpperCase());}
+ if(/\b(line maintenance|line station|line mechanic|line technician)\b/.test(blob)){pts+=12;marks.push("Line");}
+ if(/\b(base maintenance|hangar|heavy maintenance)\b/.test(blob)){pts+=5;marks.push("Base");}
+ var loc=norm(j.location);if(isEurope(j)){pts+=8;}else{pts-=12;}
+ if(/\b(contract|contractor|rotation|rotational|freelance)\b/.test(blob))pts+=3;
+ return {value:Math.max(0,Math.min(100,pts)),marks:Array.from(new Set(marks))};
+}
+function parseDate(v){if(!v)return null;var d=typeof v==="number"?(v<1e12?new Date(v*1000):new Date(v)):new Date(v);return isNaN(d.getTime())?null:d;}
+function dateLabel(v){var d=parseDate(v);if(!d)return "Fecha no indicada";return d.toLocaleDateString("es-ES",{day:"2-digit",month:"short",year:"numeric"});}
+function rateLabel(j){if(!j.salary)return "Tarifa no publicada";return j.salary;}
+function openUrl(url){if(!url)return false;try{var u=new URL(url);if(u.protocol!=="http:"&&u.protocol!=="https:")return false;window.open(u.href,"_blank","noopener");return true;}catch(e){return false;}}
+var currentFilter="all";
+function filteredJobs(){
+ var arr=state.jobs.slice();
+ if(currentFilter==="high")arr=arr.filter(function(j){return j.score.value>=55;});
+ if(currentFilter==="wide")arr=arr.filter(function(j){var b=norm([j.title,j.description].join(" "));return /\b(a350|a330|a320|widebody|wide body)\b/.test(b);});
+ if(currentFilter==="line")arr=arr.filter(function(j){return /\b(line maintenance|line station|line mechanic)\b/.test(norm([j.title,j.description].join(" ")));});
+ if($("sortSelect")&&$("sortSelect").value==="recent")arr.sort(function(a,b){return (parseDate(b.date)||new Date(0))-(parseDate(a.date)||new Date(0));});
+ else arr.sort(function(a,b){return b.score.value-a.score.value;});
+ return arr;
+}
+function savedIds(){return state.saved.map(function(x){return x.id;});}
+function jobCard(j,savedMode){
+ var high=j.score.value>=65,mid=j.score.value>=40;
+ var scoreClass=high?"":" "+(mid?"mid":"low"),scoreText=high?"Alta":mid?"Media":"Baja";
+ var marks=(j.score.marks||[]).slice(0,4).map(function(m){return '<span class="chip green">'+esc(m)+'</span>';}).join("");
+ var locEurope=isEurope(j);
+ var title=esc(j.title),company=esc(j.company),loc=esc(j.location);
+ var id=encodeURIComponent(j.id);
+ var isSaved=savedIds().indexOf(j.id)>=0;
+ var desc=esc(j.description?j.description.slice(0,210)+(j.description.length>210?"…":""):"La fuente no facilita un resumen del anuncio.");
+ var apply=j.url&&/^https?:\/\//i.test(j.url)?'<a class="apply" href="'+esc(j.url)+'" target="_blank" rel="noopener">Ver oferta original ↗</a>':'<span class="chip gray">Enlace de candidatura no disponible</span>';
+ return '<article class="job"><div class="job-head"><div style="min-width:0"><h3 class="job-title">'+title+'</h3><div class="company">'+company+'</div></div><div class="score'+scoreClass+'">'+j.score.value+'% · '+scoreText+'</div></div><div class="job-meta"><span class="chip">'+loc+'</span><span class="chip">'+esc(dateLabel(j.date))+'</span><span class="chip gold">'+esc(rateLabel(j))+'</span>'+marks+'</div><p class="job-summary">'+desc+'</p><div class="job-meta" style="margin-bottom:0"><span class="chip '+(locEurope?"green":"gray")+'">'+(locEurope?"Europa detectada":"Ubicación por revisar")+'</span><span class="chip gray">'+esc(j.arrangement||"Modalidad no indicada")+'</span></div><div class="job-actions">'+apply+'<button class="save '+(isSaved?"saved":"")+'" data-save="'+id+'">'+(isSaved?"✓ Guardada":"☆ Guardar")+'</button></div></article>';
+}
+function renderResults(){
+ var arr=filteredJobs();
+ $("resultsHeading").textContent=arr.length+" ofertas";
+ $("resultsSub").textContent=state.jobs.length?"Ordenadas por afinidad con tu perfil":"Consulta para cargar anuncios";
+ $("resultStatus").textContent=state.lastCheck?"Última consulta: "+new Date(state.lastCheck).toLocaleTimeString("es-ES",{hour:"2-digit",minute:"2-digit"}):"Aún no se han consultado ofertas";
+ $("results").innerHTML=arr.length?arr.map(function(j){return jobCard(j,false);}).join(""):'<div class="no-results"><strong>No hay resultados en este filtro</strong>Prueba otra categoría o realiza una nueva consulta. La fuente conectada puede no indexar todas las vacantes aeronáuticas ni todos los países.</div>';
+ $("metricTotal").textContent=state.jobs.length||0;
+ $("metricMatch").textContent=state.jobs.filter(function(j){return j.score.value>=65;}).length;
+ $("metricSaved").textContent=state.saved.length;
+}
+function renderHome(){
+ $("metricTotal").textContent=state.jobs.length?state.jobs.length:"—";
+ $("metricMatch").textContent=state.jobs.length?state.jobs.filter(function(j){return j.score.value>=65;}).length:"—";
+ $("metricSaved").textContent=state.saved.length;
+ $("lastCheck").textContent=state.lastCheck?"Consulta "+new Date(state.lastCheck).toLocaleTimeString("es-ES",{hour:"2-digit",minute:"2-digit"}):"Sin consulta todavía";
+ var chips=[state.licence].concat(typeList().map(function(x){return x.toUpperCase();}),[state.experience,state.regions,"Sin noches","Alojamiento prioritario"]);
+ $("profileChips").innerHTML=chips.map(function(x){return '<span class="chip">'+esc(x)+'</span>';}).join("");
+ $("profileSummary").textContent=state.licence+" · "+state.types+" · "+state.experience+" · "+state.regions+" · prioridad: turnos de día, rotación y alojamiento.";
+}
+function renderSaved(){
+ $("savedHeading").textContent=state.saved.length+" oportunidades";
+ if(!state.saved.length){$("savedList").innerHTML='<div class="saved-empty"><strong>No tienes ofertas guardadas</strong>Guarda una oferta desde el buscador para tenerla a mano aquí.</div>';return;}
+ $("savedList").innerHTML=state.saved.map(function(j){return '<div style="margin-bottom:10px">'+jobCard(j,true)+'<div class="card"><label class="label">Estado de candidatura</label><select class="field" data-status="'+encodeURIComponent(j.id)+'"><option '+(j.status==="Pendiente"?"selected":"")+'>Pendiente</option><option '+(j.status==="Contactado"?"selected":"")+'>Contactado</option><option '+(j.status==="Entrevista"?"selected":"")+'>Entrevista</option><option '+(j.status==="Descartado"?"selected":"")+'>Descartado</option></select><label class="label" style="margin-top:10px">Notas</label><input class="field" data-note="'+encodeURIComponent(j.id)+'" value="'+esc(j.note||"")+'" placeholder="Recruiter, tarifa, rotación, seguimiento…"><button class="quiet" data-remove="'+encodeURIComponent(j.id)+'" style="margin-top:9px">Eliminar de guardadas</button></div></div>';}).join("");
+}
+function showTab(tab){
+ document.querySelectorAll(".view").forEach(function(v){v.classList.toggle("active",v.id==="view-"+tab);});
+ document.querySelectorAll(".nav").forEach(function(b){b.classList.toggle("active",b.dataset.tab===tab);});
+ if(tab==="home")renderHome();if(tab==="jobs")renderResults();if(tab==="saved")renderSaved();if(tab==="profile")fillProfile();
+ window.scrollTo(0,0);
+}
+document.querySelectorAll(".nav").forEach(function(b){b.addEventListener("click",function(){showTab(b.dataset.tab);});});
+document.querySelectorAll("[data-tab]").forEach(function(b){if(!b.classList.contains("nav"))b.addEventListener("click",function(){showTab(b.dataset.tab);});});
+function fillProfile(){
+ $("licence").value=state.licence;$("types").value=state.types;$("experience").value=state.experience;$("regions").value=state.regions;$("rate").value=state.rate;
+ $("rot55").checked=state.rotations.indexOf("5 on / 5 off")>=0;$("rot77").checked=state.rotations.indexOf("7 on / 7 off")>=0;$("rot44").checked=state.rotations.indexOf("4 on / 4 off")>=0;$("rotOther").checked=state.rotations.indexOf("Other")>=0;
+ $("noNights").checked=state.noNights;$("accommodation").checked=state.accommodation;$("contract").checked=state.contract;
+}
+$("saveProfile").addEventListener("click",function(){
+ state.licence=$("licence").value.trim()||defaults.licence;state.types=$("types").value.trim()||defaults.types;state.experience=$("experience").value;state.regions=$("regions").value.trim()||"Europe";state.rate=Math.max(0,Number($("rate").value)||0);
+ state.rotations=[];if($("rot55").checked)state.rotations.push("5 on / 5 off");if($("rot77").checked)state.rotations.push("7 on / 7 off");if($("rot44").checked)state.rotations.push("4 on / 4 off");if($("rotOther").checked)state.rotations.push("Other");
+ state.noNights=$("noNights").checked;state.accommodation=$("accommodation").checked;state.contract=$("contract").checked;persist();renderHome();notify("Perfil profesional actualizado.");
+});
+function queryUrl(q){
+ var u=new URL(API);u.searchParams.set("q",q);u.searchParams.set("perPage","40");u.searchParams.set("sort","recent");return u.toString();
+}
+var queries=["aircraft","aviation","aircraft maintenance","B1 engineer","licensed aircraft engineer","aircraft technician"];
+function timeoutFetch(url,ms){
+ var controller=new AbortController(),timer=setTimeout(function(){controller.abort();},ms);
+ return fetch(url,{method:"GET",headers:{Accept:"application/json"},signal:controller.signal,cache:"no-store"}).then(function(r){if(!r.ok)throw new Error("HTTP "+r.status);return r.json();}).finally(function(){clearTimeout(timer);});
+}
+function sortRelevance(j){j.score=score(j);return j;}
+function checkNow(){
+ var buttons=[$("checkButton"),$("checkInline")];buttons.forEach(function(b){b.disabled=true;});
+ $("checkButton").innerHTML='<span class="spin">↻</span> Consultando fuentes…';$("liveStatus").textContent="Consultando catálogo en directo";$("resultStatus").textContent="Buscando ofertas nuevas…";
+ var requests=queries.map(function(q){return timeoutFetch(queryUrl(q),18000).then(function(data){return extractList(data);}).catch(function(e){return [];});});
+ Promise.all(requests).then(function(lists){
+   var all={},totalSources=0;lists.forEach(function(list){totalSources+=list.length;list.forEach(function(raw){var j=normalizeJob(raw);if(!j.title||j.title==="Opportunity")return;var prev=all[j.id];if(!prev||j.description.length>prev.description.length)all[j.id]=j;});});
+   var normalized=Object.keys(all).map(function(k){return all[k];});
+   var relevant=normalized.filter(function(j){
+     var blob=norm([j.title,j.company,j.description].join(" "));
+     var aircraft=/\b(aircraft|aviation|aerospace|airline|airframe|helicopter)\b/.test(blob);
+     var tech=/\b(maintenance|mechanic|technician|engineer|certifying|b1\.?1|licensed aircraft engineer|lae|avionic|airworthiness)\b/.test(blob);
+     var type=/\b(a350|a330|a320|b737|737|widebody|wide body)\b/.test(blob);
+     return (aircraft&&(tech||type))||(tech&&/\b(b1\.?1|easa|part.?66|aircraft)\b/.test(blob));
+   }).map(sortRelevance);
+   relevant.forEach(function(j){if(!j.url||!/^https?:\/\//i.test(j.url))j.url="";});
+   relevant.sort(function(a,b){return b.score.value-a.score.value;});
+   state.jobs=relevant;state.lastCheck=new Date().toISOString();persist();
+   $("liveStatus").textContent=lists.some(function(x){return x.length;})?"Consulta completada":"La fuente no devolvió anuncios";
+   $("checkButton").innerHTML="↻ Comprobar ofertas ahora";buttons.forEach(function(b){b.disabled=false;});
+   renderHome();renderResults();
+   if(!relevant.length){notify("Consulta completada: no hay ofertas aeronáuticas coincidentes en el feed.");}
+   else notify(relevant.length+" ofertas revisadas desde "+totalSources+" anuncios recibidos.");
+ }).catch(function(e){
+   $("liveStatus").textContent="No se pudo completar la consulta";$("checkButton").innerHTML="↻ Comprobar ofertas ahora";buttons.forEach(function(b){b.disabled=false;});notify("Error de conexión. Comprueba internet e inténtalo de nuevo.");
+ });
+}
+$("checkButton").addEventListener("click",checkNow);$("checkInline").addEventListener("click",checkNow);
+$("openResults").addEventListener("click",function(){showTab("jobs");if(!state.lastCheck)checkNow();});
+document.querySelectorAll("[data-filter]").forEach(function(b){b.addEventListener("click",function(){currentFilter=b.dataset.filter;document.querySelectorAll("[data-filter]").forEach(function(x){x.classList.toggle("active",x===b);});renderResults();});});
+$("sortSelect").addEventListener("change",renderResults);
+function findJob(id){return state.jobs.find(function(j){return j.id===id;})||state.saved.find(function(j){return j.id===id;});}
+function toggleSaved(id){
+ var idx=state.saved.findIndex(function(j){return j.id===id;});
+ if(idx>=0)state.saved.splice(idx,1);
+ else{var j=findJob(id);if(j)state.saved.unshift(Object.assign({},j,{status:"Pendiente",note:""}));}
+ persist();renderHome();renderResults();if($("view-saved").classList.contains("active"))renderSaved();
+ notify(idx>=0?"Oferta eliminada de guardadas.":"Oferta guardada.");
+}
+document.addEventListener("click",function(e){var b=e.target.closest("[data-save]");if(b){toggleSaved(decodeURIComponent(b.dataset.save));}});
+$("savedList").addEventListener("change",function(e){var id=e.target.dataset.status;if(!id)return;var j=state.saved.find(function(x){return x.id===decodeURIComponent(id);});if(j){j.status=e.target.value;persist();}});
+$("savedList").addEventListener("input",function(e){var id=e.target.dataset.note;if(!id)return;var j=state.saved.find(function(x){return x.id===decodeURIComponent(id);});if(j){j.note=e.target.value;persist();}});
+$("savedList").addEventListener("click",function(e){var b=e.target.closest("[data-remove]");if(!b)return;var id=decodeURIComponent(b.dataset.remove);state.saved=state.saved.filter(function(x){return x.id!==id;});persist();renderSaved();renderHome();notify("Oferta eliminada.");});
+renderHome();renderSaved();fillProfile();
+})();
+</script>
+</body></html>
