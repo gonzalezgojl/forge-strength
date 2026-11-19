@@ -53,6 +53,9 @@ FORGE is a mobile-first, installable four-session strength-training plan.
 
 ## Companion apps
 
+- [CASA 360](./casa-360/) — home maintenance tasks, recurring schedules, shopping list, repairs, expenses and history.
+
+
 - [Career 360](./career-360/) — on-demand aviation job search for EASA B1.1, A350/A330/A320 and European maintenance roles. Includes matching scores, saved jobs and application tracking.
 - [French 360](./french-360/) — daily French learning, vocabulary cards, listening and aviation-maintenance language.
 - [Mental 360](./mental-360/) — personal development and mental performance.
