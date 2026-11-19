@@ -151,6 +151,14 @@ function score(j){
  if(/\b(base maintenance|hangar|heavy maintenance)\b/.test(blob)){pts+=5;marks.push("Base");}
  var loc=norm(j.location);if(isEurope(j)){pts+=8;}else{pts-=12;}
  if(/\b(contract|contractor|rotation|rotational|freelance)\b/.test(blob))pts+=3;
+ if(state.noNights && /\b(night shift|night shifts|night duty|night work|nights)\b/.test(blob))pts-=14;
+ if(state.accommodation && /\b(accommodation|housing|per diem|allowance|hotel provided)\b/.test(blob))pts+=4;
+ var payText=String(j.salary||"");
+ var hourlyPay=/(per hour|hourly|\/h\b|\/hr\b|\bp\/h\b|\beur\s*\/\s*h\b)/i.test(payText);
+ var euroPay=payText.match(/(?:€|eur\s*)(\d{2,3}(?:[.,]\d{1,2})?)/i);
+ if(!euroPay)euroPay=payText.match(/(\d{2,3}(?:[.,]\d{1,2})?)\s*(?:€|eur)\s*(?:\/|per|hour)/i);
+ if(hourlyPay&&euroPay){var publishedRate=Number(euroPay[1].replace(",","."));if(publishedRate>=Number(state.rate||0)){pts+=7;marks.push("Tarifa objetivo");}else{pts-=9;marks.push("Tarifa inferior");}}
+ if(state.rotations.some(function(r){return r!=="Other" && ((r.indexOf("5")===0 && /\b5\s*(on)?\s*[\/-]\s*5\s*(off)?\b/.test(blob)) || (r.indexOf("7")===0 && /\b7\s*(on)?\s*[\/-]\s*7\s*(off)?\b/.test(blob)) || (r.indexOf("4")===0 && /\b4\s*(on)?\s*[\/-]\s*4\s*(off)?\b/.test(blob)));}))pts+=4;
  return {value:Math.max(0,Math.min(100,pts)),marks:Array.from(new Set(marks))};
 }
 function parseDate(v){if(!v)return null;var d=typeof v==="number"?(v<1e12?new Date(v*1000):new Date(v)):new Date(v);return isNaN(d.getTime())?null:d;}
