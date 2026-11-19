@@ -158,6 +158,12 @@ d.setHours(0,0,0,0);
 d.setDate(d.getDate()-((d.getDay()+6)%7));
 return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
 }
+function weekKeyForDate(value){
+var d=new Date(String(value)+'T12:00:00');
+if(isNaN(d.getTime()))return null;
+d.setDate(d.getDate()-((d.getDay()+6)%7));
+return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+}
 var state={weekKey:weekKeyNow(),checked:{},completed:{},history:[]};
 try{
 var saved=JSON.parse(localStorage.getItem(KEY)||localStorage.getItem('forge-training-state-v5')||'null');
@@ -169,6 +175,12 @@ state.weekKey=weekKeyNow();state.checked={};state.completed={};
 }else{
 state.checked=saved.checked||{};
 state.completed=saved.completed||{};
+}
+if(!saved.weekKey&&Array.isArray(saved.history)){
+saved.history.forEach(function(entry){
+var entryWeek=entry&&entry.week?entry.week:entry&&entry.date?weekKeyForDate(entry.date):null;
+if(entry&&entry.session&&entryWeek===state.weekKey)state.completed[entry.session]=true;
+});
 }
 }
 }catch(e){}
