@@ -1,0 +1,7 @@
+const CACHE="casa360-shell-v1";
+const SHELL=["./","./index.html","./manifest.webmanifest","./icon.svg"];
+self.addEventListener("install",e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(SHELL)).then(()=>self.skipWaiting())));
+self.addEventListener("activate",e=>e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim())));
+self.addEventListener("fetch",e=>{if(e.request.method!=="GET")return;const u=new URL(e.request.url);if(u.origin!==self.location.origin)return;e.respondWith(caches.match(e.request).then(c=>c||fetch(e.request).then(r=>{if(r&&r.ok){const copy=r.clone();caches.open(CACHE).then(cache=>cache.put(e.request,copy))}return r}).catch(()=>caches.match("./index.html"))))});
+self.addEventListener("push",e=>{let d={title:"CASA 360",body:"Tienes un recordatorio pendiente.",url:"./"};try{if(e.data)d=Object.assign(d,e.data.json())}catch(_){if(e.data)d.body=e.data.text()}e.waitUntil(self.registration.showNotification(d.title||"CASA 360",{body:d.body||"Tienes un recordatorio pendiente.",icon:"icon.svg",badge:"icon.svg",data:{url:d.url||"./"}}))});
+self.addEventListener("notificationclick",e=>{e.notification.close();const target=e.notification.data&&e.notification.data.url?e.notification.data.url:"./";e.waitUntil(clients.matchAll({type:"window",includeUncontrolled:true}).then(list=>{for(const c of list){if("focus"in c)return c.focus()}if(clients.openWindow)return clients.openWindow(target)}))});
