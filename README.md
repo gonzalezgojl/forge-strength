@@ -59,12 +59,15 @@ FORGE is a mobile-first, installable four-session strength-training plan.
 - No motivational copy, rest timer, countdown or weight-entry fields.
 - PWA manifest and service worker for Add to Home Screen.
 
-
 ## Exercise illustrations
 
 Exercise movement illustrations show the start and peak positions and are sourced from the [RepDB free exercise dataset](https://github.com/RepDB/exercise-dataset). Attribution is shown in the app. Image assets are loaded from `exercise-dataset.com` and are not redistributed in this repository.
 
-
 ## Weekly tracking
 
 Exercise checks and completed-session indicators are stored locally on the device for the current Monday–Sunday week. Completed session tabs remain green until that session or the whole week is reset. A new week starts with a clean weekly checklist; historical completion records remain stored locally.
+
+## Companion apps
+
+- [French 360](./french-360/) — daily French learning, vocabulary cards, listening and aviation-maintenance language.
+- [Mental 360](./mental-360/) — personal development and mental performance.
