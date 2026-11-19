@@ -29,6 +29,19 @@ button{font:inherit}
 .tab .name{display:block;color:var(--text);font-weight:750;font-size:12px;letter-spacing:.07em}
 .tab.active{border-color:var(--accent);background:#182019;box-shadow:inset 0 0 0 1px rgba(201,255,71,.12)}
 .tab.active .name{color:var(--accent)}
+.tab.complete{border-color:#4a633d;background:#172118}
+.tab.complete .name{color:var(--accent)}
+.tab-state{display:inline-grid;place-items:center;float:right;width:17px;height:17px;border:1px solid #3b473e;border-radius:50%;font-size:10px;color:transparent;margin-top:-1px}
+.tab.complete .tab-state{background:var(--accent);border-color:var(--accent);color:#10170b}
+.action.compact{padding:7px 10px;font-size:10px;background:transparent;color:var(--muted)}
+.action.compact:active{color:var(--accent);border-color:var(--accent)}
+.pose-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;margin-top:11px;max-width:190px}
+.pose{margin:0;min-width:0;padding:4px;background:#172019;border:1px solid #253229;border-radius:8px;text-align:center}
+.pose img{display:block;width:100%;aspect-ratio:1;object-fit:contain;border-radius:5px;background:#101612}
+.pose figcaption{font-size:8px;line-height:1.2;color:var(--muted);letter-spacing:.1em;padding:4px 0 1px}
+.pose.missing{display:none}
+.credits{margin:10px 2px 0;font-size:10px;color:#718076;letter-spacing:.04em}
+.credits a{color:#9cac9d;text-decoration:underline;text-underline-offset:2px}
 .heading{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin:0 1px 15px}
 .heading h1{font-size:29px;line-height:1.05;letter-spacing:.015em;margin:0;font-weight:820}
 .heading p{margin:7px 0 0;color:var(--muted);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
@@ -73,8 +86,8 @@ button{font:inherit}
     <div class="top-meta">Strength training</div>
   </header>
   <div class="summary">
-    <span>4 sessions / week</span>
-    <span><strong id="history-count">0</strong> completed sessions</span>
+    <span>THIS WEEK · <strong id="week-count">0 / 4</strong> SESSIONS</span>
+    <button class="action compact" id="reset-week-button" type="button">Reset week</button>
   </div>
   <nav class="tabs" id="tabs" aria-label="Training sessions"></nav>
   <section>
@@ -96,6 +109,7 @@ button{font:inherit}
     </div>
   </section>
   <div class="history" id="history-label">Rest between sets as listed</div>
+  <div class="credits">Exercise data by <a href="https://repdb.co" target="_blank" rel="nofollow noopener">RepDB</a></div>
 </main>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 <script>
@@ -137,9 +151,27 @@ var sessions=[
 {id:'legcurl',name:'Leg Curl',sets:3,reps:'3 × 12',rest:'90 sec after pair',group:'legs',order:'B'}
 ]}
 ];
-var KEY='forge-training-state-v5';
-var state={checked:{},history:[]};
-try{var saved=JSON.parse(localStorage.getItem(KEY)||'null');if(saved&&typeof saved==='object'){state.checked=saved.checked||{};state.history=Array.isArray(saved.history)?saved.history:[];}}catch(e){}
+var KEY='forge-training-state-v6';
+function weekKeyNow(){
+var d=new Date();
+d.setHours(0,0,0,0);
+d.setDate(d.getDate()-((d.getDay()+6)%7));
+return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+}
+var state={weekKey:weekKeyNow(),checked:{},completed:{},history:[]};
+try{
+var saved=JSON.parse(localStorage.getItem(KEY)||'null');
+if(saved&&typeof saved==='object'){
+state.weekKey=saved.weekKey||state.weekKey;
+state.history=Array.isArray(saved.history)?saved.history:[];
+if(state.weekKey!==weekKeyNow()){
+state.weekKey=weekKeyNow();state.checked={};state.completed={};
+}else{
+state.checked=saved.checked||{};
+state.completed=saved.completed||{};
+}
+}
+}catch(e){}
 var active='push';
 var tabs=document.getElementById('tabs');
 var list=document.getElementById('exercise-list');
@@ -149,40 +181,65 @@ var setTotal=document.getElementById('set-total');
 var progressBar=document.getElementById('progress-bar');
 var completionNote=document.getElementById('completion-note');
 var finishButton=document.getElementById('finish-button');
-var historyCount=document.getElementById('history-count');
+var weekCount=document.getElementById('week-count');
 var historyLabel=document.getElementById('history-label');
 var toast=document.getElementById('toast');
 function save(){try{localStorage.setItem(KEY,JSON.stringify(state));}catch(e){}}
+function ensureCurrentWeek(){
+var wk=weekKeyNow();
+if(state.weekKey!==wk){
+state.weekKey=wk;
+state.checked={};
+state.completed={};
+save();
+}
+}
 function current(){return sessions.find(function(s){return s.id===active;});}
 function checkedFor(id){return !!(state.checked[active]&&state.checked[active][id]);}
 function escapeHtml(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+var imageIds={
+bench:'bench-press',chestpress:'chest-press-machine',cablefly:'cable-fly',lateralcable:'cable-lateral-raise',military:'seated-smith-machine-shoulder-press',tricepspush:'tricep-pushdown',
+barbellrow:'barbell-row',closepulldown:'close-grip-lat-pulldown',unipullover:'straight-arm-pulldown',rearfly:'cable-reverse-fly',hammer:'hammer-curl',preacherpull:'barbell-preacher-curl',
+widepulldown:'lat-pulldown',tbarrow:'t-bar-row',inclinepress:'chest-press-machine',pecfly:'pec-deck',lateraldumbbell:'lateral-raise',preacherupper:'barbell-preacher-curl',skullcrusher:'skull-crusher',
+squat:'squat',rdl:'romanian-deadlift',bulgarian:'smith-machine-bulgarian-split',hack:'hack-squat',hipthrust:'hip-thrust',legextension:'leg-extension',legcurl:'seated-leg-curl'
+};
 function row(ex,index){
 var done=checkedFor(ex.id);
 var name=escapeHtml(ex.name);
 var pair=ex.order?'<span class="pair-tag">'+ex.order+'</span>':'';
+var slug=imageIds[ex.id];
+var pictures=slug?
+'<div class="pose-pair">'+
+'<figure class="pose"><img loading="lazy" src="https://exercise-dataset.com/images/flat/'+slug+'-start.webp" alt="'+name+' — start position" onerror="this.closest(\'.pose\').classList.add(\'missing\')"><figcaption>START</figcaption></figure>'+
+'<figure class="pose"><img loading="lazy" src="https://exercise-dataset.com/images/flat/'+slug+'-peak.webp" alt="'+name+' — end position" onerror="this.closest(\'.pose\').classList.add(\'missing\')"><figcaption>END</figcaption></figure>'+
+'</div>':'';
 return '<article class="exercise'+(done?' done':'')+'">'+
 '<div class="number">'+String(index+1).padStart(2,'0')+'</div>'+
 '<div class="ex-main"><div class="ex-name">'+pair+name+'</div>'+
 '<div class="ex-prescription">'+escapeHtml(ex.reps)+'</div>'+
-'<div class="ex-rest">Rest '+escapeHtml(ex.rest)+'</div></div>'+
+'<div class="ex-rest">Rest '+escapeHtml(ex.rest)+'</div>'+pictures+'</div>'+
 '<button class="check" type="button" data-action="toggle" data-id="'+escapeHtml(ex.id)+'" aria-label="'+(done?'Mark incomplete':'Mark complete')+'" aria-pressed="'+(done?'true':'false')+'">'+(done?'✓':'')+'</button></article>';
 }
 function renderTabs(){
 tabs.innerHTML=sessions.map(function(s,i){
-return '<button class="tab'+(s.id===active?' active':'')+'" type="button" data-session="'+s.id+'" aria-pressed="'+(s.id===active?'true':'false')+'"><span class="day">'+String(i+1).padStart(2,'0')+' · '+s.day+'</span><span class="name">'+s.title+'</span></button>';
+var complete=!!state.completed[s.id];
+return '<button class="tab'+(s.id===active?' active':'')+(complete?' complete':'')+'" type="button" data-session="'+s.id+'" aria-pressed="'+(s.id===active?'true':'false')+'"><span class="day">'+String(i+1).padStart(2,'0')+' · '+s.day+'</span><span class="name">'+s.title+'<span class="tab-state">'+(complete?'✓':'')+'</span></span></button>';
 }).join('');
 }
 function render(){
+ensureCurrentWeek();
 var s=current();
 var doneCount=s.exercises.filter(function(ex){return checkedFor(ex.id);}).length;
 var sets=s.exercises.reduce(function(n,ex){return n+ex.sets;},0);
+var weekDone=sessions.filter(function(item){return !!state.completed[item.id];}).length;
 title.textContent=s.title;
 subtitle.textContent=s.day+' · '+s.subtitle;
 setTotal.textContent=sets+' working sets';
-historyCount.textContent=state.history.length;
+weekCount.textContent=weekDone+' / 4';
 progressBar.style.width=(doneCount/s.exercises.length*100)+'%';
 completionNote.textContent=doneCount+' / '+s.exercises.length+' exercises completed';
-finishButton.disabled=doneCount!==s.exercises.length;
+finishButton.disabled=doneCount!==s.exercises.length||!!state.completed[s.id];
+finishButton.textContent=state.completed[s.id]?'Completed':'Complete session';
 historyLabel.textContent='Rest between sets as listed · Supersets: no rest between A and B; rest after the pair';
 var html='';
 var i=0;
@@ -217,13 +274,22 @@ state.checked[active][id]=!state.checked[active][id];
 save();render();
 });
 document.getElementById('reset-button').addEventListener('click',function(){
-if(!window.confirm('Reset the exercise checks for this session?'))return;
-state.checked[active]={};save();render();
+if(!window.confirm('Reset this session for the current week?'))return;
+state.checked[active]={};
+delete state.completed[active];
+save();render();
+});
+document.getElementById('reset-week-button').addEventListener('click',function(){
+if(!window.confirm('Reset all four sessions and exercise checks for this week?'))return;
+state.checked={};
+state.completed={};
+save();render();showToast('Week reset');
 });
 finishButton.addEventListener('click',function(){
 var s=current();
 var today=new Date().toISOString().slice(0,10);
-state.history.push({session:s.id,date:today});
+state.completed[s.id]=true;
+state.history.push({session:s.id,date:today,week:state.weekKey});
 save();render();showToast(s.title+' completed');
 });
 if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('./sw.js').catch(function(){});});}
