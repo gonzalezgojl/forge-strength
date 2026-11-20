@@ -1,4 +1,4 @@
-const CACHE="casa360-shell-v1";
+const CACHE="casa360-shell-v2";
 const SHELL=["./","./index.html","./manifest.webmanifest","./icon.svg","./floorplans/planta-principal.webp.b64","./floorplans/garaje-gimnasio.webp.b64"];
 self.addEventListener("install",e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(SHELL)).then(()=>self.skipWaiting())));
 self.addEventListener("activate",e=>e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim())));
