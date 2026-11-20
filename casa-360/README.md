@@ -38,4 +38,4 @@ Si GitHub Pages no está activado:
 5. Abre CASA 360 desde el nuevo icono.
 
 ## Plano interactivo de la vivienda
-Se han incorporado las dos plantas aportadas: planta principal y garaje/gimnasio. Las zonas pulsables enlazan con las zonas de las tareas. El color es local: rojo para tareas vencidas, amarillo para tareas que vencen en 7 días o menos, verde para tareas programadas más adelante y gris cuando no hay tareas activas. Los planos se incluyen como recursos locales y se precargan en el service worker.
+Se han incorporado las dos plantas aportadas: planta superior y garaje/gimnasio. Las zonas pulsables enlazan con las zonas de las tareas. El color es local: rojo para tareas vencidas, amarillo para tareas que vencen en 7 días o menos, verde para tareas programadas más adelante y gris cuando no hay tareas activas. Los planos se incluyen como recursos locales y se precargan en el service worker.
