@@ -146,7 +146,7 @@ $("#exportData").onclick=()=>download("casa-360-copia-"+today()+".json",JSON.str
 $("#importFile").onchange=async e=>{const f=e.target.files[0];if(!f)return;try{const x=JSON.parse(await f.text()),v=x.state||x;if(!Array.isArray(v.tasks)||!Array.isArray(v.areas))throw 0;if(confirm("La copia sustituirá la información actual. ¿Continuar?")){data=Object.assign({tasks:[],areas:baseAreas.slice(),repairs:[],expenses:[],history:[],prefs:{notifications:false},notified:[]},v);await save();render();toast("Copia importada")}}catch(_){toast("No parece una copia válida de CASA 360")}e.target.value=""};
 $("#clearData").onclick=async()=>{if(confirm("¿Borrar todos los datos de este dispositivo?")){data={tasks:[],areas:baseAreas.slice(),repairs:[],expenses:[],history:[],prefs:{notifications:false},notified:[]};await save();render();toast("Datos borrados")}};
 }
-async function init(){await load();bind();render();$("#storageStatus").textContent="Almacenamiento local del navegador (IndexedDB).";if("serviceWorker"in navigator)navigator.serviceWorker.register("sw.js").catch(()=>{});notifyDue();setInterval(notifyDue,60000);document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")notifyDue()})}
+async function init(){await load();bind();render();$("#storageStatus").textContent="Almacenamiento local del navegador (IndexedDB).";if("serviceWorker"in navigator)navigator.serviceWorker.register("sw.js",{updateViaCache:"none"}).then(reg=>reg.update()).catch(()=>{});notifyDue();setInterval(notifyDue,60000);document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")notifyDue()})}
 init();
 })();
 </script></body></html>
