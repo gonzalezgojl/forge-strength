@@ -37,7 +37,7 @@ button,input,select,textarea{font:inherit}button{cursor:pointer}button:focus-vis
 <section id="view-plan" class="view">
 <div class="section" style="margin-top:0"><h2>Plano de la vivienda</h2><span class="tag">Plano real</span></div>
 <p class="sub">Pulsa una zona del plano para ver sus tareas o añadir una nueva. El color indica su estado.</p>
-<div class="floor-switch"><button class="active" data-floor="upper">Planta principal</button><button data-floor="lower">Garaje y gimnasio</button></div>
+<div class="floor-switch"><button class="active" data-floor="upper">Planta superior</button><button data-floor="lower">Garaje y gimnasio</button></div>
 <div class="plan-legend"><span><i class="late"></i> Atrasada</span><span><i class="soon"></i> Próxima</span><span><i class="ok"></i> Al día</span><span><i class="none"></i> Sin tareas</span></div>
 <div class="plan-frame"><div class="plan-image-wrap"><img id="planImage" alt="Plano de la vivienda" loading="eager"><svg id="planOverlay" class="plan-overlay" viewBox="0 0 710 618" preserveAspectRatio="none" role="group" aria-label="Zonas interactivas del plano"></svg></div></div>
 <div class="section"><h3>Zonas de esta planta</h3><span class="hint">Pulsa para abrir</span></div><div id="planZones" class="plan-zone-list"></div>
@@ -88,7 +88,7 @@ function renderExpenses(){const arr=data.expenses.slice().sort((a,b)=>b.date.loc
 function renderHistory(){const a=data.history.slice().sort((x,y)=>y.date.localeCompare(x.date));$("#historyList").innerHTML=a.length?a.map(h=>'<div class="listrow"><span style="font-size:20px">'+(h.kind==="repair"?"🔧":"✓")+'</span><div class="grow"><strong>'+esc(h.title)+'</strong><small>'+fmt(h.date)+' · '+esc(h.area||"Sin zona")+(h.note?" · "+esc(h.note):"")+'</small></div>'+(h.cost?'<b>'+euro(h.cost)+'</b>':'')+'</div>').join(""):empty("Al completar tareas o resolver reparaciones, aparecerán aquí.","↶")}
 function renderSettings(){$("#areasList").innerHTML=data.areas.map(a=>'<span class="chip" style="display:inline-flex;margin:3px;gap:7px">'+esc(a)+' <button data-act="delarea" data-value="'+esc(a)+'" style="border:0;background:none;color:#ffaaa0">×</button></span>').join("");$("#notificationStatus").textContent=data.prefs.notifications?"Avisos activados mientras CASA 360 está abierta.":"Avisos no activados."}
 const floorMaps={
-upper:{label:"Planta principal",src:"floorplans/planta-principal.webp.b64",viewBox:"0 0 710 618",width:710,height:618,zones:[
+upper:{label:"Planta superior",src:"floorplans/planta-principal.webp.b64",viewBox:"0 0 710 618",width:710,height:618,zones:[
 {area:"Baños",points:"119,160 365,160 365,233 119,233",cx:241,cy:197},
 {area:"Dormitorio 1",points:"124,232 218,232 218,346 124,346",cx:171,cy:288},
 {area:"Dormitorio 2",points:"219,252 307,252 307,346 219,346",cx:263,cy:300},
