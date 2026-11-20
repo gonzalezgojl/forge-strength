@@ -124,7 +124,8 @@ function normalizeState(){
  state.tasks=(Array.isArray(state.tasks)?state.tasks:[]).map(t=>Object.assign({},t,{
   dueDate:t.dueDate||t.due||today(),
   notes:t.notes||t.note||t.description||"",
-  supplies:t.supplies||t.items||[],
+  repeat:t.repeat?{n:Number(t.repeat.n||t.repeat.every||1),unit:({days:"day",weeks:"week",months:"month"}[t.repeat.unit]||t.repeat.unit||"month")}:null,
+  supplies:(t.supplies||t.items||[]).map(x=>Object.assign({},x,{kind:x.kind||(x.type==="tool"?"tool":"material"),bought:!!(x.bought||x.checked),buy:!!x.buy})),
   done:!!t.done,
   archived:!!t.archived
  }));
