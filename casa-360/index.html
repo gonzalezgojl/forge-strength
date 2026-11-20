@@ -119,6 +119,19 @@ async function load(){
    try{const old=await new Promise((resolve,reject)=>{const q=indexedDB.open("casa360-data");q.onsuccess=()=>{const d=q.result;if(!d.objectStoreNames.contains("db")){d.close();resolve(null);return}const tx=d.transaction("db","readonly"),g=tx.objectStore("db").get("state");g.onsuccess=()=>{const z=g.result;d.close();resolve(z)};g.onerror=()=>{d.close();resolve(null)}};q.onerror=()=>resolve(null)});if(old)state=Object.assign(fresh(),old)}catch(e){}
    await writeDb();
  }}catch(e){try{const v=localStorage.getItem("casa360-rebuilt");if(v)state=Object.assign(fresh(),JSON.parse(v))}catch(_){}}}
+function normalizeState(){
+ state.areas=Array.from(new Set([...DEFAULT_AREAS,...(Array.isArray(state.areas)?state.areas:[])]));
+ state.tasks=(Array.isArray(state.tasks)?state.tasks:[]).map(t=>Object.assign({},t,{
+  dueDate:t.dueDate||t.due||today(),
+  notes:t.notes||t.note||t.description||"",
+  supplies:t.supplies||t.items||[],
+  done:!!t.done,
+  archived:!!t.archived
+ }));
+ state.repairs=(Array.isArray(state.repairs)?state.repairs:[]).map(r=>Object.assign({},r,{notes:r.notes||r.note||r.description||"",status:r.status||"open"}));
+ state.expenses=(Array.isArray(state.expenses)?state.expenses:[]).map(e=>Object.assign({},e,{attachment:e.attachment||e.file||null}));
+ state.history=Array.isArray(state.history)?state.history:[];
+}
 async function save(){try{if(db)await writeDb();else localStorage.setItem("casa360-rebuilt",JSON.stringify(state))}catch(e){toast("No se pudo guardar. Exporta una copia y libera espacio.")}}
 function activeTasks(){return state.tasks.filter(t=>!t.done&&!t.archived).sort((a,b)=>(a.dueDate||"9999").localeCompare(b.dueDate||"9999"))}
 function repeatLabel(r){if(!r)return"Una sola vez";const unit={day:r.n===1?"día":"días",week:r.n===1?"semana":"semanas",month:r.n===1?"mes":"meses"};return"Cada "+r.n+" "+unit[r.unit]}
@@ -225,7 +238,7 @@ function bind(){
  $("#clearData").addEventListener("click",async()=>{if(confirm("¿Borrar todos los datos de este dispositivo?")){state=fresh();await save();refresh();toast("Datos borrados")}});
 }
 async function init(){
- await load();bind();showView("home");
+ await load();normalizeState();await save();bind();showView("home");
  // Retire the old cache-first service worker from previous builds. The new app uses normal web requests.
  if("serviceWorker"in navigator){navigator.serviceWorker.getRegistration().then(reg=>{if(reg)reg.update().catch(()=>{})}).catch(()=>{});if("caches"in window)caches.keys().then(keys=>Promise.all(keys.map(k=>caches.delete(k))))}
 }
