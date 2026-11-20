@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#101512">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="CASA 360">
+<meta name="description" content="Mantenimiento de la vivienda: tareas, compras, reparaciones, gastos e historial.">
+<link rel="manifest" href="manifest.webmanifest?v=4">
+<link rel="apple-touch-icon" href="icon.svg">
+<title>CASA 360</title>
+<style>
+:root{color-scheme:dark;--bg:#101512;--panel:#19221c;--panel2:#243027;--line:#344238;--text:#eff5ef;--muted:#a4b0a5;--accent:#b9e477;--red:#ff7770;--yellow:#f2c568;--green:#85cf83;--gray:#8e9b91}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;padding-bottom:calc(78px + env(safe-area-inset-bottom))}
+button,input,select,textarea{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+header{max-width:1000px;margin:auto;padding:calc(15px + env(safe-area-inset-top)) 15px 12px;display:flex;align-items:center;justify-content:space-between}.brand{display:flex;align-items:center;gap:10px}.logo{width:40px;height:40px;border-radius:12px;background:var(--accent);color:#152015;display:grid;place-items:center;font-size:23px;font-weight:900}.brand strong{font-size:17px;letter-spacing:.04em}.brand small{display:block;color:var(--muted);font-size:11px}.headbtn{width:40px;height:40px;border:1px solid var(--line);background:var(--panel);border-radius:12px;color:var(--text);font-size:18px}
+main{max-width:1000px;margin:auto;padding:10px 14px 25px}.view{display:none}.view.active{display:block}h1{font-size:24px;letter-spacing:-.03em;margin:0 0 5px}h2{font-size:18px;margin:0}h3{font-size:15px;margin:0}.sub{font-size:12px;color:var(--muted);margin:0 0 15px}
+.nav{position:fixed;z-index:15;bottom:0;left:0;right:0;display:flex;overflow-x:auto;gap:3px;padding:7px 5px calc(7px + env(safe-area-inset-bottom));background:#101512f5;border-top:1px solid var(--line);backdrop-filter:blur(18px)}.nav button{flex:1 0 58px;max-width:130px;border:0;background:transparent;color:var(--muted);border-radius:10px;padding:7px 3px;display:flex;flex-direction:column;align-items:center;gap:3px;font-size:10px;white-space:nowrap}.nav button b{font-size:17px;font-weight:500;line-height:1}.nav button.active{background:#2a392d;color:var(--accent)}
+.btn{border:0;border-radius:11px;background:var(--accent);color:#192218;font-weight:800;padding:10px 14px}.btn.secondary{background:var(--panel2);border:1px solid var(--line);color:var(--text)}.btn.outline{background:transparent;border:1px solid var(--line);color:var(--text)}.btn.danger{background:#4b2927;color:#ffd8d4}.btn.small{padding:7px 10px;font-size:12px;border-radius:9px}.btn.full{width:100%}
+.row{display:flex;align-items:center;gap:8px}.between{justify-content:space-between}.wrap{flex-wrap:wrap}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:13px;margin:0 0 9px}.stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:12px 0 18px}.stat{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:13px}.stat strong{display:block;font-size:23px;margin-top:5px}.stat small{color:var(--muted);font-size:11px}
+.section{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:19px 0 9px}.muted{color:var(--muted)}.tiny{font-size:11px;color:var(--muted)}.tag{display:inline-block;padding:4px 7px;border-radius:8px;background:var(--panel2);font-size:10px;color:var(--muted);font-weight:800;white-space:nowrap}.tag.red{background:#4c2927;color:#ffb4ad}.tag.yellow{background:#49391e;color:#ffdfa0}.tag.green{background:#23422a;color:#c7f2bb}
+.tasktop{display:flex;align-items:flex-start;gap:10px}.taskbody{flex:1;min-width:0}.taskname{font-weight:800;overflow-wrap:anywhere;font-size:14px}.meta{display:flex;gap:7px;flex-wrap:wrap;font-size:11px;color:var(--muted);margin-top:4px}.taskdesc{font-size:12px;color:#c4d0c5;white-space:pre-wrap;margin:9px 0 0}.photo{width:54px;height:54px;object-fit:cover;border-radius:10px;border:1px solid var(--line)}.chips{display:flex;flex-wrap:wrap;gap:5px;margin-top:9px}.chip{font-size:10px;padding:4px 7px;border:1px solid #3a4b3c;background:#222f25;color:#d7e7d7;border-radius:8px}.chip.need{border-color:#756037;color:#ffdda0}.actions{display:flex;gap:6px;flex-wrap:wrap;margin-top:11px}
+.empty{padding:22px 14px;border:1px dashed #405044;border-radius:15px;text-align:center;color:var(--muted);font-size:12px}.alert{border:1px solid #765a30;background:#30271a;color:#f4d79e;border-radius:12px;padding:11px;margin:10px 0;font-size:12px}
+input,select,textarea{width:100%;min-width:0;padding:10px 11px;border:1px solid #3b493e;border-radius:10px;background:#101712;color:var(--text)}textarea{min-height:75px;resize:vertical}input[type=file]{font-size:11px;padding:8px}input[type=checkbox]{width:18px;height:18px;accent-color:var(--accent)}.field{display:flex;flex-direction:column;gap:5px;min-width:0}.field label{font-size:11px;font-weight:700;color:#cad5cb}.field.full{grid-column:1/-1}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.check{display:flex;align-items:center;gap:6px;font-size:11px;color:#d1dbd2}.supply{border:1px solid var(--line);background:#111913;border-radius:12px;padding:10px;margin-top:8px}.supplygrid{display:grid;grid-template-columns:1fr 86px;gap:7px}.supply .field{margin-top:7px}.supply input,.supply select{padding:8px;font-size:12px}
+.modalback{display:none;position:fixed;z-index:30;inset:0;background:#000b;align-items:flex-end;justify-content:center;padding:10px}.modalback.open{display:flex}.modal{background:#19221c;border:1px solid #465448;border-radius:22px;width:100%;max-width:650px;max-height:92dvh;overflow:auto;padding:16px 14px calc(18px + env(safe-area-inset-bottom))}.modalhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}.modalhead strong{font-size:17px}.close{border:0;background:var(--panel2);color:var(--text);border-radius:9px;width:34px;height:34px;font-size:20px}
+.floor-switch{display:flex;gap:7px;margin:0 0 10px}.floor-switch button{flex:1;background:var(--panel);border:1px solid var(--line);color:var(--muted);border-radius:10px;padding:10px 6px;font-size:12px;font-weight:800}.floor-switch button.active{border-color:#829e5e;background:#28382b;color:var(--accent)}
+.legend{display:flex;gap:11px;flex-wrap:wrap;font-size:10px;color:var(--muted);margin:0 0 10px}.legend span{display:flex;gap:5px;align-items:center}.dot{width:9px;height:9px;display:inline-block;border-radius:50%;background:var(--gray)}.dot.red{background:var(--red)}.dot.yellow{background:var(--yellow)}.dot.green{background:var(--green)}
+.planframe{background:#f8f8f4;border:1px solid #687368;border-radius:12px;padding:4px;overflow:hidden}.planwrap{position:relative;width:100%;line-height:0}.planwrap img{display:block;width:100%;height:auto}.overlay{position:absolute;inset:0;width:100%;height:100%}.overlay rect{cursor:pointer;fill-opacity:.18;stroke-width:2.5}.overlay rect:hover{fill-opacity:.42}.overlay text{font-size:11px;font-weight:900;fill:#172015;pointer-events:none}.zone-list{display:grid;grid-template-columns:1fr 1fr;gap:6px}.zone{display:flex;align-items:center;gap:7px;padding:10px;background:var(--panel);color:var(--text);border:1px solid var(--line);border-radius:11px;text-align:left;min-width:0}.zone strong{font-size:11px;flex:1}.zone small{font-size:9px;color:var(--muted);white-space:nowrap}
+.listrow{display:flex;align-items:center;gap:9px;border-bottom:1px solid var(--line);padding:10px 0}.listrow:last-child{border:0}.listrow strong{font-size:13px;display:block}.listrow small{font-size:10px;color:var(--muted);display:block}.grow{flex:1;min-width:0}.preview{display:flex;align-items:center;gap:8px;margin-top:6px}.preview img{width:52px;height:52px;object-fit:cover;border-radius:9px}
+.toast{position:fixed;z-index:40;left:15px;right:15px;bottom:calc(82px + env(safe-area-inset-bottom));max-width:480px;margin:auto;padding:11px 14px;border-radius:12px;background:var(--accent);color:#182216;font-weight:800;font-size:12px;display:none}.toast.show{display:block}
+@media(min-width:760px){main{padding-top:20px}.stats{grid-template-columns:repeat(4,1fr)}.nav{position:sticky;top:0;bottom:auto;max-width:900px;margin:auto;border:1px solid var(--line);border-radius:13px}.nav button{flex-direction:row;justify-content:center;font-size:12px}.modalback{align-items:center}}
+@media(max-width:390px){.formgrid{grid-template-columns:1fr}.field.full{grid-column:auto}.zone-list{grid-template-columns:1fr}.nav button{flex-basis:55px}}
+</style>
+</head>
+<body>
+<header>
+ <div class="brand"><div class="logo">⌂</div><div><strong>CASA 360</strong><small>Mantenimiento de la vivienda</small></div></div>
+ <button class="headbtn" data-view="settings" aria-label="Ajustes">⚙</button>
+</header>
+<nav class="nav" aria-label="Navegación">
+ <button class="active" data-view="home"><b>⌂</b>Inicio</button>
+ <button data-view="plan"><b>⌖</b>Plano</button>
+ <button data-view="tasks"><b>☷</b>Tareas</button>
+ <button data-view="shopping"><b>🛒</b>Compras</button>
+ <button data-view="repairs"><b>🔧</b>Reparaciones</button>
+ <button data-view="expenses"><b>€</b>Gastos</button>
+ <button data-view="history"><b>↶</b>Historial</button>
+</nav>
+<main>
+<section class="view active" id="view-home">
+ <div class="row between"><h1>Resumen</h1><button class="btn" data-action="new-task">＋ Añadir tarea</button></div>
+ <div id="homeAlerts"></div><div class="stats" id="stats"></div>
+ <div class="section"><h2>Próximas tareas</h2><button class="btn small outline" data-view="tasks">Ver todas</button></div><div id="homeTasks"></div>
+ <div class="section"><h2>Por comprar</h2><button class="btn small outline" data-view="shopping">Ver lista</button></div><div id="homeShopping"></div>
+</section>
+<section class="view" id="view-plan">
+ <h1>Plano de la vivienda</h1><p class="sub">Pulsa una zona para ver sus tareas o añadir una nueva.</p>
+ <div class="floor-switch"><button class="active" data-floor="upper">Planta superior</button><button data-floor="lower">Garaje y gimnasio</button></div>
+ <div class="legend"><span><i class="dot red"></i>Atrasada</span><span><i class="dot yellow"></i>Próxima</span><span><i class="dot green"></i>Al día</span><span><i class="dot"></i>Sin tareas</span></div>
+ <div class="planframe"><div class="planwrap"><img id="planImage" src="floorplans/planta-superior.webp" alt="Plano de la planta superior"><svg class="overlay" id="planOverlay" viewBox="0 0 710 618" preserveAspectRatio="none"></svg></div></div>
+ <div class="section"><h2>Zonas de esta planta</h2></div><div class="zone-list" id="zoneList"></div>
+</section>
+<section class="view" id="view-tasks">
+ <div class="row between"><h1>Tareas</h1><button class="btn" data-action="new-task">＋ Añadir</button></div><p class="sub">Tareas puntuales y recurrentes.</p>
+ <div class="field"><label for="taskFilter">Filtrar por zona</label><select id="taskFilter"><option value="">Todas las zonas</option></select></div>
+ <div id="tasksList" style="margin-top:12px"></div>
+</section>
+<section class="view" id="view-shopping">
+ <h1>Lista de compras</h1><p class="sub">Materiales y herramientas que has marcado para comprar.</p><div id="shoppingList"></div>
+</section>
+<section class="view" id="view-repairs">
+ <div class="row between"><h1>Reparaciones</h1><button class="btn" data-action="new-repair">＋ Añadir</button></div><p class="sub">Averías, arreglos y trabajos pendientes.</p><div id="repairsList"></div>
+</section>
+<section class="view" id="view-expenses">
+ <div class="row between"><h1>Gastos</h1><button class="btn" data-action="new-expense">＋ Añadir</button></div><p class="sub">Facturas, tickets y presupuestos.</p><div class="card"><div class="tiny">Total registrado</div><strong id="expenseTotal" style="font-size:26px">0,00 €</strong></div><div id="expensesList"></div>
+</section>
+<section class="view" id="view-history">
+ <h1>Historial</h1><p class="sub">Tareas completadas y reparaciones resueltas.</p><div id="historyList"></div>
+</section>
+<section class="view" id="view-settings">
+ <h1>Ajustes y copias</h1><p class="sub">Zonas de la casa y copias de seguridad.</p><div class="card">
+  <div class="section" style="margin-top:0"><h2>Zonas</h2></div><div id="areasList"></div>
+  <div class="row" style="margin-top:10px"><input id="newArea" placeholder="Nombre de la zona"><button class="btn small" id="addArea">Añadir</button></div>
+  <hr style="border:0;border-top:1px solid var(--line);margin:16px 0">
+  <h2>Copias de seguridad</h2><p class="tiny">Tus datos se guardan en este dispositivo. Exporta una copia periódicamente.</p>
+  <div class="row wrap"><button class="btn secondary" id="exportData">Exportar copia</button><label class="btn outline" for="importData">Importar copia</label><input id="importData" type="file" accept="application/json,.json" hidden></div>
+  <hr style="border:0;border-top:1px solid var(--line);margin:16px 0">
+  <h2>Datos y privacidad</h2><p class="tiny">Tareas, fotos, facturas e historial se guardan localmente en este navegador. No se conectan aparatos de la vivienda ni se sincroniza con otros dispositivos.</p>
+  <button class="btn danger full" id="clearData">Borrar todos los datos de este dispositivo</button>
+ </div>
+</section>
+</main>
+<div class="modalback" id="modalBack"><div class="modal" id="modal" role="dialog" aria-modal="true"></div></div>
+<div class="toast" id="toast"></div>
+<script>
+(function(){
+"use strict";
+const $=s=>document.querySelector(s), $$=s=>Array.from(document.querySelectorAll(s));
+const today=()=>{const d=new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")};
+const uid=()=>Date.now().toString(36)+"-"+Math.random().toString(36).slice(2,8);
+const esc=v=>String(v==null?"":v).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const euros=n=>(Number(n)||0).toLocaleString("es-ES",{style:"currency",currency:"EUR"});
+const dObj=s=>{if(!s)return new Date();const p=s.split("-");return new Date(+p[0],+p[1]-1,+p[2],12)};
+const dayDiff=(a,b)=>Math.round((dObj(a)-dObj(b))/86400000);
+const dateText=s=>s?s.split("-").reverse().join("/"):"Sin fecha";
+const DEFAULT_AREAS=["Piscina","Jardín","Terraza","Baños","Dormitorio 1","Dormitorio 2","Dormitorio 3","Cocina","Salón-comedor","Escalera","Garaje","Gimnasio","Zona técnica","Acceso garaje","Exterior","Vivienda"];
+const fresh=()=>({tasks:[],areas:DEFAULT_AREAS.slice(),repairs:[],expenses:[],history:[]});
+let db=null,state=fresh(),activeView="home",activeFloor="upper";
+function toast(msg){const e=$("#toast");e.textContent=msg;e.classList.add("show");clearTimeout(toast.timer);toast.timer=setTimeout(()=>e.classList.remove("show"),2400)}
+function openDb(){return new Promise((resolve,reject)=>{const r=indexedDB.open("casa360-rebuilt",1);r.onupgradeneeded=()=>r.result.createObjectStore("app");r.onsuccess=()=>{db=r.result;resolve(db)};r.onerror=()=>reject(r.error)})}
+async function readDb(){return new Promise((resolve,reject)=>{const r=db.transaction("app","readonly").objectStore("app").get("state");r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error)})}
+async function writeDb(){return new Promise((resolve,reject)=>{const t=db.transaction("app","readwrite");t.objectStore("app").put(state,"state");t.oncomplete=resolve;t.onerror=()=>reject(t.error)})}
+async function load(){
+ try{await openDb();const v=await readDb();if(v){state=Object.assign(fresh(),v)}else{
+   // Try to migrate the earlier CASA 360 local database once.
+   try{const old=await new Promise((resolve,reject)=>{const q=indexedDB.open("casa360-data");q.onsuccess=()=>{const d=q.result;if(!d.objectStoreNames.contains("db")){d.close();resolve(null);return}const tx=d.transaction("db","readonly"),g=tx.objectStore("db").get("state");g.onsuccess=()=>{const z=g.result;d.close();resolve(z)};g.onerror=()=>{d.close();resolve(null)}};q.onerror=()=>resolve(null)});if(old)state=Object.assign(fresh(),old)}catch(e){}
+   await writeDb();
+ }}catch(e){try{const v=localStorage.getItem("casa360-rebuilt");if(v)state=Object.assign(fresh(),JSON.parse(v))}catch(_){}}}
+function normalizeState(){
+ state.areas=Array.from(new Set([...DEFAULT_AREAS,...(Array.isArray(state.areas)?state.areas:[])]));
+ state.tasks=(Array.isArray(state.tasks)?state.tasks:[]).map(t=>Object.assign({},t,{
+  dueDate:t.dueDate||t.due||today(),
+  notes:t.notes||t.note||t.description||"",
+  repeat:t.repeat?{n:Number(t.repeat.n||t.repeat.every||1),unit:({days:"day",weeks:"week",months:"month"}[t.repeat.unit]||t.repeat.unit||"month")}:null,
+  supplies:(t.supplies||t.items||[]).map(x=>Object.assign({},x,{kind:x.kind||(x.type==="tool"?"tool":"material"),bought:!!(x.bought||x.checked),buy:!!x.buy})),
+  done:!!t.done,
+  archived:!!t.archived
+ }));
+ state.repairs=(Array.isArray(state.repairs)?state.repairs:[]).map(r=>Object.assign({},r,{notes:r.notes||r.note||r.description||"",status:r.status||"open"}));
+ state.expenses=(Array.isArray(state.expenses)?state.expenses:[]).map(e=>Object.assign({},e,{attachment:e.attachment||e.file||null}));
+ state.history=Array.isArray(state.history)?state.history:[];
+}
+async function save(){try{if(db)await writeDb();else localStorage.setItem("casa360-rebuilt",JSON.stringify(state))}catch(e){toast("No se pudo guardar. Exporta una copia y libera espacio.")}}
+function activeTasks(){return state.tasks.filter(t=>!t.done&&!t.archived).sort((a,b)=>(a.dueDate||"9999").localeCompare(b.dueDate||"9999"))}
+function repeatLabel(r){if(!r)return"Una sola vez";const unit={day:r.n===1?"día":"días",week:r.n===1?"semana":"semanas",month:r.n===1?"mes":"meses"};return"Cada "+r.n+" "+unit[r.unit]}
+function nextDate(base,repeat){const d=dObj(base),n=Math.max(1,Number(repeat.n)||1);if(repeat.unit==="day")d.setDate(d.getDate()+n);else if(repeat.unit==="week")d.setDate(d.getDate()+7*n);else{const day=d.getDate();d.setDate(1);d.setMonth(d.getMonth()+n);const last=new Date(d.getFullYear(),d.getMonth()+1,0).getDate();d.setDate(Math.min(day,last))}return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
+function dueClass(t){const n=dayDiff(t.dueDate,today());if(n<0)return"red";if(n<=7)return"yellow";return"green"}
+function dueText(t){const n=dayDiff(t.dueDate,today());if(n<0)return"Atrasada "+Math.abs(n)+" días";if(n===0)return"Hoy";if(n<=7)return"En "+n+" días";return"Programada"}
+function taskCard(t){const supplies=(t.supplies||[]).map(s=>'<span class="chip '+(s.buy&&!s.bought?"need":"")+'">'+(s.kind==="tool"?"🔧 ":"📦 ")+esc(s.name)+(s.qty?" · "+esc(s.qty):"")+'</span>').join("");return '<article class="card"><div class="tasktop"><div class="taskbody"><div class="taskname">'+esc(t.title)+'</div><div class="meta"><span>⌂ '+esc(t.area)+'</span><span>↻ '+esc(repeatLabel(t.repeat))+'</span></div></div>'+(t.photo?'<img class="photo" src="'+t.photo+'" alt="">':'')+'</div>'+(t.notes?'<p class="taskdesc">'+esc(t.notes)+'</p>':'')+'<div class="row between" style="margin-top:9px"><span class="meta">Próxima: '+dateText(t.dueDate)+'</span><span class="tag '+dueClass(t)+'">'+dueText(t)+'</span></div>'+(supplies?'<div class="chips">'+supplies+'</div>':'')+'<div class="actions"><button class="btn small" data-action="complete-task" data-id="'+t.id+'">✓ Hecho</button><button class="btn small secondary" data-action="edit-task" data-id="'+t.id+'">Editar</button><button class="btn small outline" data-action="calendar-task" data-id="'+t.id+'">Calendario</button></div></article>'}
+function empty(msg){return'<div class="empty">'+esc(msg)+'</div>'}
+function renderHome(){
+ const a=activeTasks(),late=a.filter(t=>dayDiff(t.dueDate,today())<0),todayTasks=a.filter(t=>dayDiff(t.dueDate,today())===0),buy=shoppingItems(),sum=state.expenses.reduce((n,e)=>n+(Number(e.amount)||0),0);
+ $("#stats").innerHTML=[["Tareas activas",a.length],["Atrasadas",late.length],["Por comprar",buy.length],["Gastos registrados",euros(sum)]].map(x=>'<div class="stat"><small>'+x[0]+'</small><strong>'+x[1]+'</strong></div>').join("");
+ $("#homeAlerts").innerHTML=late.length||todayTasks.length?'<div class="alert">Hay '+late.length+' tarea(s) atrasada(s) y '+todayTasks.length+' para hoy.</div>':"";
+ const upcoming=a.filter(t=>dayDiff(t.dueDate,today())<=14).slice(0,4);$("#homeTasks").innerHTML=upcoming.length?upcoming.map(taskCard).join(""):empty("No hay tareas próximas. Añade una tarea para empezar.");
+ $("#homeShopping").innerHTML=buy.length?buy.slice(0,4).map(x=>'<div class="listrow"><span>🛒</span><div class="grow"><strong>'+esc(x.s.name)+'</strong><small>'+esc(x.t.title)+' · '+esc(x.t.area)+'</small></div></div>').join(""):empty("No tienes materiales pendientes de compra.");
+}
+function shoppingItems(){return state.tasks.flatMap(t=>(t.supplies||[]).map((s,i)=>({t,s,i})).filter(x=>x.s.buy&&!x.s.bought))}
+function renderTasks(){
+ const filter=$("#taskFilter").value||"";$("#taskFilter").innerHTML='<option value="">Todas las zonas</option>'+state.areas.map(a=>'<option value="'+esc(a)+'">'+esc(a)+'</option>').join("");$("#taskFilter").value=filter;
+ const a=activeTasks().filter(t=>!filter||t.area===filter);$("#tasksList").innerHTML=a.length?a.map(taskCard).join(""):empty("No hay tareas en esta zona.");
+}
+function renderShopping(){const a=shoppingItems();$("#shoppingList").innerHTML=a.length?a.map(x=>'<div class="card"><div class="row"><input type="checkbox" data-action="bought" data-task="'+x.t.id+'" data-index="'+x.i+'"><div class="grow"><strong>'+esc(x.s.name)+'</strong><div class="meta">'+(x.s.kind==="tool"?"Herramienta":"Material")+' · '+esc(x.s.qty||"Cantidad no indicada")+'</div><div class="tiny">Para '+esc(x.t.title)+' · '+esc(x.t.area)+'</div>'+(x.s.url?'<a href="'+esc(x.s.url)+'" target="_blank" rel="noopener" style="font-size:11px;color:var(--accent)">Ver producto ↗</a>':'')+'</div>'+(x.s.photo?'<img class="photo" src="'+x.s.photo+'" alt="">':'')+'</div></div>').join(""):empty("No hay compras pendientes. Añade materiales desde una tarea y marca que tienes que comprarlos.")}
+function renderRepairs(){const a=state.repairs.slice().sort((x,y)=>(y.date||"").localeCompare(x.date||""));$("#repairsList").innerHTML=a.length?a.map(r=>'<div class="card"><div class="row between"><div class="taskname">'+esc(r.title)+'</div><span class="tag '+(r.status==="done"?"green":"red")+'">'+(r.status==="done"?"Resuelta":"Pendiente")+'</span></div><div class="meta">'+esc(r.area)+' · '+dateText(r.date)+'</div>'+(r.notes?'<p class="taskdesc">'+esc(r.notes)+'</p>':'')+(r.photo?'<p><img class="photo" src="'+r.photo+'" alt=""></p>':'')+'<div class="actions">'+(r.status!=="done"?'<button class="btn small" data-action="resolve-repair" data-id="'+r.id+'">✓ Resuelta</button>':'')+'<button class="btn small secondary" data-action="edit-repair" data-id="'+r.id+'">Editar</button><button class="btn small outline" data-action="delete-repair" data-id="'+r.id+'">Eliminar</button></div></div>').join(""):empty("No hay reparaciones registradas.")}
+function renderExpenses(){const a=state.expenses.slice().sort((x,y)=>(y.date||"").localeCompare(x.date||"")),sum=a.reduce((n,e)=>n+(Number(e.amount)||0),0);$("#expenseTotal").textContent=euros(sum);$("#expensesList").innerHTML=a.length?a.map(e=>'<div class="card row between"><div class="grow"><strong>'+esc(e.title)+'</strong><div class="meta">'+dateText(e.date)+' · '+esc(e.category)+' · '+esc(e.area||"")+'</div>'+(e.attachment?'<a download="'+esc(e.attachment.name)+'" href="'+e.attachment.data+'" style="font-size:11px;color:var(--accent)">Abrir '+esc(e.attachment.name)+' ↗</a>':'')+'</div><div style="text-align:right"><strong>'+euros(e.amount)+'</strong><button class="btn small outline" data-action="delete-expense" data-id="'+e.id+'">Eliminar</button></div></div>').join(""):empty("No hay gastos ni facturas.")}
+function renderHistory(){const a=state.history.slice().sort((x,y)=>(y.date||"").localeCompare(x.date||""));$("#historyList").innerHTML=a.length?a.map(h=>'<div class="listrow"><span>'+(h.kind==="repair"?"🔧":"✓")+'</span><div class="grow"><strong>'+esc(h.title)+'</strong><small>'+dateText(h.date)+' · '+esc(h.area||"")+(h.note?" · "+esc(h.note):"")+'</small></div>'+(h.cost?'<strong>'+euros(h.cost)+'</strong>':'')+'</div>').join(""):empty("El historial aparecerá aquí cuando completes tareas o reparaciones.")}
+const floorMaps={
+ upper:{name:"Planta superior",src:"floorplans/planta-superior.webp",view:"0 0 710 618",zones:[
+  {area:"Baños",x:120,y:160,w:245,h:72},
+  {area:"Dormitorio 1",x:123,y:234,w:96,h:111},
+  {area:"Dormitorio 2",x:220,y:234,w:89,h:111},
+  {area:"Dormitorio 3",x:310,y:234,w:105,h:111},
+  {area:"Escalera",x:366,y:160,w:78,h:87},
+  {area:"Cocina",x:445,y:34,w:88,h:196},
+  {area:"Salón-comedor",x:534,y:34,w:118,h:196},
+  {area:"Terraza",x:460,y:235,w:245,h:164},
+  {area:"Piscina",x:316,y:405,w:200,h:82},
+  {area:"Jardín",x:30,y:405,w:214,h:205},
+  {area:"Jardín",x:654,y:111,w:54,h:118}
+ ]},
+ lower:{name:"Garaje y gimnasio",src:"floorplans/garaje-gimnasio.webp",view:"0 0 545 355",zones:[
+  {area:"Garaje",x:118,y:54,w:164,h:190},
+  {area:"Gimnasio",x:280,y:103,w:174,h:140},
+  {area:"Zona técnica",x:282,y:55,w:172,h:48},
+  {area:"Acceso garaje",x:120,y:246,w:128,h:96},
+  {area:"Jardín",x:30,y:294,w:92,h:61}
+ ]}
+};
+function zoneStatus(area){const a=activeTasks().filter(t=>t.area===area);if(!a.length)return{cls:"gray",label:"Sin tareas",count:0,color:"#89968d"};if(a.some(t=>dayDiff(t.dueDate,today())<0))return{cls:"red",label:"Atrasada",count:a.length,color:"#f16f68"};if(a.some(t=>dayDiff(t.dueDate,today())<=7))return{cls:"yellow",label:"Próxima",count:a.length,color:"#e8b84d"};return{cls:"green",label:"Al día",count:a.length,color:"#85c879"}}
+function renderPlan(){const f=floorMaps[activeFloor],img=$("#planImage"),svg=$("#planOverlay");$$("[data-floor]").forEach(b=>b.classList.toggle("active",b.dataset.floor===activeFloor));img.src=f.src;img.alt="Plano: "+f.name;img.onerror=()=>toast("No se pudo cargar el plano. Comprueba la conexión.");svg.setAttribute("viewBox",f.view);svg.innerHTML=f.zones.map((z,i)=>{const st=zoneStatus(z.area);return'<g data-zone="'+esc(z.area)+'" tabindex="0" role="button" aria-label="'+esc(z.area)+" — "+st.label+'"><rect x="'+z.x+'" y="'+z.y+'" width="'+z.w+'" height="'+z.h+'" rx="4" fill="'+st.color+'" stroke="'+st.color+'"/><circle cx="'+(z.x+z.w/2)+'" cy="'+(z.y+z.h/2)+'" r="10" fill="'+st.color+'" stroke="#fff" stroke-width="1.5"/><text x="'+(z.x+z.w/2)+'" y="'+(z.y+z.h/2+4)+'" text-anchor="middle">'+(i+1)+'</text></g>'}).join("");const unique=[...new Set(f.zones.map(z=>z.area))];$("#zoneList").innerHTML=unique.map(a=>{const st=zoneStatus(a);return'<button class="zone" data-zone="'+esc(a)+'"><i class="dot '+st.cls+'"></i><strong>'+esc(a)+'</strong><small>'+st.count+" · "+st.label+'</small></button>'}).join("")}
+function showView(v){activeView=v;$$(".view").forEach(x=>x.classList.toggle("active",x.id==="view-"+v));$$(".nav [data-view]").forEach(x=>x.classList.toggle("active",x.dataset.view===v));if(v==="home")renderHome();if(v==="plan")renderPlan();if(v==="tasks")renderTasks();if(v==="shopping")renderShopping();if(v==="repairs")renderRepairs();if(v==="expenses")renderExpenses();if(v==="history")renderHistory();if(v==="settings")renderSettings();window.scrollTo(0,0)}
+function modal(title,html){$("#modal").innerHTML='<div class="modalhead"><strong>'+title+'</strong><button class="close" data-action="close-modal" aria-label="Cerrar">×</button></div>'+html;$("#modalBack").classList.add("open")}
+function closeModal(){$("#modalBack").classList.remove("open");$("#modal").innerHTML=""}
+function areaOptions(selected){return state.areas.map(a=>'<option value="'+esc(a)+'" '+(a===selected?"selected":"")+'>'+esc(a)+'</option>').join("")}
+function supplyRow(s){s=s||{};return'<div class="supply" data-photo="'+esc(s.photo||"")+'"><div class="supplygrid"><div class="field"><label>Material o herramienta</label><input class="s-name" placeholder="Ej. Garrafa de cloro" value="'+esc(s.name||"")+'"></div><div class="field"><label>Cantidad</label><input class="s-qty" placeholder="1 unidad" value="'+esc(s.qty||"")+'"></div></div><div class="row between" style="margin-top:8px"><select class="s-kind"><option value="material" '+(s.kind!=="tool"?"selected":"")+'>Material / producto</option><option value="tool" '+(s.kind==="tool"?"selected":"")+'>Herramienta</option></select><label class="check"><input class="s-buy" type="checkbox" '+(s.buy?"checked":"")+'> Comprar</label><button class="btn small outline" type="button" data-action="remove-supply">Quitar</button></div><div class="field" style="margin-top:7px"><label>Enlace de producto (opcional)</label><input class="s-url" type="url" placeholder="https://…" value="'+esc(s.url||"")+'"></div><div class="field" style="margin-top:7px"><label>Foto (opcional)</label><input class="s-file" type="file" accept="image/*">'+(s.photo?'<div class="preview"><img class="old-photo" src="'+s.photo+'" alt=""><span class="tiny">Foto añadida</span></div>':'')+'</div></div>'}
+function openTaskForm(t,area){t=t||{};const repeat=t.repeat||null,sel=repeat?repeat.unit+":"+repeat.n:"none";modal(t.id?"Editar tarea":"Nueva tarea",'<form id="taskForm" data-id="'+esc(t.id||"")+'"><div class="formgrid"><div class="field full"><label>Nombre de la tarea *</label><input name="title" required maxlength="100" value="'+esc(t.title||"")+'" placeholder="Ej. Limpiar filtro de piscina"></div><div class="field"><label>Zona *</label><select name="area">'+areaOptions(area||t.area||state.areas[0])+'</select></div><div class="field"><label>Prioridad</label><select name="priority"><option value="normal">Normal</option><option value="high" '+(t.priority==="high"?"selected":"")+'>Alta</option></select></div><div class="field full"><label>Frecuencia</label><select name="repeat" id="repeatSelect"><option value="none">Una sola vez</option><option value="day:1">Cada día</option><option value="day:7">Cada 7 días</option><option value="day:15">Cada 15 días</option><option value="week:1">Cada semana</option><option value="month:1">Cada mes</option><option value="month:2">Cada 2 meses</option><option value="custom">Otro intervalo…</option></select><div class="row" id="customRepeat" style="display:none"><span class="tiny">Cada</span><input name="repeatN" type="number" min="1" max="365" value="'+(repeat?repeat.n:3)+'" style="max-width:80px"><select name="repeatUnit"><option value="day">Días</option><option value="week">Semanas</option><option value="month">Meses</option></select></div></div><div class="field"><label>Próxima fecha</label><input type="date" name="dueDate" required value="'+esc(t.dueDate||today())+'"></div><div class="field"><label>Aviso antes</label><select name="reminder"><option value="0">El mismo día</option><option value="1">1 día</option><option value="3">3 días</option><option value="7">7 días</option></select></div><div class="field full"><label>Notas / instrucciones</label><textarea name="notes" placeholder="Detalles de la tarea…">'+esc(t.notes||"")+'</textarea></div><div class="field full"><label>Foto de la tarea (opcional)</label><input id="taskPhoto" name="photo" type="file" accept="image/*">'+(t.photo?'<div class="preview"><img src="'+t.photo+'" alt=""><label class="check"><input name="removePhoto" type="checkbox"> Quitar foto</label></div>':'')+'</div></div><div class="section"><h3>Materiales y herramientas</h3><button type="button" class="btn small secondary" data-action="add-supply">＋ Añadir</button></div><p class="tiny">Los artículos marcados «Comprar» pasan a la lista de compras.</p><div id="supplyRows">'+((t.supplies&&t.supplies.length)?t.supplies.map(supplyRow).join(""):supplyRow())+'</div><div class="row between" style="margin-top:15px"><button type="button" class="btn outline" data-action="close-modal">Cancelar</button><button class="btn" type="submit">Guardar tarea</button></div></form>');$("#repeatSelect").value=sel==="none"?"none":(["day:1","day:7","day:15","week:1","month:1","month:2"].includes(sel)?sel:"custom");$("#customRepeat").style.display=$("#repeatSelect").value==="custom"?"flex":"none";if(repeat&&$("#repeatSelect").value==="custom")$("#taskForm [name=repeatUnit]").value=repeat.unit;$("#taskForm [name=reminder]").value=String(t.reminder||0);$("#repeatSelect").addEventListener("change",()=>$("#customRepeat").style.display=$("#repeatSelect").value==="custom"?"flex":"none");}
+async function imageData(file,max=900){if(!file)return null;if(!file.type.startsWith("image/"))return null;return new Promise(resolve=>{const r=new FileReader();r.onload=()=>{const im=new Image();im.onload=()=>{const scale=Math.min(1,max/Math.max(im.width,im.height)),c=document.createElement("canvas");c.width=Math.max(1,Math.round(im.width*scale));c.height=Math.max(1,Math.round(im.height*scale));c.getContext("2d").drawImage(im,0,0,c.width,c.height);resolve(c.toDataURL("image/jpeg",.68))};im.onerror=()=>resolve(null);im.src=r.result};r.onerror=()=>resolve(null);r.readAsDataURL(file)})}
+async function saveTaskForm(form){const fd=new FormData(form),rp=fd.get("repeat");let repeat=null;if(rp!=="none"){if(rp==="custom")repeat={n:Math.max(1,Number(fd.get("repeatN"))||1),unit:fd.get("repeatUnit")};else{const [unit,n]=rp.split(":");repeat={unit,n:Number(n)}}}
+ const supplies=[];for(const row of $$("#supplyRows .supply")){const name=$(".s-name",row).value.trim();if(!name)continue;let photo=row.dataset.photo||null;const file=$(".s-file",row).files[0];if(file)photo=await imageData(file,500);supplies.push({name,qty:$(".s-qty",row).value.trim(),kind:$(".s-kind",row).value,buy:$(".s-buy",row).checked,bought:false,url:$(".s-url",row).value.trim(),photo})}
+ const oldId=form.dataset.id||"",old=state.tasks.find(t=>t.id===oldId);let photo=old?old.photo:null;if(fd.get("removePhoto")==="on")photo=null;const file=$("#taskPhoto").files[0];if(file)photo=await imageData(file);
+ const t={id:oldId||uid(),title:fd.get("title").trim(),area:fd.get("area"),priority:fd.get("priority"),dueDate:fd.get("dueDate"),repeat,reminder:Number(fd.get("reminder"))||0,notes:fd.get("notes").trim(),supplies,photo,done:false,archived:false,createdAt:old?old.createdAt:today()};
+ const i=state.tasks.findIndex(x=>x.id===t.id);if(i>=0)state.tasks[i]=t;else state.tasks.push(t);await save();closeModal();refresh();toast("Tarea guardada")}
+function completeForm(t){modal("Completar tarea",'<form id="completeForm" data-id="'+t.id+'"><div class="formgrid"><div class="field"><label>Coste (€)</label><input name="cost" type="number" min="0" step=".01" placeholder="0,00"></div><div class="field"><label>Fecha realizada</label><input name="date" type="date" value="'+today()+'"></div><div class="field full"><label>Observaciones</label><textarea name="note" placeholder="Trabajo realizado…"></textarea></div></div><div class="row between" style="margin-top:14px"><button type="button" class="btn outline" data-action="close-modal">Cancelar</button><button class="btn" type="submit">Guardar</button></div></form>');}
+async function finishTask(form){const t=state.tasks.find(x=>x.id===form.dataset.id);if(!t)return;const f=new FormData(form),d=f.get("date")||today();state.history.push({id:uid(),kind:"task",title:t.title,area:t.area,date:d,cost:Number(f.get("cost"))||0,note:f.get("note").trim()});if(t.repeat){t.dueDate=nextDate(d,t.repeat);(t.supplies||[]).forEach(s=>s.bought=false)}else t.done=true;await save();closeModal();refresh();toast("Tarea registrada")}
+function openZone(area){const rel=activeTasks().filter(t=>t.area===area);modal(esc(area),'<div class="row"><i class="dot '+zoneStatus(area).cls+'"></i><span class="tiny">'+zoneStatus(area).label+' · '+rel.length+' tareas activas</span></div><div style="margin:12px 0">'+(rel.length?rel.map(taskCard).join(""):empty("No hay tareas en esta zona."))+'</div><button class="btn full" id="zoneAdd">＋ Añadir tarea en '+esc(area)+'</button>');$("#zoneAdd").onclick=()=>openTaskForm(null,area)}
+function repairForm(r){r=r||{};modal(r.id?"Editar reparación":"Nueva reparación",'<form id="repairForm" data-id="'+(r.id||"")+'"><div class="formgrid"><div class="field full"><label>Descripción *</label><input name="title" required value="'+esc(r.title||"")+'" placeholder="Ej. Fuga en el grifo"></div><div class="field"><label>Zona</label><select name="area">'+areaOptions(r.area||state.areas[0])+'</select></div><div class="field"><label>Fecha</label><input name="date" type="date" value="'+esc(r.date||today())+'"></div><div class="field full"><label>Detalles</label><textarea name="notes">'+esc(r.notes||"")+'</textarea></div><div class="field"><label>Coste (€)</label><input name="cost" type="number" min="0" step=".01" value="'+esc(r.cost||"")+'"></div><div class="field"><label>Estado</label><select name="status"><option value="open">Pendiente</option><option value="done">Resuelta</option></select></div><div class="field full"><label>Foto (opcional)</label><input id="repairPhoto" type="file" accept="image/*">'+(r.photo?'<div class="preview"><img src="'+r.photo+'" alt=""><label class="check"><input name="removePhoto" type="checkbox"> Quitar foto</label></div>':'')+'</div></div><div class="row between" style="margin-top:14px"><button type="button" class="btn outline" data-action="close-modal">Cancelar</button><button class="btn" type="submit">Guardar reparación</button></div></form>');$("#repairForm [name=status]").value=r.status||"open"}
+async function saveRepairForm(form){const f=new FormData(form),id=form.dataset.id||"",old=state.repairs.find(x=>x.id===id);let photo=old?old.photo:null;if(f.get("removePhoto")==="on")photo=null;if($("#repairPhoto").files[0])photo=await imageData($("#repairPhoto").files[0]);const r={id:id||uid(),title:f.get("title").trim(),area:f.get("area"),date:f.get("date"),notes:f.get("notes").trim(),cost:Number(f.get("cost"))||0,status:f.get("status"),photo};const i=state.repairs.findIndex(x=>x.id===r.id);if(i>=0)state.repairs[i]=r;else state.repairs.push(r);if(r.status==="done"&&(!old||old.status!=="done"))state.history.push({id:uid(),kind:"repair",title:r.title,area:r.area,date:today(),cost:r.cost,note:"Reparación resuelta"});await save();closeModal();refresh();toast("Reparación guardada")}
+function expenseForm(){modal("Nuevo gasto o factura",'<form id="expenseForm"><div class="formgrid"><div class="field full"><label>Concepto *</label><input name="title" required placeholder="Ej. Sustitución de bomba"></div><div class="field"><label>Importe (€) *</label><input name="amount" type="number" min="0" step=".01" required></div><div class="field"><label>Fecha</label><input name="date" type="date" value="'+today()+'"></div><div class="field"><label>Categoría</label><select name="category"><option>Mantenimiento</option><option>Reparación</option><option>Piscina</option><option>Jardín</option><option>Materiales</option><option>Herramientas</option><option>Otros</option></select></div><div class="field"><label>Zona</label><select name="area"><option value="">Sin zona</option>'+areaOptions("")+'</select></div><div class="field full"><label>Factura o ticket (foto/PDF, máximo 3 MB)</label><input id="expenseFile" type="file" accept="image/*,application/pdf"></div></div><div class="row between" style="margin-top:14px"><button class="btn outline" type="button" data-action="close-modal">Cancelar</button><button class="btn" type="submit">Guardar gasto</button></div></form>')}
+async function saveExpense(form){const f=new FormData(form),file=$("#expenseFile").files[0];let attachment=null;if(file){if(file.size>3*1024*1024){toast("El archivo supera 3 MB");return}const data=await new Promise(resolve=>{const r=new FileReader();r.onload=()=>resolve(r.result);r.onerror=()=>resolve(null);r.readAsDataURL(file)});attachment={name:file.name,data}}state.expenses.push({id:uid(),title:f.get("title").trim(),amount:Number(f.get("amount"))||0,date:f.get("date"),category:f.get("category"),area:f.get("area"),attachment});await save();closeModal();refresh();toast("Gasto guardado")}
+function renderSettings(){$("#areasList").innerHTML=state.areas.map(a=>'<span class="chip" style="display:inline-flex;gap:6px;margin:3px">'+esc(a)+' <button data-action="delete-area" data-area="'+esc(a)+'" style="border:0;background:none;color:var(--red)">×</button></span>').join("")}
+function renderAll(){if(activeView==="home")renderHome();else if(activeView==="plan")renderPlan();else if(activeView==="tasks")renderTasks();else if(activeView==="shopping")renderShopping();else if(activeView==="repairs")renderRepairs();else if(activeView==="expenses")renderExpenses();else if(activeView==="history")renderHistory();else if(activeView==="settings")renderSettings()}
+function refresh(){renderHome();if(activeView!=="home")renderAll()}
+function escapeIcs(s){return String(s||"").replace(/\\/g,"\\\\").replace(/\n/g,"\\n").replace(/;/g,"\\;").replace(/,/g,"\\,")}
+function exportCalendar(t){const date=t.dueDate.replace(/-/g,""),time="090000",rule=t.repeat?"RRULE:FREQ="+(t.repeat.unit==="day"?"DAILY":t.repeat.unit==="week"?"WEEKLY":"MONTHLY")+";INTERVAL="+t.repeat.n:"",stamp=new Date().toISOString().replace(/[-:]/g,"").replace(/\.\d{3}/,"");const lines=["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//CASA360//ES","CALSCALE:GREGORIAN","BEGIN:VEVENT","UID:"+t.id+"@casa360","DTSTAMP:"+stamp,"DTSTART:"+date+"T"+time,"SUMMARY:"+escapeIcs(t.title),"DESCRIPTION:"+escapeIcs(t.area+" · "+(t.notes||"")),"LOCATION:"+escapeIcs(t.area),rule,"BEGIN:VALARM","TRIGGER:-P"+(t.reminder||0)+"D","ACTION:DISPLAY","DESCRIPTION:"+escapeIcs("CASA 360 · "+t.title),"END:VALARM","END:VEVENT","END:VCALENDAR"].filter(Boolean).join("\r\n");const blob=new Blob([lines],{type:"text/calendar;charset=utf-8"}),url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="casa360-recordatorio.ics";a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);toast("Archivo .ics creado para añadirlo al calendario")}
+function bind(){
+ document.addEventListener("click",async e=>{
+  const floor=e.target.closest("[data-floor]");if(floor){activeFloor=floor.dataset.floor;renderPlan();return}
+  const zone=e.target.closest("[data-zone]");if(zone){openZone(zone.dataset.zone);return}
+  const view=e.target.closest("[data-view]");if(view){showView(view.dataset.view);return}
+  const b=e.target.closest("[data-action]");if(!b)return;const a=b.dataset.action,id=b.dataset.id;
+  if(a==="new-task")openTaskForm();
+  else if(a==="edit-task")openTaskForm(state.tasks.find(t=>t.id===id));
+  else if(a==="complete-task"){const t=state.tasks.find(t=>t.id===id);if(t)completeForm(t)}
+  else if(a==="calendar-task"){const t=state.tasks.find(t=>t.id===id);if(t)exportCalendar(t)}
+  else if(a==="close-modal")closeModal();
+  else if(a==="add-supply")$("#supplyRows").insertAdjacentHTML("beforeend",supplyRow());
+  else if(a==="remove-supply")b.closest(".supply").remove();
+  else if(a==="new-repair")repairForm();
+  else if(a==="edit-repair")repairForm(state.repairs.find(r=>r.id===id));
+  else if(a==="resolve-repair"){const r=state.repairs.find(r=>r.id===id);if(r){r.status="done";state.history.push({id:uid(),kind:"repair",title:r.title,area:r.area,date:today(),cost:r.cost,note:"Reparación resuelta"});await save();refresh();toast("Reparación cerrada")}}
+  else if(a==="delete-repair"&&confirm("¿Eliminar esta reparación?")){state.repairs=state.repairs.filter(r=>r.id!==id);await save();refresh()}
+  else if(a==="new-expense")expenseForm();
+  else if(a==="delete-expense"&&confirm("¿Eliminar este gasto?")){state.expenses=state.expenses.filter(x=>x.id!==id);await save();refresh()}
+  else if(a==="delete-area"){const area=b.dataset.area;if(confirm("¿Eliminar la zona "+area+" de la lista? Las tareas guardadas conservarán el nombre.")){state.areas=state.areas.filter(x=>x!==area);await save();renderSettings()}}
+ });
+ document.addEventListener("change",async e=>{
+  const el=e.target;
+  if(el.id==="taskFilter")renderTasks();
+  if(el.dataset.action==="bought"){const t=state.tasks.find(x=>x.id===el.dataset.task),s=t&&t.supplies[Number(el.dataset.index)];if(s){s.bought=el.checked;await save();refresh()}}
+ });
+ document.addEventListener("submit",async e=>{e.preventDefault();if(e.target.id==="taskForm")await saveTaskForm(e.target);else if(e.target.id==="completeForm")await finishTask(e.target);else if(e.target.id==="repairForm")await saveRepairForm(e.target);else if(e.target.id==="expenseForm")await saveExpense(e.target)});
+ $("#modalBack").addEventListener("click",e=>{if(e.target===$("#modalBack"))closeModal()});
+ $("#addArea").addEventListener("click",async()=>{const v=$("#newArea").value.trim();if(v&&!state.areas.some(a=>a.toLowerCase()===v.toLowerCase())){state.areas.push(v);$("#newArea").value="";await save();renderSettings();toast("Zona añadida")}});
+ $("#exportData").addEventListener("click",()=>{const blob=new Blob([JSON.stringify({app:"CASA 360",version:4,state},null,2)],{type:"application/json"}),url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="casa360-copia-"+today()+".json";a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)});
+ $("#importData").addEventListener("change",async e=>{const file=e.target.files[0];if(!file)return;try{const parsed=JSON.parse(await file.text()),v=parsed.state||parsed;if(!Array.isArray(v.tasks)||!Array.isArray(v.areas))throw new Error("invalid");if(confirm("La copia sustituirá todos los datos actuales. ¿Continuar?")){state=Object.assign(fresh(),v);await save();refresh();toast("Copia importada")}}catch(_){toast("El archivo no parece una copia válida")}e.target.value=""});
+ $("#clearData").addEventListener("click",async()=>{if(confirm("¿Borrar todos los datos de este dispositivo?")){state=fresh();await save();refresh();toast("Datos borrados")}});
+}
+async function init(){
+ await load();normalizeState();await save();bind();showView("home");
+ // Retire the old cache-first service worker from previous builds. The new app uses normal web requests.
+ if("serviceWorker"in navigator){navigator.serviceWorker.getRegistration().then(reg=>{if(reg)reg.update().catch(()=>{})}).catch(()=>{});if("caches"in window)caches.keys().then(keys=>Promise.all(keys.map(k=>caches.delete(k))))}
+}
+init();
+})();
+</script>
+</body></html>
